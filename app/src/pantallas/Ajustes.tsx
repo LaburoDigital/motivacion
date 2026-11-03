@@ -1,10 +1,11 @@
-import { IconBell, IconBolt, IconCopy, IconLock } from "@tabler/icons-react";
+import { IconApps, IconBell, IconBolt, IconCopy, IconLock } from "@tabler/icons-react";
 import { useState } from "react";
 import { ATAJO_URL, WORKER_URL } from "../config";
 import { GuiaAtajo } from "../componentes/GuiaAtajo";
 import type { Preferencias, PrefsNotificaciones } from "../datos/almacen";
 import { activarNotificaciones, desactivarNotificaciones, type ResultadoActivar } from "../datos/notificaciones";
 import type { FrasesApi } from "../datos/useFrases";
+import { ICONOS_APP, aplicarIcono, urlIcono } from "../visual/iconos";
 
 const MENSAJES: Record<Exclude<ResultadoActivar, "ok">, string> = {
   "sin-soporte": "Instalá la app en tu pantalla de inicio para recibir notificaciones (iOS 16.4 o más).",
@@ -131,6 +132,24 @@ export function Ajustes({ api }: { api: FrasesApi }) {
         <a className="boton" href={ATAJO_URL || undefined} target="_blank" rel="noreferrer"><IconBolt size={18} stroke={1.8} /> Instalar atajo</a>
         <GuiaAtajo />
         <p className="aviso">Si cambiás tus temas o el estilo, volvé a copiar el link y pegalo en el atajo.</p>
+      </section>
+      <section className="seccion">
+        <h2><IconApps size={20} stroke={1.7} /> Ícono de la app</h2>
+        <div className="iconos-app">
+          {ICONOS_APP.map((i) => (
+            <button
+              key={i.id}
+              className={`icono-app ${prefs.icono === i.id ? "activo" : ""}`}
+              aria-label={`Ícono: ${i.nombre}`}
+              aria-pressed={prefs.icono === i.id}
+              onClick={() => { api.setPrefs({ icono: i.id }); aplicarIcono(i.id); }}
+            >
+              <img src={urlIcono(i.id)} alt="" />
+              <span>{i.nombre}</span>
+            </button>
+          ))}
+        </div>
+        <p className="aviso">Para ver el ícono nuevo, borrá la app de la pantalla de inicio y volvé a agregarla desde Safari. Tus frases y favoritos no se pierden.</p>
       </section>
     </div>
   );

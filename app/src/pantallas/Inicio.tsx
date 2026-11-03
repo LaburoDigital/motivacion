@@ -51,6 +51,7 @@ export function Inicio({ api, fraseInicial }: Props) {
           liked={frase.id in estado.likes}
           delDia={frase.id === fraseDelDia?.id}
           onLike={() => api.alternarLike(frase.id)}
+          onDobleTap={() => { if (!(frase.id in estado.likes)) api.alternarLike(frase.id); }}
           onCompartir={() => void compartirFrase(frase, aparienciaDe(frase))}
           onCambiarFondo={() => setCambios((c) => ({ ...c, [frase.id]: (c[frase.id] ?? 0) + 1 }))}
           onMantener={() => setMenu(frase)}

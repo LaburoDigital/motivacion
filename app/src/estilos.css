@@ -9,23 +9,27 @@
   --tenue: #9c9891;
   --acento: #e9b45c;
   --acento-texto: #1c1407;
-  --vidrio: rgba(20, 21, 26, 0.42);
-  --nav: 62px;
+  --vidrio: rgba(28, 29, 36, 0.38);
+  --vidrio-sombra: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1px 0 rgba(255, 255, 255, 0.04), 0 10px 30px rgba(0, 0, 0, 0.35);
+  --desenfoque: blur(22px) saturate(180%);
+  --nav: 64px;
+  --nav-espacio: calc(var(--nav) + env(safe-area-inset-bottom) + 22px);
   --suave: cubic-bezier(0.2, 0.8, 0.2, 1);
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-html, body, #root { margin: 0; height: 100%; background: var(--fondo); color: var(--texto); }
+html, body, #root { margin: 0; height: 100%; background: var(--fondo); color: var(--texto); overflow: hidden; }
 body { font-family: "Outfit", system-ui, sans-serif; overscroll-behavior: none; -webkit-font-smoothing: antialiased; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
 h1 { font-family: "Fraunces", Georgia, serif; font-weight: 500; font-size: 32px; letter-spacing: -0.02em; margin: 4px 0 20px; }
 h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
 
-.app { height: 100%; display: flex; flex-direction: column; }
-.contenido { flex: 1; overflow: hidden; position: relative; }
-.pantalla { height: 100%; overflow-y: auto; padding: calc(env(safe-area-inset-top) + 20px) 18px 32px; }
+/* La app ocupa toda la pantalla del iPhone, debajo de la barra de estado y del indicador de inicio. */
+.app { position: fixed; inset: 0; width: 100vw; height: 100dvh; overflow: hidden; }
+.contenido { position: absolute; inset: 0; overflow: hidden; }
+.pantalla { height: 100%; overflow-y: auto; overflow-x: hidden; padding: calc(env(safe-area-inset-top) + 20px) 18px calc(var(--nav-espacio) + 16px); }
 .cargando, .vacio { color: var(--tenue); text-align: center; padding: 56px 24px; line-height: 1.5; }
 
 /* Feed */
@@ -39,13 +43,28 @@ h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.0
 }
 .fondo-contenido {
   position: relative; height: 100%; display: flex; flex-direction: column; justify-content: center;
-  padding: calc(env(safe-area-inset-top) + 64px) 28px calc(env(safe-area-inset-bottom) + 120px);
+  padding: calc(env(safe-area-inset-top) + 64px) 28px calc(var(--nav-espacio) + 96px);
+}
+.fondo-contenido > * { position: relative; z-index: 1; pointer-events: none; }
+.fondo-contenido > .tarjeta-arriba, .fondo-contenido > .acciones { position: absolute; }
+.fondo-contenido > .acciones { pointer-events: auto; z-index: 2; }
+.fondo-contenido > .tarjeta-toque { position: absolute; inset: 0; z-index: 0; pointer-events: auto; touch-action: pan-y; -webkit-user-select: none; user-select: none; }
+.corazon-animado {
+  position: absolute !important; left: 50%; top: 50%; color: #ff5a6a; filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.35));
+  animation: corazon 850ms var(--suave) forwards; z-index: 3 !important;
+}
+@keyframes corazon {
+  0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0; }
+  18% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+  32% { transform: translate(-50%, -50%) scale(0.95); }
+  70% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -60%) scale(1.05); opacity: 0; }
 }
 .tarjeta-arriba { position: absolute; top: calc(env(safe-area-inset-top) + 18px); left: 24px; right: 24px; }
 .etiqueta {
   display: inline-block; font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
   color: rgba(243, 240, 234, 0.85); padding: 6px 10px; border-radius: 8px;
-  background: var(--vidrio); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  background: var(--vidrio); -webkit-backdrop-filter: var(--desenfoque); backdrop-filter: var(--desenfoque); box-shadow: var(--vidrio-sombra);
 }
 .etiqueta-dia { color: var(--acento-texto); background: var(--acento); }
 .frase { margin: 0; max-width: 32ch; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; --escala: 1; }
@@ -58,11 +77,11 @@ h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.0
 .frase-grande p { font-size: calc(clamp(30px, 9vw, 44px) * var(--escala)); }
 .frase-medio p { font-size: calc(clamp(24px, 6.8vw, 32px) * var(--escala)); }
 .frase-chico p { font-size: calc(clamp(19px, 5.2vw, 24px) * var(--escala)); line-height: 1.28; }
-.acciones { position: absolute; left: 24px; bottom: calc(env(safe-area-inset-bottom) + 24px); display: flex; gap: 12px; }
+.acciones { position: absolute; left: 24px; bottom: calc(var(--nav-espacio) + 18px); display: flex; gap: 12px; }
 .accion {
-  width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; color: var(--texto);
-  background: var(--vidrio); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1); transition: transform 180ms var(--suave), background 180ms;
+  width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; color: var(--texto);
+  background: var(--vidrio); -webkit-backdrop-filter: var(--desenfoque); backdrop-filter: var(--desenfoque);
+  box-shadow: var(--vidrio-sombra); transition: transform 220ms var(--suave), background 180ms;
 }
 .accion:active { transform: scale(0.92); }
 .accion.activa { color: #ff6b6b; }
@@ -70,26 +89,36 @@ h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.0
 @keyframes aparecer { from { opacity: 0; transform: scale(1.04); } to { opacity: 1; transform: none; } }
 
 /* Menú de frase */
-.menu-fondo { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); display: flex; align-items: flex-end; z-index: 20; animation: fundido 160ms; }
-.menu { width: 100%; background: var(--superficie); border-radius: 22px 22px 0 0; padding: 14px 14px calc(env(safe-area-inset-bottom) + 14px); display: grid; gap: 8px; }
-.menu button { padding: 16px; border-radius: 14px; background: var(--superficie-2); text-align: left; font-size: 17px; display: flex; align-items: center; gap: 12px; }
+.menu-fondo { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.35); display: flex; align-items: flex-end; z-index: 20; animation: fundido 160ms; padding: 0 10px calc(env(safe-area-inset-bottom) + 10px); }
+.menu {
+  width: 100%; border-radius: 30px; padding: 10px; display: grid; gap: 6px; animation: subir 280ms var(--suave);
+  background: rgba(36, 37, 45, 0.55); -webkit-backdrop-filter: var(--desenfoque); backdrop-filter: var(--desenfoque); box-shadow: var(--vidrio-sombra);
+}
+.menu button { padding: 16px 18px; border-radius: 22px; background: rgba(255, 255, 255, 0.07); text-align: left; font-size: 17px; display: flex; align-items: center; gap: 12px; }
+@keyframes subir { from { transform: translateY(24px); opacity: 0; } }
 .menu .menu-cancelar { justify-content: center; color: var(--tenue); background: none; }
 @keyframes fundido { from { opacity: 0; } }
 
 /* Barra de navegación */
+/* Barra flotante de vidrio, estilo iOS 26 */
 .barra-nav {
-  display: flex; justify-content: space-around; background: rgba(16, 17, 20, 0.92);
-  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
-  border-top: 1px solid var(--borde); padding-bottom: env(safe-area-inset-bottom);
+  position: absolute; z-index: 15; left: 16px; right: 16px; bottom: calc(env(safe-area-inset-bottom) + 10px);
+  height: var(--nav); padding: 6px; border-radius: 999px; display: flex; gap: 4px;
+  background: rgba(30, 31, 39, 0.42); -webkit-backdrop-filter: var(--desenfoque); backdrop-filter: var(--desenfoque);
+  box-shadow: var(--vidrio-sombra);
 }
-.barra-nav button { flex: 1; height: var(--nav); display: grid; place-items: center; align-content: center; gap: 3px; color: var(--tenue); transition: color 180ms; }
-.barra-nav button small { font-size: 11px; font-weight: 500; }
-.barra-nav button[aria-current="page"] { color: var(--acento); }
+.barra-nav button {
+  flex: 1; border-radius: 999px; display: grid; place-items: center; align-content: center; gap: 2px;
+  color: rgba(243, 240, 234, 0.7); transition: color 200ms, background 260ms var(--suave), transform 160ms;
+}
+.barra-nav button:active { transform: scale(0.94); }
+.barra-nav button small { font-size: 10.5px; font-weight: 500; }
+.barra-nav button[aria-current="page"] { color: var(--acento); background: rgba(255, 255, 255, 0.12); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12); }
 
 /* Pestañas */
-.pestanas { display: flex; gap: 4px; background: var(--superficie); padding: 4px; border-radius: 12px; margin-bottom: 18px; }
-.pestanas button { flex: 1; padding: 10px; border-radius: 9px; color: var(--tenue); font-weight: 500; transition: background 180ms, color 180ms; }
-.pestanas button[aria-selected="true"] { background: var(--superficie-2); color: var(--texto); }
+.pestanas { display: flex; gap: 4px; background: var(--superficie); padding: 4px; border-radius: 999px; margin-bottom: 18px; box-shadow: inset 0 0 0 1px var(--borde); }
+.pestanas button { flex: 1; padding: 10px; border-radius: 999px; color: var(--tenue); font-weight: 500; transition: background 220ms var(--suave), color 180ms; }
+.pestanas button[aria-selected="true"] { background: rgba(255, 255, 255, 0.1); color: var(--texto); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12); }
 
 /* Temas */
 .bloque { margin-bottom: 32px; }
@@ -118,8 +147,8 @@ h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.0
 .foto-muestra { position: relative; aspect-ratio: 9 / 16; border-radius: 12px; overflow: hidden; background: var(--superficie); }
 .foto-muestra img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .foto-estrella {
-  position: absolute; top: 6px; right: 6px; width: 34px; height: 34px; border-radius: 10px; display: grid; place-items: center;
-  background: var(--vidrio); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); color: var(--texto);
+  position: absolute; top: 6px; right: 6px; width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--vidrio); -webkit-backdrop-filter: var(--desenfoque); backdrop-filter: var(--desenfoque); box-shadow: var(--vidrio-sombra); color: var(--texto);
 }
 .foto-estrella.activa { color: var(--acento); }
 .lista-letras { display: grid; gap: 8px; }
@@ -141,7 +170,7 @@ h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.0
 .frase-abierta { position: fixed; inset: 0; z-index: 30; animation: fundido 180ms; }
 
 /* Ajustes */
-.seccion { background: var(--superficie); border-radius: 20px; padding: 18px; margin-bottom: 16px; display: grid; gap: 14px; }
+.seccion { background: var(--superficie); box-shadow: inset 0 0 0 1px var(--borde); border-radius: 26px; padding: 18px; margin-bottom: 16px; display: grid; gap: 14px; }
 .seccion h2 { margin: 0; color: var(--texto); text-transform: none; letter-spacing: 0; font-size: 17px; }
 .fila { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 15px; }
 .fila select, .fila input[type="time"] { background: var(--superficie-2); color: var(--texto); border: 1px solid var(--borde); border-radius: 10px; padding: 8px 10px; font: inherit; }
@@ -161,8 +190,8 @@ h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.0
 
 /* Cartel de instalar */
 .cartel-instalar {
-  position: fixed; left: 12px; right: 12px; bottom: calc(var(--nav) + env(safe-area-inset-bottom) + 12px);
-  background: var(--superficie-2); border-radius: 16px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  position: fixed; left: 16px; right: 16px; bottom: calc(var(--nav-espacio) + 6px);
+  border-radius: 24px; background: rgba(36, 37, 45, 0.6); -webkit-backdrop-filter: var(--desenfoque); backdrop-filter: var(--desenfoque); box-shadow: var(--vidrio-sombra);
   padding: 14px 44px 14px 16px; z-index: 10; font-size: 14px; line-height: 1.4;
 }
 .cartel-instalar p { margin: 0; }
@@ -181,3 +210,11 @@ h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.0
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Ícono de la app */
+.iconos-app { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.icono-app { display: grid; justify-items: center; gap: 8px; font-size: 12px; color: var(--tenue); }
+.icono-app img { width: 100%; max-width: 68px; aspect-ratio: 1; border-radius: 22%; box-shadow: 0 0 0 1px var(--borde); transition: transform 160ms var(--suave), box-shadow 180ms; }
+.icono-app.activo img { box-shadow: 0 0 0 2.5px var(--acento); }
+.icono-app.activo { color: var(--texto); }
+.icono-app:active img { transform: scale(0.94); }

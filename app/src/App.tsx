@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BarraNav, type Seccion } from "./componentes/BarraNav";
 import { CartelInstalar } from "./componentes/CartelInstalar";
 import { VistaPrevia } from "./componentes/VistaPrevia";
@@ -9,6 +9,7 @@ import { Favoritos } from "./pantallas/Favoritos";
 import { Inicio } from "./pantallas/Inicio";
 import { Temas } from "./pantallas/Temas";
 import { fondoPara } from "./visual/fondos";
+import { aplicarIcono } from "./visual/iconos";
 import { letraPorId } from "./visual/letras";
 import "./estilos.css";
 
@@ -26,6 +27,10 @@ export default function App() {
   };
 
   useResincronizarNotificaciones(api.prefs);
+  const icono = api.prefs?.icono;
+  useEffect(() => {
+    if (icono) aplicarIcono(icono);
+  }, [icono]);
 
   return (
     <div className="app">

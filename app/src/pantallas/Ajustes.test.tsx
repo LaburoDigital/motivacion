@@ -70,3 +70,16 @@ test("elegir '3 por día' saca el cada N horas", () => {
   fireEvent.change(screen.getByLabelText("Frecuencia"), { target: { value: "d3" } });
   expect(api.setPrefs).toHaveBeenCalledWith({ notificaciones: expect.objectContaining({ cantidad: 3, cadaHoras: null }) });
 });
+
+test("elegir un ícono lo guarda y cambia el ícono que toma iOS al agregar a inicio", async () => {
+  const link = document.createElement("link");
+  link.rel = "apple-touch-icon";
+  link.href = "/apple-touch-icon.png";
+  document.head.appendChild(link);
+  const api = apiFalsa();
+  render(<Ajustes api={api} />);
+  fireEvent.click(screen.getByRole("button", { name: "Ícono: Noche" }));
+  expect(api.setPrefs).toHaveBeenCalledWith({ icono: "noche" });
+  expect(link.getAttribute("href")).toBe("/iconos/noche-180.png");
+  link.remove();
+});

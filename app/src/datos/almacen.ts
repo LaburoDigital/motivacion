@@ -6,6 +6,7 @@ export interface Preferencias {
   /** "auto" (según el tema de cada frase) o un pack de fotos. */
   fondo: "auto" | PackId;
   letra: string;
+  icono: string;
   soloFondosFavoritos: boolean;
   fondosFavoritos: string[];
   zonaHoraria: string;
@@ -39,6 +40,7 @@ const prefsDefault = (): Preferencias => ({
   temas: [],
   fondo: "auto",
   letra: "playfair",
+  icono: "llama",
   soloFondosFavoritos: false,
   fondosFavoritos: [],
   zonaHoraria: Intl.DateTimeFormat().resolvedOptions().timeZone,
