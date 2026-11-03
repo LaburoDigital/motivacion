@@ -1,0 +1,7 @@
+name = "motivacion-worker"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+[[kv_namespaces]]
+binding = "KV"
+id = "REEMPLAZAR_CON_ID_DEL_KV"

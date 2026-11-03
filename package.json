@@ -1,0 +1,8 @@
+{
+  "name": "motivacion",
+  "private": true,
+  "workspaces": ["shared", "app", "worker"],
+  "scripts": {
+    "test": "npm test --workspaces"
+  }
+}
