@@ -6,8 +6,8 @@ compatibility_date = "2026-10-01"
 crons = ["0 9 * * *", "* * * * *"]
 
 [vars]
-# Se completa en el deploy con la URL raw de curadas/frases.json en GitHub.
-CURADAS_URL = "https://raw.githubusercontent.com/USUARIO/REPO/main/curadas/frases.json"
+# URL raw de curadas/frases.json en GitHub.
+CURADAS_URL = "https://raw.githubusercontent.com/LaburoDigital/motivacion/main/curadas/frases.json"
 PAGES_URL = "https://motivacion.pages.dev"
 VAPID_SUBJECT = "mailto:motivacion@example.com"
 # VAPID_PUBLIC y VAPID_PRIVATE van como secrets (npx wrangler secret put).
