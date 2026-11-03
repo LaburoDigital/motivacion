@@ -16,7 +16,8 @@ test("sin datos devuelve los defaults", async () => {
 
 test("guarda y vuelve a leer los 4 grupos", async () => {
   const estado = { vistas: { a: 1 }, likes: { b: 2 }, malas: ["c"], clavesPropias: ["d"] };
-  const prefs = { temas: ["gym" as const], estiloVisual: "foto-3", soloFondosFavoritos: true, fondosFavoritos: ["foto-3"], zonaHoraria: "UTC" };
+  const prefs = { temas: ["gym" as const], estiloVisual: "foto-3", soloFondosFavoritos: true, fondosFavoritos: ["foto-3"], zonaHoraria: "UTC",
+    notificaciones: { activas: true, cantidad: 2, desde: "09:00", hasta: "21:00" }, estiloWallpaper: "foto" as const };
   const remotas = { version: "v1", frases: [{ id: "c-0001", texto: "x", categoria: "gym" as const, nivel: "buena" as const, fuente: "curada" as const }] };
   await almacen.guardarEstado(estado);
   await almacen.guardarPrefs(prefs);

@@ -7,6 +7,15 @@ export interface Preferencias {
   soloFondosFavoritos: boolean;
   fondosFavoritos: string[];
   zonaHoraria: string;
+  notificaciones: PrefsNotificaciones;
+  estiloWallpaper: "negro" | "degradado" | "foto";
+}
+
+export interface PrefsNotificaciones {
+  activas: boolean;
+  cantidad: number;
+  desde: string;
+  hasta: string;
 }
 
 export interface Remotas {
@@ -26,6 +35,8 @@ const prefsDefault = (): Preferencias => ({
   soloFondosFavoritos: false,
   fondosFavoritos: [],
   zonaHoraria: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  notificaciones: { activas: false, cantidad: 3, desde: "08:00", hasta: "22:00" },
+  estiloWallpaper: "negro",
 });
 
 async function leer<T>(clave: string, porDefecto: () => T): Promise<T> {
