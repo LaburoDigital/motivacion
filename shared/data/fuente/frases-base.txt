@@ -1,0 +1,541 @@
+# Formato: nivel|autor|texto   (nivel: k = clave, b = buena, n = normal; autor vacío = anónima)
+# Regenerar el JSON: node shared/scripts/generar-base.mjs
+
+@disciplina
+k|Jocko Willink|La disciplina es libertad.
+k|Jim Rohn|La disciplina es el puente entre las metas y los logros.
+k|Jim Rohn|Todos vamos a sufrir uno de dos dolores: el de la disciplina o el del arrepentimiento.
+k|Will Durant, sobre Aristóteles|Somos lo que hacemos repetidamente. La excelencia, entonces, no es un acto sino un hábito.
+k|David Goggins|Cuando tu mente te dice que terminaste, apenas estás al 40% de lo que sos capaz.
+k|Lao Tsé|Dominar a otros es fuerza. Dominarse a uno mismo es verdadero poder.
+k|Bruce Lee|No le temo al hombre que practicó diez mil patadas una vez, sino al que practicó una patada diez mil veces.
+k|Platón|La primera y mejor de las victorias es conquistarse a uno mismo.
+k|Confucio|No importa lo lento que vayas, siempre y cuando no te detengas.
+k|Epicteto|Primero decí qué querés ser; después hacé lo que tengas que hacer.
+k|Marco Aurelio|No pierdas más tiempo discutiendo cómo debe ser un buen hombre. Sé uno.
+k|Séneca|Empezá a vivir de una vez, y contá cada día como una vida aparte.
+k|J. R. R. Tolkien|Todo lo que tenemos que decidir es qué hacer con el tiempo que se nos ha dado.
+k|Aristóteles|Adquirimos una virtud ejerciéndola: nos hacemos justos haciendo actos justos.
+b|Kobe Bryant|¿Sabés cómo se ve Los Ángeles a las cuatro de la mañana?
+b|Tim Notke|El trabajo duro le gana al talento cuando el talento no trabaja duro.
+b||La motivación te hace arrancar. La disciplina te hace volver mañana.
+b||No negocies con tu cansancio: hacé lo que dijiste que ibas a hacer.
+b||Tu futuro se decide en lo que hacés cuando nadie te está mirando.
+b||Hacelo con ganas o sin ganas, pero hacelo.
+b||Las ganas van y vienen. Los hábitos se quedan.
+b||Prometete poco y cumplite siempre.
+b||Ganar el día es ganar la mañana. Ganar la mañana es ganarle a la almohada.
+b||La comodidad de hoy es la deuda de mañana.
+b||Ser constante es aburrido. Por eso tan pocos llegan.
+b||No necesitás más tiempo. Necesitás menos excusas.
+b||El que se gobierna a sí mismo no necesita que nadie lo empuje.
+b||Cada vez que cumplís algo que te prometiste, te volvés alguien en quien podés confiar.
+b||Lo difícil no es empezar. Lo difícil es el día 23, cuando ya no es nuevo.
+b||La disciplina es elegir lo que más querés por encima de lo que querés ahora.
+b||Repetí lo básico hasta que deje de ser básico.
+b||Nadie se arrepiente de haber entrenado, estudiado o cumplido su palabra.
+b||El celular puede esperar. Tu vida no.
+b||Si esperás a tener ganas, vas a esperar toda la vida.
+b||Ordená tu cuarto, ordená tu día, ordená tu cabeza.
+n||Un poco todos los días le gana a mucho de vez en cuando.
+n||Hoy es un buen día para no fallarte.
+n||Hacé la tarea más difícil primero.
+n||Levantate. Una vez más.
+n||Menos hablar, más hacer.
+n||Tu rutina es tu escudo.
+n||No rompas la racha.
+n||Lo que hacés todos los días importa más que lo que hacés de vez en cuando.
+n||Cumplí. Aunque sea poco, cumplí.
+n||La constancia es un superpoder silencioso.
+n||Si lo agendaste, se hace.
+n||Primero el deber, después el placer.
+n||Cada mañana es una nueva oportunidad de ser disciplinado.
+n||Lo hiciste ayer. Podés hacerlo hoy.
+n||Dejá de pensarlo tanto y arrancá.
+n||Tu yo del futuro te está mirando.
+n||Sin atajos.
+n||Pequeños pasos, todos los días.
+n||Las excusas no construyen nada.
+n||Cuidá tus hábitos: ellos te van a cuidar a vos.
+n||El orden trae calma.
+n||Hacelo aunque no sea perfecto.
+n||Hoy no se negocia.
+n||Ponete un horario y respetalo.
+n||Si es importante, encontrás la manera. Si no, encontrás una excusa.
+n||Terminá lo que empezás.
+n||El esfuerzo de hoy es el orgullo de mañana.
+n||Disciplina es amor propio con horario.
+
+@estudio
+k|Mahatma Gandhi|Viví como si fueras a morir mañana; aprendé como si fueras a vivir para siempre.
+k|Benjamin Franklin|Una inversión en conocimiento paga el mejor interés.
+k|Confucio|Aprender sin pensar es inútil. Pensar sin aprender es peligroso.
+k|Nelson Mandela|La educación es el arma más poderosa que podés usar para cambiar el mundo.
+k|Aristóteles|Las raíces de la educación son amargas, pero sus frutos son dulces.
+k|Plutarco|La mente no es un vaso que llenar, sino un fuego que encender.
+k|Leonardo da Vinci|El aprendizaje nunca agota la mente.
+k|Henry Ford|Cualquiera que deja de aprender es viejo, tenga veinte u ochenta años.
+k|Malcolm X|El futuro pertenece a quienes se preparan para él hoy.
+k|Jorge Luis Borges|Que otros se jacten de las páginas que han escrito; a mí me enorgullecen las que he leído.
+k|Miguel de Cervantes|El que lee mucho y anda mucho, ve mucho y sabe mucho.
+k|Sócrates|Solo sé que no sé nada.
+k|Séneca|Mientras enseñamos, aprendemos.
+k|Albert Einstein|Lo importante es no dejar de hacerse preguntas.
+b||Estudiar hoy es comprarle libertad a tu yo del futuro.
+b||Nadie aprende por vos. Y eso es una buena noticia: nadie te lo puede quitar.
+b||Una hora enfocada vale más que cuatro con el celular al lado.
+b||No es que no te da la cabeza. Es que todavía no le diste suficientes horas.
+b||Entender una cosa a fondo vale más que memorizar diez.
+b||El examen no mide lo que sos. Mide lo que preparaste. Prepará más.
+b||Si no lo podés explicar simple, todavía no lo entendiste. Seguí.
+b||El conocimiento es lo único que crece cuando lo compartís.
+b||Equivocarte en la práctica es la mejor forma de no equivocarte en el examen.
+b||Cada página que leés te separa un poco más de la persona que eras.
+b||Lo que estudiás con curiosidad no se olvida.
+b||No estudies para aprobar. Estudiá para no tener que volver a estudiarlo.
+b||El cerebro es un músculo: duele un poco antes de crecer.
+b||Hoy aburrido, mañana preparado.
+b||Preguntá. La duda que no preguntás se convierte en el error que cometés.
+b||La distracción es el impuesto que pagás por no tener un plan.
+b||Ser inteligente es una decisión que se toma todos los días frente al escritorio.
+b||Estudiar es aburrido hasta que empezás a entender. Ahí se vuelve adictivo.
+b||Leer es hablar con los muertos más inteligentes de la historia.
+n||Una página más.
+n||Cerrá las pestañas. Abrí el libro.
+n||Modo avión, modo foco.
+n||Veinticinco minutos de foco. Cinco de descanso. Repetí.
+n||Hoy entendés algo que ayer no entendías.
+n||Repasar es aprender dos veces.
+n||Tu escritorio es tu campo de batalla.
+n||Estudiá ahora, disfrutá después.
+n||Un tema a la vez.
+n||El conocimiento suma. Siempre.
+n||Hacé resúmenes, no excusas.
+n||Lo que no se practica, se olvida.
+n||Cada clase cuenta.
+n||Aprender es una aventura sin final.
+n||El esfuerzo de estudiar nunca se pierde.
+n||Leé algo que te haga pensar.
+n||Tu mente es tu mejor inversión.
+n||No te compares con el que sabe más: aprendé de él.
+n||Entender lleva tiempo. Dátelo.
+n||El primer paso para saber es admitir que no sabés.
+n||Hacé ejercicios, no solo leas.
+n||Dormir bien también es estudiar.
+n||Las buenas notas son la consecuencia, no el objetivo.
+n||Cada error es una lección gratis.
+n||Hoy aprendés, mañana enseñás.
+n||Tu curiosidad es tu motor.
+n||Paso a paso se termina la carrera.
+n||El que estudia, elige.
+n||Una mente ocupada aprendiendo no tiene tiempo para dudar de sí misma.
+n||Repasá antes de dormir.
+
+@gym
+k|Muhammad Ali|Odié cada minuto de entrenamiento, pero me dije: no abandones. Sufrí ahora y viví el resto de tu vida como un campeón.
+k|Arnold Schwarzenegger|La fuerza no viene de ganar. Tus luchas desarrollan tu fuerza.
+k|Sócrates|Es una desgracia que un hombre envejezca sin ver la belleza y la fuerza de las que su cuerpo es capaz.
+k|Rocky Balboa|No se trata de cuán fuerte pegás, sino de cuán fuerte te pueden pegar y seguir avanzando.
+k|Ronnie Coleman|Todo el mundo quiere ser culturista, pero nadie quiere levantar estas pesas pesadas.
+k|Mike Tyson|Todos tienen un plan hasta que reciben la primera piña.
+k|Bruce Lee|Si siempre ponés límites a lo que hacés, físico o de cualquier tipo, se va a extender a tu trabajo y a tu vida. No hay límites; solo mesetas, y no hay que quedarse en ellas.
+k|David Goggins|Nadie va a venir a salvarte.
+b||El dolor no te dice cuándo parar. Te dice que estás cerca.
+k|Pelé|Cuanto más difícil es la victoria, mayor es la felicidad de ganar.
+k||La última repetición es la que hace crecer el músculo. Ese dolor separa a un campeón de alguien que no lo es.
+b||El cuerpo logra lo que la mente cree.
+b||Nadie se arrepintió nunca de un entrenamiento terminado.
+b||No entrenás para el espejo. Entrenás para ser alguien que no se rinde.
+b||El hierro no miente: cuarenta kilos son cuarenta kilos.
+b||Tu cuerpo es el único lugar en el que vas a vivir toda la vida. Cuidalo.
+b||El dolor de hoy es la fuerza de mañana.
+b||Cuando quieras parar, acordate de por qué empezaste.
+b||Las pesas no te preguntan cómo fue tu día. Solo te piden que las levantes.
+b||El gimnasio es el único lugar donde caer te hace más fuerte.
+b||No hay ascensor al éxito físico. Hay que usar las escaleras.
+b||Hoy duele. Mañana se nota.
+b||El sudor es la grasa llorando.
+b||Entrená como si alguien te quisiera sacar el lugar.
+b||La meseta no es el final: es la señal de que hay que cambiar.
+b||Tu único rival es el que eras la semana pasada.
+b||Ningún entrenamiento corto es peor que el que no hiciste.
+b||La fuerza física se construye con repeticiones; la mental, con días malos.
+b||El cansancio miente. Te queda más.
+n||Una serie más.
+n||Hoy toca pierna. No se negocia.
+n||Comé bien, dormí bien, entrená fuerte.
+n||El progreso es progreso, aunque sea lento.
+n||Tomá agua.
+n||Sin excusas, con pesas.
+n||Calentá bien y rompela.
+n||Respirá y empujá.
+n||La técnica primero, el peso después.
+n||Cada gota de sudor cuenta.
+n||Hoy entrenás por el de mañana.
+n||Movete. Tu cuerpo te lo va a agradecer.
+n||El descanso también es parte del plan.
+n||No pares cuando estés cansado; pará cuando termines.
+n||Tu cuerpo puede más de lo que creés.
+n||Sumá un kilo. O una repetición.
+n||Cuerpo fuerte, mente fuerte.
+n||Lo que hoy pesa, mañana es tu calentamiento.
+n||Hacé que tu entrenamiento valga la pena.
+n||Las ganas aparecen después de la primera serie.
+n||Constancia le gana a intensidad.
+n||El gimnasio está abierto. ¿Y vos?
+n||Entrená con propósito.
+n||Una mala sesión es mejor que ninguna.
+n||Paciencia: los músculos no se hacen en un día.
+n||Tu salud es tu riqueza.
+n||Ponete los auriculares y desaparecé del mundo una hora.
+n||Pequeñas mejoras, grandes resultados.
+n||El sudor de hoy es la sonrisa de mañana.
+n||Correr también es meditar.
+n||El cuerpo se cansa. La voluntad decide.
+n||Dale, que se puede.
+n||Fuerza no es solo levantar: es volver.
+n||Entrená tu mente igual que tu cuerpo.
+
+@estoicismo
+k|Séneca|No es que tengamos poco tiempo, sino que perdemos mucho.
+k|Marco Aurelio|El impedimento a la acción hace avanzar la acción. Lo que se interpone en el camino se convierte en el camino.
+k|Marco Aurelio|La mejor venganza es no ser como tu enemigo.
+k|Epicteto|No son las cosas las que nos perturban, sino las opiniones que tenemos sobre ellas.
+k|Epicteto|Ningún hombre es libre si no es dueño de sí mismo.
+k|Séneca|Mientras esperamos vivir, la vida pasa.
+k|Séneca|Si un hombre no sabe a qué puerto se dirige, ningún viento le es favorable.
+k|Séneca|La dificultad fortalece la mente, como el trabajo al cuerpo.
+k|Marco Aurelio|Muy poco se necesita para hacer una vida feliz; todo está dentro de vos, en tu manera de pensar.
+k|Epicteto|La riqueza no consiste en tener grandes posesiones, sino en tener pocas necesidades.
+k|Marco Aurelio|Tenés poder sobre tu mente, no sobre los acontecimientos. Date cuenta de esto y vas a encontrar la fuerza.
+k|Viktor Frankl|Al hombre se le puede arrebatar todo salvo una cosa: la última de las libertades humanas, elegir su actitud ante cualquier circunstancia.
+k|Marco Aurelio|Pensá en la belleza de la vida. Mirá las estrellas y imaginate corriendo con ellas.
+k|Séneca|Vivir es como una obra de teatro: no importa cuánto dura, sino qué tan bien se actúa.
+k|Epicteto|Es imposible que un hombre aprenda lo que cree que ya sabe.
+k|Marco Aurelio|Cuando te levantes por la mañana, pensá en el privilegio que es estar vivo: respirar, pensar, disfrutar, amar.
+b||La suerte no existe: lo que llamamos suerte es el cuidado de los detalles.
+k|Nicolás Maquiavelo|Todos ven lo que aparentás; pocos advierten lo que sos.
+b|Séneca|Quien está en todas partes no está en ninguna.
+b|Marco Aurelio|La felicidad de tu vida depende de la calidad de tus pensamientos.
+b|Epicteto|Si querés mejorar, conformate con parecer tonto en las cosas externas.
+b|Séneca|Es más fácil impedir que entren las pasiones que expulsarlas una vez que entraron.
+b|Marco Aurelio|Lo que no es útil para la colmena no es útil para la abeja.
+b||Separá lo que depende de vos de lo que no. Todo lo demás es ruido.
+b||No podés controlar el viento, pero sí ajustar las velas.
+b||Recordá que vas a morir. No para tener miedo, sino para no perder el tiempo.
+b||Lo que te pasa no es tu culpa. Lo que hacés con eso, sí es tu responsabilidad.
+b||Tu enojo no castiga al otro: te castiga a vos.
+b||Hacé lo correcto aunque nadie lo aplauda.
+b||Perder algo que no depende de vos no es una derrota: es la vida.
+b||El obstáculo es el entrenamiento.
+b||No reacciones. Respondé.
+b||El que necesita poco es difícil de vencer.
+b||Ante la duda, preguntate qué haría la mejor versión de vos.
+b||Si mañana no te despertaras, ¿estarías conforme con cómo usaste hoy?
+b||La opinión de los demás es un clima: no la podés cambiar, solo vestirte para ella.
+n||Controlá lo controlable.
+n||Memento mori.
+n||Amor fati: amá lo que te toca.
+n||Calma ante el caos.
+n||El hoy es todo lo que tenés.
+n||Sé dueño de tus reacciones.
+n||Lo externo no te define.
+n||Pensá antes de hablar.
+n||Elegí tu actitud.
+n||El carácter se forja en la adversidad.
+n||Hacé tu parte y soltá el resultado.
+n||Una mente tranquila es una mente fuerte.
+n||No sufras dos veces: antes y durante.
+n||La virtud es su propia recompensa.
+n||Vivir con poco es vivir libre.
+n||Mirá el problema desde arriba.
+n||Tu paz vale más que tener razón.
+n||Agradecé lo que tenés antes de que la vida te lo enseñe.
+n||Que nada te saque de tu centro.
+n||Practicá la incomodidad.
+n||Sé justo, sé valiente, sé moderado.
+n||El tiempo es lo único que no vuelve.
+n||Aceptá. Adaptate. Avanzá.
+n||No te quejes: actuá.
+n||Cada día es una vida entera.
+n||La serenidad también se entrena.
+n||Lo que pasó, pasó. ¿Qué hacés ahora?
+n||El sabio no se ofende fácilmente.
+n||Tus pensamientos tiñen tu realidad.
+n||Hacé el bien sin esperar nada.
+n||El dolor pasa; el carácter queda.
+n||Cuidá tus palabras: te definen.
+n||Vivir bien es la mejor respuesta.
+n||Lo importante es invisible a los ojos del apuro.
+
+@amor-propio
+k|Oscar Wilde|Amarse a uno mismo es el comienzo de un romance para toda la vida.
+k|Carl Jung|Quien mira hacia afuera, sueña; quien mira hacia adentro, despierta.
+k|Eleanor Roosevelt|Nadie puede hacerte sentir inferior sin tu consentimiento.
+k|Lao Tsé|Conocer a otros es inteligencia; conocerse a uno mismo es verdadera sabiduría.
+k|Albert Camus|En medio del invierno descubrí que había en mí un verano invencible.
+k|Friedrich Nietzsche|Llegá a ser el que sos.
+k|Fiódor Dostoyevski|Lo más importante es no mentirse a uno mismo.
+k|Mary Oliver|Decime, ¿qué pensás hacer con tu única, salvaje y preciosa vida?
+k|Frida Kahlo|Pies, ¿para qué los quiero si tengo alas para volar?
+k|Rumi|Ayer era inteligente y quería cambiar el mundo. Hoy soy sabio y me estoy cambiando a mí mismo.
+b||Lo que buscás te está buscando.
+k|Carl Jung|Tu visión se vuelve clara solo cuando mirás dentro de tu corazón.
+b||Conocerse a uno mismo es el comienzo de toda sabiduría.
+k|Marco Aurelio|Todos nos amamos a nosotros mismos más que a los demás, pero nos importa más su opinión que la nuestra.
+b||No sos demasiado. Estás rodeado de gente que da poco.
+b||Hablate como le hablarías a alguien que querés.
+b||No tenés que ganarte el derecho a descansar.
+b||Tu valor no baja porque alguien no lo vea.
+b||Compararte es robarte la alegría.
+b||Elegirte no es egoísmo. Es supervivencia.
+b||Sos el único que va a estar con vos toda la vida. Llevate bien.
+b||Está bien no estar bien. No está bien quedarse ahí para siempre.
+b||Poner límites también es una forma de amor.
+b||No le debés explicaciones a quien decidió no entenderte.
+b||La versión de vos que más necesitás es la que se perdona.
+b||Tu cuerpo no es un proyecto a corregir: es tu casa.
+b||Dejá de pedir perdón por existir.
+b||Lo que pensás de vos es más importante que lo que piensan los demás.
+b||Celebrá tus pequeñas victorias. Nadie las vio tan de cerca como vos.
+b||Alejarte de lo que te hace mal también es avanzar.
+b||Tus cicatrices son prueba de que sobreviviste.
+b||No sos tus errores. Sos lo que hacés después de ellos.
+b||Tratate con la paciencia que tendrías con tu mejor amigo.
+n||Sos suficiente.
+n||Cuidate. Sos importante.
+n||Hoy elegite.
+n||Tu paz primero.
+n||Mirate con cariño.
+n||Sos tu propio hogar.
+n||Estás haciendo lo mejor que podés.
+n||Perdonate.
+n||Merecés lo bueno que te pasa.
+n||Tu historia todavía se está escribiendo.
+n||Brillá a tu manera.
+n||Respetá tus tiempos.
+n||Decí que no sin culpa.
+n||Tu energía es valiosa: cuidá dónde la ponés.
+n||Escuchate.
+n||Abrazá tu proceso.
+n||No te achiques para caber.
+n||Sos único.
+n||Agradecele a tu cuerpo todo lo que hace por vos.
+n||Rodeate de quienes suman.
+n||Sos más fuerte de lo que pensás.
+n||Date permiso para crecer.
+n||Tu felicidad es tu responsabilidad.
+n||Querete como querés que te quieran.
+n||Merecés un descanso.
+n||Cada día te conocés un poco más.
+n||Sé amable con vos.
+n||Tu luz no necesita permiso.
+n||Aceptarte es el primer paso para mejorar.
+n||Vos también contás.
+n||Soltá lo que no es para vos.
+n||Volvé a vos.
+
+@exito
+k|Michael Jordan|Fallé una y otra vez en mi vida. Y por eso tengo éxito.
+k|Thomas Edison|No fracasé. Encontré diez mil maneras que no funcionan.
+k|Pelé|El éxito no es un accidente. Es trabajo duro, perseverancia, aprendizaje, estudio, sacrificio y, sobre todo, amor por lo que estás haciendo.
+k|Steve Jobs|Tu tiempo es limitado, así que no lo desperdicies viviendo la vida de otro.
+k|Nicolás Maquiavelo|Donde hay una gran voluntad no puede haber grandes dificultades.
+k|Henry Ford|Tanto si pensás que podés como si pensás que no podés, tenés razón.
+k|Pablo Picasso|La inspiración existe, pero tiene que encontrarte trabajando.
+k|Wayne Gretzky|Fallás el cien por ciento de los tiros que no hacés.
+k|Steve Jobs|La única manera de hacer un gran trabajo es amar lo que hacés.
+k|Theodore Roosevelt|Hacé lo que puedas, con lo que tengas, donde estés.
+b||Lo que importa no es la idea, sino la ejecución.
+k|Kobe Bryant|Todo lo negativo, la presión y los desafíos, es para mí una oportunidad de crecer.
+k|Nicolás Maquiavelo|El que quiere obtener lo que desea debe estar dispuesto a cambiar de método, no de objetivo.
+k|Lionel Messi|Empecé temprano y me quedé hasta tarde, día tras día, año tras año. Me llevó diecisiete años y ciento catorce días convertirme en un éxito de la noche a la mañana.
+b|Colin Powell|No hay secretos para el éxito. Es el resultado de la preparación, el trabajo duro y aprender del fracaso.
+b|Vince Lombardi|Ganar no lo es todo, pero querer ganar sí.
+b|Walt Disney|La forma de empezar es dejar de hablar y empezar a hacer.
+b|Steve Jobs|Mantenete hambriento, mantenete alocado.
+b||El éxito es ir de fracaso en fracaso sin perder el entusiasmo.
+b||Nadie ve las horas. Todos ven los resultados.
+b||El éxito de la noche a la mañana tarda unos diez años.
+b||Trabajá en silencio y dejá que el éxito haga el ruido.
+b||Los sueños no funcionan si vos no trabajás.
+b||Si no construís tu sueño, alguien te va a contratar para construir el suyo.
+b||No busques ser el mejor del mundo. Buscá ser mejor que ayer.
+b||Las oportunidades no aparecen: se crean.
+b||El que se anima a fallar en grande es el que puede ganar en grande.
+b||Que te digan que no es solo el comienzo de la conversación.
+b||Elegí tu dolor: el de intentarlo o el de no haberlo intentado nunca.
+b||Rodeate de gente que te quede grande.
+b||La suerte favorece a los que ya estaban trabajando.
+b||Hacé tanto ruido con tus resultados que no te haga falta hablar.
+b||El éxito no se persigue; se atrae con la persona en la que te convertís.
+n||Pensá en grande, empezá en chico.
+n||Tu meta, tu ritmo.
+n||Hoy siembra, mañana cosecha.
+n||Creé en vos.
+n||El que la sigue, la consigue.
+n||Hacelo realidad.
+n||Arriesgate.
+n||Soñá, planeá, ejecutá.
+n||Los resultados llegan.
+n||Hacé que pase.
+n||Visualizá y trabajá.
+n||El esfuerzo siempre paga.
+n||Apuntá alto.
+n||Que tus acciones hablen.
+n||Cada no te acerca a un sí.
+n||Tu momento va a llegar. Preparate.
+n||Ganar empieza en la cabeza.
+n||Invertí en vos.
+n||El éxito es una suma de pequeños esfuerzos.
+n||Hacé lo que otros no quieren hacer.
+n||Enfocate en el proceso.
+n||Sé paciente con los resultados y exigente con el esfuerzo.
+n||La ambición sana mueve montañas.
+n||Tu talento merece trabajo.
+n||Celebrá cada avance.
+n||Lo mejor está por venir.
+n||Construí algo de lo que estés orgulloso.
+n||Más acción, menos planes.
+n||El que no arriesga no gana.
+n||Hoy es el día uno.
+n||Tus metas no tienen fecha de vencimiento.
+n||Seguí tu propio camino.
+
+@calma
+k|Marco Aurelio|Si te aflige algo externo, el dolor no se debe a la cosa en sí, sino a tu valoración de ella; y tenés el poder de revocarla en cualquier momento.
+k|Lao Tsé|La naturaleza no se apura, y sin embargo todo se cumple.
+k|Epicteto|Hay un solo camino a la felicidad: dejar de preocuparse por las cosas que están más allá de nuestro poder.
+k|Blaise Pascal|Toda la desdicha de los hombres viene de no saber quedarse tranquilos en una habitación.
+k|Thich Nhat Hanh|Los sentimientos vienen y van como nubes en un cielo con viento. La respiración consciente es mi ancla.
+k|Nikos Kazantzakis|No espero nada. No temo nada. Soy libre.
+k|Mario Benedetti|Después de todo, la muerte es solo un síntoma de que hubo vida.
+k|Séneca|Sufrimos más en la imaginación que en la realidad.
+k|Michel de Montaigne|Mi vida estuvo llena de terribles desgracias, la mayoría de las cuales nunca sucedieron.
+k|Proverbio chino|Si tiene solución, ¿por qué te preocupás? Si no tiene solución, ¿por qué te preocupás?
+k|Lao Tsé|Si estás deprimido, vivís en el pasado. Si estás ansioso, vivís en el futuro. Si estás en paz, vivís en el presente.
+k||La paz viene de adentro. No la busques afuera.
+k|Hermann Hesse|Dentro de vos hay una quietud y un santuario al que podés retirarte en cualquier momento y ser vos mismo.
+k|Albert Camus|No hay amor a la vida sin desesperación de vivir.
+b||Respirá. No tenés que resolver toda tu vida hoy.
+b||No todo merece tu energía.
+b||Lo que hoy te desvela, en un año ni lo vas a recordar.
+b||Bajá un cambio. La vida no es una carrera.
+b||Tu mente es un cielo; los pensamientos, solo nubes.
+b||No hace falta que reacciones a todo.
+b||A veces lo más productivo es descansar.
+b||El silencio también es una respuesta.
+b||Calmar la mente es el primer paso para pensar con claridad.
+b||Hay cosas que se resuelven solas si dejás de tocarlas.
+b||Elegí la paz por encima de tener razón.
+b||No apures lo que necesita tiempo.
+b||La ansiedad pregunta "¿y si...?". La calma responde "ya veremos".
+b||Desconectarte de todo a veces es la mejor forma de reconectar con vos.
+b||Lo que es para vos, te va a encontrar.
+b||Tu valor no depende de tu productividad.
+b||Cuando el agua se calma, se ve el fondo.
+b||Soltá lo que no podés controlar y vas a tener las manos libres para lo que sí.
+n||Respirá hondo.
+n||Una cosa a la vez.
+n||Aquí y ahora.
+n||Todo pasa.
+n||Tranquilo, vas bien.
+n||Bajá los hombros.
+n||Cerrá los ojos un minuto.
+n||Poné el celular boca abajo.
+n||Salí a caminar.
+n||Mirá el cielo.
+n||Disfrutá el silencio.
+n||El presente es un regalo.
+n||Inhalá calma, exhalá tensión.
+n||Paso a paso.
+n||Mañana es otro día.
+n||Soltá.
+n||No te lleves todo tan a pecho.
+n||Encontrá tu ritmo.
+n||Un té, un libro, un respiro.
+n||La calma es tu superpoder.
+n||Escuchá tu respiración.
+n||Hoy, menos ruido.
+n||Dejá ir.
+n||Confiá en el proceso.
+n||Desacelerá.
+n||Hacé espacio para vos.
+n||Sé paciente con vos.
+n||La tormenta también pasa.
+n||Agradecé este momento.
+n||Está todo bien.
+n||Escribí lo que te preocupa y dejalo en el papel.
+n||Volvé a tu respiración.
+n||Simplificá.
+n||Disfrutá el camino.
+
+@superacion
+k|Friedrich Nietzsche|Quien tiene un porqué para vivir puede soportar casi cualquier cómo.
+k|Friedrich Nietzsche|Lo que no me mata me hace más fuerte.
+k|Rumi|La herida es el lugar por donde entra la luz.
+k|Albert Camus|Hay que imaginarse a Sísifo feliz.
+k|Fiódor Dostoyevski|Solo hay una cosa que temo: no ser digno de mis sufrimientos.
+k|Haruki Murakami|El dolor es inevitable; el sufrimiento es opcional.
+k|Nelson Mandela|Siempre parece imposible hasta que se hace.
+k|Confucio|Nuestra mayor gloria no está en no caer nunca, sino en levantarnos cada vez que caemos.
+k|Martin Luther King Jr.|Si no podés volar, corré; si no podés correr, caminá; si no podés caminar, gateá; pero hagas lo que hagas, seguí avanzando.
+k|Fiódor Dostoyevski|El secreto de la existencia humana no está solo en vivir, sino en saber para qué se vive.
+k|Friedrich Nietzsche|Hay que llevar todavía un caos dentro de sí para poder dar a luz una estrella danzarina.
+k|Heráclito|El carácter de un hombre es su destino.
+k|Winston Churchill|Si estás atravesando el infierno, seguí caminando.
+k|Albert Camus|La verdadera generosidad con el futuro consiste en darlo todo al presente.
+k|Fiódor Dostoyevski|El hombre se acostumbra a todo, el muy canalla.
+k|Nikos Kazantzakis|Tenés los pinceles y los colores: pintá el paraíso y entrá en él.
+k|Viktor Frankl|Cuando ya no podemos cambiar una situación, tenemos el desafío de cambiarnos a nosotros mismos.
+k|Maya Angelou|Puede que no controles todo lo que te pasa, pero podés decidir no ser reducido por ello.
+b|Heráclito|Nadie se baña dos veces en el mismo río.
+b||Caerse está permitido. Levantarse es obligatorio.
+b||Lo que hoy te rompe, mañana te va a sostener.
+b||No llegaste hasta acá para quedarte acá.
+b||El fondo no es el final: es el piso desde donde se empuja.
+b||Si te tiembla todo y seguís, eso es valentía.
+b||No tenés que ver toda la escalera. Solo el próximo escalón.
+b||Los días malos también cuentan. Te enseñan a aguantar.
+b||Volver a empezar no es empezar de cero: es empezar con experiencia.
+b||Todo lo que querés está del otro lado del miedo.
+b||Sobreviviste a todos tus peores días. Vas por buen camino.
+b||El que no se rinde no pierde nunca: solo aprende.
+b||Los diamantes se forman bajo presión.
+b||Si hoy no podés con todo, podé con una cosa.
+b||La vida no se vuelve más fácil. Vos te volvés más fuerte.
+b||Tu pasado explica, pero no decide.
+b||Las tormentas hacen que los árboles echen raíces más profundas.
+b||Hay batallas que se ganan solo por no abandonarlas.
+n||Seguí.
+n||No te rindas.
+n||Una vez más.
+n||Podés con esto.
+n||Lo peor ya pasó.
+n||Respirá y seguí.
+n||Cada caída te enseña algo.
+n||Estás creciendo.
+n||Valiente no es el que no tiene miedo.
+n||Hoy cuesta. Mañana vale.
+n||Confiá en tu fuerza.
+n||Mirá todo lo que ya superaste.
+n||Fuerza.
+n||Tu historia no termina acá.
+n||Avanzá aunque sea un poco.
+n||Del dolor también se aprende.
+n||Hacelo con miedo, pero hacelo.
+n||Resistí.
+n||Todo esfuerzo deja huella.
+n||Nunca es tarde para cambiar.
+n||Sos capaz de mucho más.
+n||Levantá la cabeza.
+n||El camino difícil lleva a lugares hermosos.
+n||Cada día es una nueva oportunidad.
+n||Lo que hoy es difícil, mañana es fácil.
+n||Las crisis también son puertas.
+n||Volvé a intentarlo.
+n||Tus límites están en tu cabeza.
+n||Rendirse no es una opción.
+n||Seguí adelante, pase lo que pase.
+n||Lo imposible solo tarda un poco más.
+n||Tu fuerza nace de tus luchas.

@@ -1,0 +1,3785 @@
+[
+ {
+  "id": "b-0001",
+  "texto": "La disciplina es libertad.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Jocko Willink"
+ },
+ {
+  "id": "b-0002",
+  "texto": "La disciplina es el puente entre las metas y los logros.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Jim Rohn"
+ },
+ {
+  "id": "b-0003",
+  "texto": "Todos vamos a sufrir uno de dos dolores: el de la disciplina o el del arrepentimiento.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Jim Rohn"
+ },
+ {
+  "id": "b-0004",
+  "texto": "Somos lo que hacemos repetidamente. La excelencia, entonces, no es un acto sino un hábito.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Will Durant, sobre Aristóteles"
+ },
+ {
+  "id": "b-0005",
+  "texto": "Cuando tu mente te dice que terminaste, apenas estás al 40% de lo que sos capaz.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "David Goggins"
+ },
+ {
+  "id": "b-0006",
+  "texto": "Dominar a otros es fuerza. Dominarse a uno mismo es verdadero poder.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Lao Tsé"
+ },
+ {
+  "id": "b-0007",
+  "texto": "No le temo al hombre que practicó diez mil patadas una vez, sino al que practicó una patada diez mil veces.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Bruce Lee"
+ },
+ {
+  "id": "b-0008",
+  "texto": "La primera y mejor de las victorias es conquistarse a uno mismo.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Platón"
+ },
+ {
+  "id": "b-0009",
+  "texto": "No importa lo lento que vayas, siempre y cuando no te detengas.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Confucio"
+ },
+ {
+  "id": "b-0010",
+  "texto": "Primero decí qué querés ser; después hacé lo que tengas que hacer.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Epicteto"
+ },
+ {
+  "id": "b-0011",
+  "texto": "No pierdas más tiempo discutiendo cómo debe ser un buen hombre. Sé uno.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Marco Aurelio"
+ },
+ {
+  "id": "b-0012",
+  "texto": "Empezá a vivir de una vez, y contá cada día como una vida aparte.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Séneca"
+ },
+ {
+  "id": "b-0013",
+  "texto": "Todo lo que tenemos que decidir es qué hacer con el tiempo que se nos ha dado.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "J. R. R. Tolkien"
+ },
+ {
+  "id": "b-0014",
+  "texto": "Adquirimos una virtud ejerciéndola: nos hacemos justos haciendo actos justos.",
+  "categoria": "disciplina",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Aristóteles"
+ },
+ {
+  "id": "b-0015",
+  "texto": "¿Sabés cómo se ve Los Ángeles a las cuatro de la mañana?",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base",
+  "autor": "Kobe Bryant"
+ },
+ {
+  "id": "b-0016",
+  "texto": "El trabajo duro le gana al talento cuando el talento no trabaja duro.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base",
+  "autor": "Tim Notke"
+ },
+ {
+  "id": "b-0017",
+  "texto": "La motivación te hace arrancar. La disciplina te hace volver mañana.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0018",
+  "texto": "No negocies con tu cansancio: hacé lo que dijiste que ibas a hacer.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0019",
+  "texto": "Tu futuro se decide en lo que hacés cuando nadie te está mirando.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0020",
+  "texto": "Hacelo con ganas o sin ganas, pero hacelo.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0021",
+  "texto": "Las ganas van y vienen. Los hábitos se quedan.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0022",
+  "texto": "Prometete poco y cumplite siempre.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0023",
+  "texto": "Ganar el día es ganar la mañana. Ganar la mañana es ganarle a la almohada.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0024",
+  "texto": "La comodidad de hoy es la deuda de mañana.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0025",
+  "texto": "Ser constante es aburrido. Por eso tan pocos llegan.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0026",
+  "texto": "No necesitás más tiempo. Necesitás menos excusas.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0027",
+  "texto": "El que se gobierna a sí mismo no necesita que nadie lo empuje.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0028",
+  "texto": "Cada vez que cumplís algo que te prometiste, te volvés alguien en quien podés confiar.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0029",
+  "texto": "Lo difícil no es empezar. Lo difícil es el día 23, cuando ya no es nuevo.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0030",
+  "texto": "La disciplina es elegir lo que más querés por encima de lo que querés ahora.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0031",
+  "texto": "Repetí lo básico hasta que deje de ser básico.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0032",
+  "texto": "Nadie se arrepiente de haber entrenado, estudiado o cumplido su palabra.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0033",
+  "texto": "El celular puede esperar. Tu vida no.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0034",
+  "texto": "Si esperás a tener ganas, vas a esperar toda la vida.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0035",
+  "texto": "Ordená tu cuarto, ordená tu día, ordená tu cabeza.",
+  "categoria": "disciplina",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0036",
+  "texto": "Un poco todos los días le gana a mucho de vez en cuando.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0037",
+  "texto": "Hoy es un buen día para no fallarte.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0038",
+  "texto": "Hacé la tarea más difícil primero.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0039",
+  "texto": "Levantate. Una vez más.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0040",
+  "texto": "Menos hablar, más hacer.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0041",
+  "texto": "Tu rutina es tu escudo.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0042",
+  "texto": "No rompas la racha.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0043",
+  "texto": "Lo que hacés todos los días importa más que lo que hacés de vez en cuando.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0044",
+  "texto": "Cumplí. Aunque sea poco, cumplí.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0045",
+  "texto": "La constancia es un superpoder silencioso.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0046",
+  "texto": "Si lo agendaste, se hace.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0047",
+  "texto": "Primero el deber, después el placer.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0048",
+  "texto": "Cada mañana es una nueva oportunidad de ser disciplinado.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0049",
+  "texto": "Lo hiciste ayer. Podés hacerlo hoy.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0050",
+  "texto": "Dejá de pensarlo tanto y arrancá.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0051",
+  "texto": "Tu yo del futuro te está mirando.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0052",
+  "texto": "Sin atajos.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0053",
+  "texto": "Pequeños pasos, todos los días.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0054",
+  "texto": "Las excusas no construyen nada.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0055",
+  "texto": "Cuidá tus hábitos: ellos te van a cuidar a vos.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0056",
+  "texto": "El orden trae calma.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0057",
+  "texto": "Hacelo aunque no sea perfecto.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0058",
+  "texto": "Hoy no se negocia.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0059",
+  "texto": "Ponete un horario y respetalo.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0060",
+  "texto": "Si es importante, encontrás la manera. Si no, encontrás una excusa.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0061",
+  "texto": "Terminá lo que empezás.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0062",
+  "texto": "El esfuerzo de hoy es el orgullo de mañana.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0063",
+  "texto": "Disciplina es amor propio con horario.",
+  "categoria": "disciplina",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0064",
+  "texto": "Viví como si fueras a morir mañana; aprendé como si fueras a vivir para siempre.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Mahatma Gandhi"
+ },
+ {
+  "id": "b-0065",
+  "texto": "Una inversión en conocimiento paga el mejor interés.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Benjamin Franklin"
+ },
+ {
+  "id": "b-0066",
+  "texto": "Aprender sin pensar es inútil. Pensar sin aprender es peligroso.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Confucio"
+ },
+ {
+  "id": "b-0067",
+  "texto": "La educación es el arma más poderosa que podés usar para cambiar el mundo.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Nelson Mandela"
+ },
+ {
+  "id": "b-0068",
+  "texto": "Las raíces de la educación son amargas, pero sus frutos son dulces.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Aristóteles"
+ },
+ {
+  "id": "b-0069",
+  "texto": "La mente no es un vaso que llenar, sino un fuego que encender.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Plutarco"
+ },
+ {
+  "id": "b-0070",
+  "texto": "El aprendizaje nunca agota la mente.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Leonardo da Vinci"
+ },
+ {
+  "id": "b-0071",
+  "texto": "Cualquiera que deja de aprender es viejo, tenga veinte u ochenta años.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Henry Ford"
+ },
+ {
+  "id": "b-0072",
+  "texto": "El futuro pertenece a quienes se preparan para él hoy.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Malcolm X"
+ },
+ {
+  "id": "b-0073",
+  "texto": "Que otros se jacten de las páginas que han escrito; a mí me enorgullecen las que he leído.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Jorge Luis Borges"
+ },
+ {
+  "id": "b-0074",
+  "texto": "El que lee mucho y anda mucho, ve mucho y sabe mucho.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Miguel de Cervantes"
+ },
+ {
+  "id": "b-0075",
+  "texto": "Solo sé que no sé nada.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Sócrates"
+ },
+ {
+  "id": "b-0076",
+  "texto": "Mientras enseñamos, aprendemos.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Séneca"
+ },
+ {
+  "id": "b-0077",
+  "texto": "Lo importante es no dejar de hacerse preguntas.",
+  "categoria": "estudio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Albert Einstein"
+ },
+ {
+  "id": "b-0078",
+  "texto": "Estudiar hoy es comprarle libertad a tu yo del futuro.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0079",
+  "texto": "Nadie aprende por vos. Y eso es una buena noticia: nadie te lo puede quitar.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0080",
+  "texto": "Una hora enfocada vale más que cuatro con el celular al lado.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0081",
+  "texto": "No es que no te da la cabeza. Es que todavía no le diste suficientes horas.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0082",
+  "texto": "Entender una cosa a fondo vale más que memorizar diez.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0083",
+  "texto": "El examen no mide lo que sos. Mide lo que preparaste. Prepará más.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0084",
+  "texto": "Si no lo podés explicar simple, todavía no lo entendiste. Seguí.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0085",
+  "texto": "El conocimiento es lo único que crece cuando lo compartís.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0086",
+  "texto": "Equivocarte en la práctica es la mejor forma de no equivocarte en el examen.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0087",
+  "texto": "Cada página que leés te separa un poco más de la persona que eras.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0088",
+  "texto": "Lo que estudiás con curiosidad no se olvida.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0089",
+  "texto": "No estudies para aprobar. Estudiá para no tener que volver a estudiarlo.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0090",
+  "texto": "El cerebro es un músculo: duele un poco antes de crecer.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0091",
+  "texto": "Hoy aburrido, mañana preparado.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0092",
+  "texto": "Preguntá. La duda que no preguntás se convierte en el error que cometés.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0093",
+  "texto": "La distracción es el impuesto que pagás por no tener un plan.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0094",
+  "texto": "Ser inteligente es una decisión que se toma todos los días frente al escritorio.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0095",
+  "texto": "Estudiar es aburrido hasta que empezás a entender. Ahí se vuelve adictivo.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0096",
+  "texto": "Leer es hablar con los muertos más inteligentes de la historia.",
+  "categoria": "estudio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0097",
+  "texto": "Una página más.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0098",
+  "texto": "Cerrá las pestañas. Abrí el libro.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0099",
+  "texto": "Modo avión, modo foco.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0100",
+  "texto": "Veinticinco minutos de foco. Cinco de descanso. Repetí.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0101",
+  "texto": "Hoy entendés algo que ayer no entendías.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0102",
+  "texto": "Repasar es aprender dos veces.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0103",
+  "texto": "Tu escritorio es tu campo de batalla.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0104",
+  "texto": "Estudiá ahora, disfrutá después.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0105",
+  "texto": "Un tema a la vez.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0106",
+  "texto": "El conocimiento suma. Siempre.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0107",
+  "texto": "Hacé resúmenes, no excusas.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0108",
+  "texto": "Lo que no se practica, se olvida.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0109",
+  "texto": "Cada clase cuenta.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0110",
+  "texto": "Aprender es una aventura sin final.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0111",
+  "texto": "El esfuerzo de estudiar nunca se pierde.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0112",
+  "texto": "Leé algo que te haga pensar.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0113",
+  "texto": "Tu mente es tu mejor inversión.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0114",
+  "texto": "No te compares con el que sabe más: aprendé de él.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0115",
+  "texto": "Entender lleva tiempo. Dátelo.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0116",
+  "texto": "El primer paso para saber es admitir que no sabés.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0117",
+  "texto": "Hacé ejercicios, no solo leas.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0118",
+  "texto": "Dormir bien también es estudiar.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0119",
+  "texto": "Las buenas notas son la consecuencia, no el objetivo.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0120",
+  "texto": "Cada error es una lección gratis.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0121",
+  "texto": "Hoy aprendés, mañana enseñás.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0122",
+  "texto": "Tu curiosidad es tu motor.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0123",
+  "texto": "Paso a paso se termina la carrera.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0124",
+  "texto": "El que estudia, elige.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0125",
+  "texto": "Una mente ocupada aprendiendo no tiene tiempo para dudar de sí misma.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0126",
+  "texto": "Repasá antes de dormir.",
+  "categoria": "estudio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0127",
+  "texto": "Odié cada minuto de entrenamiento, pero me dije: no abandones. Sufrí ahora y viví el resto de tu vida como un campeón.",
+  "categoria": "gym",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Muhammad Ali"
+ },
+ {
+  "id": "b-0128",
+  "texto": "La fuerza no viene de ganar. Tus luchas desarrollan tu fuerza.",
+  "categoria": "gym",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Arnold Schwarzenegger"
+ },
+ {
+  "id": "b-0129",
+  "texto": "Es una desgracia que un hombre envejezca sin ver la belleza y la fuerza de las que su cuerpo es capaz.",
+  "categoria": "gym",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Sócrates"
+ },
+ {
+  "id": "b-0130",
+  "texto": "No se trata de cuán fuerte pegás, sino de cuán fuerte te pueden pegar y seguir avanzando.",
+  "categoria": "gym",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Rocky Balboa"
+ },
+ {
+  "id": "b-0131",
+  "texto": "Todo el mundo quiere ser culturista, pero nadie quiere levantar estas pesas pesadas.",
+  "categoria": "gym",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Ronnie Coleman"
+ },
+ {
+  "id": "b-0132",
+  "texto": "Todos tienen un plan hasta que reciben la primera piña.",
+  "categoria": "gym",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Mike Tyson"
+ },
+ {
+  "id": "b-0133",
+  "texto": "Si siempre ponés límites a lo que hacés, físico o de cualquier tipo, se va a extender a tu trabajo y a tu vida. No hay límites; solo mesetas, y no hay que quedarse en ellas.",
+  "categoria": "gym",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Bruce Lee"
+ },
+ {
+  "id": "b-0134",
+  "texto": "Nadie va a venir a salvarte.",
+  "categoria": "gym",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "David Goggins"
+ },
+ {
+  "id": "b-0135",
+  "texto": "El dolor no te dice cuándo parar. Te dice que estás cerca.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0136",
+  "texto": "Cuanto más difícil es la victoria, mayor es la felicidad de ganar.",
+  "categoria": "gym",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Pelé"
+ },
+ {
+  "id": "b-0137",
+  "texto": "La última repetición es la que hace crecer el músculo. Ese dolor separa a un campeón de alguien que no lo es.",
+  "categoria": "gym",
+  "nivel": "clave",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0138",
+  "texto": "El cuerpo logra lo que la mente cree.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0139",
+  "texto": "Nadie se arrepintió nunca de un entrenamiento terminado.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0140",
+  "texto": "No entrenás para el espejo. Entrenás para ser alguien que no se rinde.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0141",
+  "texto": "El hierro no miente: cuarenta kilos son cuarenta kilos.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0142",
+  "texto": "Tu cuerpo es el único lugar en el que vas a vivir toda la vida. Cuidalo.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0143",
+  "texto": "El dolor de hoy es la fuerza de mañana.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0144",
+  "texto": "Cuando quieras parar, acordate de por qué empezaste.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0145",
+  "texto": "Las pesas no te preguntan cómo fue tu día. Solo te piden que las levantes.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0146",
+  "texto": "El gimnasio es el único lugar donde caer te hace más fuerte.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0147",
+  "texto": "No hay ascensor al éxito físico. Hay que usar las escaleras.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0148",
+  "texto": "Hoy duele. Mañana se nota.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0149",
+  "texto": "El sudor es la grasa llorando.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0150",
+  "texto": "Entrená como si alguien te quisiera sacar el lugar.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0151",
+  "texto": "La meseta no es el final: es la señal de que hay que cambiar.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0152",
+  "texto": "Tu único rival es el que eras la semana pasada.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0153",
+  "texto": "Ningún entrenamiento corto es peor que el que no hiciste.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0154",
+  "texto": "La fuerza física se construye con repeticiones; la mental, con días malos.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0155",
+  "texto": "El cansancio miente. Te queda más.",
+  "categoria": "gym",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0156",
+  "texto": "Una serie más.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0157",
+  "texto": "Hoy toca pierna. No se negocia.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0158",
+  "texto": "Comé bien, dormí bien, entrená fuerte.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0159",
+  "texto": "El progreso es progreso, aunque sea lento.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0160",
+  "texto": "Tomá agua.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0161",
+  "texto": "Sin excusas, con pesas.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0162",
+  "texto": "Calentá bien y rompela.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0163",
+  "texto": "Respirá y empujá.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0164",
+  "texto": "La técnica primero, el peso después.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0165",
+  "texto": "Cada gota de sudor cuenta.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0166",
+  "texto": "Hoy entrenás por el de mañana.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0167",
+  "texto": "Movete. Tu cuerpo te lo va a agradecer.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0168",
+  "texto": "El descanso también es parte del plan.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0169",
+  "texto": "No pares cuando estés cansado; pará cuando termines.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0170",
+  "texto": "Tu cuerpo puede más de lo que creés.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0171",
+  "texto": "Sumá un kilo. O una repetición.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0172",
+  "texto": "Cuerpo fuerte, mente fuerte.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0173",
+  "texto": "Lo que hoy pesa, mañana es tu calentamiento.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0174",
+  "texto": "Hacé que tu entrenamiento valga la pena.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0175",
+  "texto": "Las ganas aparecen después de la primera serie.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0176",
+  "texto": "Constancia le gana a intensidad.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0177",
+  "texto": "El gimnasio está abierto. ¿Y vos?",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0178",
+  "texto": "Entrená con propósito.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0179",
+  "texto": "Una mala sesión es mejor que ninguna.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0180",
+  "texto": "Paciencia: los músculos no se hacen en un día.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0181",
+  "texto": "Tu salud es tu riqueza.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0182",
+  "texto": "Ponete los auriculares y desaparecé del mundo una hora.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0183",
+  "texto": "Pequeñas mejoras, grandes resultados.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0184",
+  "texto": "El sudor de hoy es la sonrisa de mañana.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0185",
+  "texto": "Correr también es meditar.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0186",
+  "texto": "El cuerpo se cansa. La voluntad decide.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0187",
+  "texto": "Dale, que se puede.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0188",
+  "texto": "Fuerza no es solo levantar: es volver.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0189",
+  "texto": "Entrená tu mente igual que tu cuerpo.",
+  "categoria": "gym",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0190",
+  "texto": "No es que tengamos poco tiempo, sino que perdemos mucho.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Séneca"
+ },
+ {
+  "id": "b-0191",
+  "texto": "El impedimento a la acción hace avanzar la acción. Lo que se interpone en el camino se convierte en el camino.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Marco Aurelio"
+ },
+ {
+  "id": "b-0192",
+  "texto": "La mejor venganza es no ser como tu enemigo.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Marco Aurelio"
+ },
+ {
+  "id": "b-0193",
+  "texto": "No son las cosas las que nos perturban, sino las opiniones que tenemos sobre ellas.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Epicteto"
+ },
+ {
+  "id": "b-0194",
+  "texto": "Ningún hombre es libre si no es dueño de sí mismo.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Epicteto"
+ },
+ {
+  "id": "b-0195",
+  "texto": "Mientras esperamos vivir, la vida pasa.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Séneca"
+ },
+ {
+  "id": "b-0196",
+  "texto": "Si un hombre no sabe a qué puerto se dirige, ningún viento le es favorable.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Séneca"
+ },
+ {
+  "id": "b-0197",
+  "texto": "La dificultad fortalece la mente, como el trabajo al cuerpo.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Séneca"
+ },
+ {
+  "id": "b-0198",
+  "texto": "Muy poco se necesita para hacer una vida feliz; todo está dentro de vos, en tu manera de pensar.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Marco Aurelio"
+ },
+ {
+  "id": "b-0199",
+  "texto": "La riqueza no consiste en tener grandes posesiones, sino en tener pocas necesidades.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Epicteto"
+ },
+ {
+  "id": "b-0200",
+  "texto": "Tenés poder sobre tu mente, no sobre los acontecimientos. Date cuenta de esto y vas a encontrar la fuerza.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Marco Aurelio"
+ },
+ {
+  "id": "b-0201",
+  "texto": "Al hombre se le puede arrebatar todo salvo una cosa: la última de las libertades humanas, elegir su actitud ante cualquier circunstancia.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Viktor Frankl"
+ },
+ {
+  "id": "b-0202",
+  "texto": "Pensá en la belleza de la vida. Mirá las estrellas y imaginate corriendo con ellas.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Marco Aurelio"
+ },
+ {
+  "id": "b-0203",
+  "texto": "Vivir es como una obra de teatro: no importa cuánto dura, sino qué tan bien se actúa.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Séneca"
+ },
+ {
+  "id": "b-0204",
+  "texto": "Es imposible que un hombre aprenda lo que cree que ya sabe.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Epicteto"
+ },
+ {
+  "id": "b-0205",
+  "texto": "Cuando te levantes por la mañana, pensá en el privilegio que es estar vivo: respirar, pensar, disfrutar, amar.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Marco Aurelio"
+ },
+ {
+  "id": "b-0206",
+  "texto": "La suerte no existe: lo que llamamos suerte es el cuidado de los detalles.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0207",
+  "texto": "Todos ven lo que aparentás; pocos advierten lo que sos.",
+  "categoria": "estoicismo",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Nicolás Maquiavelo"
+ },
+ {
+  "id": "b-0208",
+  "texto": "Quien está en todas partes no está en ninguna.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base",
+  "autor": "Séneca"
+ },
+ {
+  "id": "b-0209",
+  "texto": "La felicidad de tu vida depende de la calidad de tus pensamientos.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base",
+  "autor": "Marco Aurelio"
+ },
+ {
+  "id": "b-0210",
+  "texto": "Si querés mejorar, conformate con parecer tonto en las cosas externas.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base",
+  "autor": "Epicteto"
+ },
+ {
+  "id": "b-0211",
+  "texto": "Es más fácil impedir que entren las pasiones que expulsarlas una vez que entraron.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base",
+  "autor": "Séneca"
+ },
+ {
+  "id": "b-0212",
+  "texto": "Lo que no es útil para la colmena no es útil para la abeja.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base",
+  "autor": "Marco Aurelio"
+ },
+ {
+  "id": "b-0213",
+  "texto": "Separá lo que depende de vos de lo que no. Todo lo demás es ruido.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0214",
+  "texto": "No podés controlar el viento, pero sí ajustar las velas.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0215",
+  "texto": "Recordá que vas a morir. No para tener miedo, sino para no perder el tiempo.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0216",
+  "texto": "Lo que te pasa no es tu culpa. Lo que hacés con eso, sí es tu responsabilidad.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0217",
+  "texto": "Tu enojo no castiga al otro: te castiga a vos.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0218",
+  "texto": "Hacé lo correcto aunque nadie lo aplauda.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0219",
+  "texto": "Perder algo que no depende de vos no es una derrota: es la vida.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0220",
+  "texto": "El obstáculo es el entrenamiento.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0221",
+  "texto": "No reacciones. Respondé.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0222",
+  "texto": "El que necesita poco es difícil de vencer.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0223",
+  "texto": "Ante la duda, preguntate qué haría la mejor versión de vos.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0224",
+  "texto": "Si mañana no te despertaras, ¿estarías conforme con cómo usaste hoy?",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0225",
+  "texto": "La opinión de los demás es un clima: no la podés cambiar, solo vestirte para ella.",
+  "categoria": "estoicismo",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0226",
+  "texto": "Controlá lo controlable.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0227",
+  "texto": "Memento mori.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0228",
+  "texto": "Amor fati: amá lo que te toca.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0229",
+  "texto": "Calma ante el caos.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0230",
+  "texto": "El hoy es todo lo que tenés.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0231",
+  "texto": "Sé dueño de tus reacciones.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0232",
+  "texto": "Lo externo no te define.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0233",
+  "texto": "Pensá antes de hablar.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0234",
+  "texto": "Elegí tu actitud.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0235",
+  "texto": "El carácter se forja en la adversidad.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0236",
+  "texto": "Hacé tu parte y soltá el resultado.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0237",
+  "texto": "Una mente tranquila es una mente fuerte.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0238",
+  "texto": "No sufras dos veces: antes y durante.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0239",
+  "texto": "La virtud es su propia recompensa.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0240",
+  "texto": "Vivir con poco es vivir libre.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0241",
+  "texto": "Mirá el problema desde arriba.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0242",
+  "texto": "Tu paz vale más que tener razón.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0243",
+  "texto": "Agradecé lo que tenés antes de que la vida te lo enseñe.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0244",
+  "texto": "Que nada te saque de tu centro.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0245",
+  "texto": "Practicá la incomodidad.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0246",
+  "texto": "Sé justo, sé valiente, sé moderado.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0247",
+  "texto": "El tiempo es lo único que no vuelve.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0248",
+  "texto": "Aceptá. Adaptate. Avanzá.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0249",
+  "texto": "No te quejes: actuá.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0250",
+  "texto": "Cada día es una vida entera.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0251",
+  "texto": "La serenidad también se entrena.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0252",
+  "texto": "Lo que pasó, pasó. ¿Qué hacés ahora?",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0253",
+  "texto": "El sabio no se ofende fácilmente.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0254",
+  "texto": "Tus pensamientos tiñen tu realidad.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0255",
+  "texto": "Hacé el bien sin esperar nada.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0256",
+  "texto": "El dolor pasa; el carácter queda.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0257",
+  "texto": "Cuidá tus palabras: te definen.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0258",
+  "texto": "Vivir bien es la mejor respuesta.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0259",
+  "texto": "Lo importante es invisible a los ojos del apuro.",
+  "categoria": "estoicismo",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0260",
+  "texto": "Amarse a uno mismo es el comienzo de un romance para toda la vida.",
+  "categoria": "amor-propio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Oscar Wilde"
+ },
+ {
+  "id": "b-0261",
+  "texto": "Quien mira hacia afuera, sueña; quien mira hacia adentro, despierta.",
+  "categoria": "amor-propio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Carl Jung"
+ },
+ {
+  "id": "b-0262",
+  "texto": "Nadie puede hacerte sentir inferior sin tu consentimiento.",
+  "categoria": "amor-propio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Eleanor Roosevelt"
+ },
+ {
+  "id": "b-0263",
+  "texto": "Conocer a otros es inteligencia; conocerse a uno mismo es verdadera sabiduría.",
+  "categoria": "amor-propio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Lao Tsé"
+ },
+ {
+  "id": "b-0264",
+  "texto": "En medio del invierno descubrí que había en mí un verano invencible.",
+  "categoria": "amor-propio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Albert Camus"
+ },
+ {
+  "id": "b-0265",
+  "texto": "Llegá a ser el que sos.",
+  "categoria": "amor-propio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Friedrich Nietzsche"
+ },
+ {
+  "id": "b-0266",
+  "texto": "Lo más importante es no mentirse a uno mismo.",
+  "categoria": "amor-propio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Fiódor Dostoyevski"
+ },
+ {
+  "id": "b-0267",
+  "texto": "Decime, ¿qué pensás hacer con tu única, salvaje y preciosa vida?",
+  "categoria": "amor-propio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Mary Oliver"
+ },
+ {
+  "id": "b-0268",
+  "texto": "Pies, ¿para qué los quiero si tengo alas para volar?",
+  "categoria": "amor-propio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Frida Kahlo"
+ },
+ {
+  "id": "b-0269",
+  "texto": "Ayer era inteligente y quería cambiar el mundo. Hoy soy sabio y me estoy cambiando a mí mismo.",
+  "categoria": "amor-propio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Rumi"
+ },
+ {
+  "id": "b-0270",
+  "texto": "Lo que buscás te está buscando.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0271",
+  "texto": "Tu visión se vuelve clara solo cuando mirás dentro de tu corazón.",
+  "categoria": "amor-propio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Carl Jung"
+ },
+ {
+  "id": "b-0272",
+  "texto": "Conocerse a uno mismo es el comienzo de toda sabiduría.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0273",
+  "texto": "Todos nos amamos a nosotros mismos más que a los demás, pero nos importa más su opinión que la nuestra.",
+  "categoria": "amor-propio",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Marco Aurelio"
+ },
+ {
+  "id": "b-0274",
+  "texto": "No sos demasiado. Estás rodeado de gente que da poco.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0275",
+  "texto": "Hablate como le hablarías a alguien que querés.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0276",
+  "texto": "No tenés que ganarte el derecho a descansar.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0277",
+  "texto": "Tu valor no baja porque alguien no lo vea.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0278",
+  "texto": "Compararte es robarte la alegría.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0279",
+  "texto": "Elegirte no es egoísmo. Es supervivencia.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0280",
+  "texto": "Sos el único que va a estar con vos toda la vida. Llevate bien.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0281",
+  "texto": "Está bien no estar bien. No está bien quedarse ahí para siempre.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0282",
+  "texto": "Poner límites también es una forma de amor.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0283",
+  "texto": "No le debés explicaciones a quien decidió no entenderte.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0284",
+  "texto": "La versión de vos que más necesitás es la que se perdona.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0285",
+  "texto": "Tu cuerpo no es un proyecto a corregir: es tu casa.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0286",
+  "texto": "Dejá de pedir perdón por existir.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0287",
+  "texto": "Lo que pensás de vos es más importante que lo que piensan los demás.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0288",
+  "texto": "Celebrá tus pequeñas victorias. Nadie las vio tan de cerca como vos.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0289",
+  "texto": "Alejarte de lo que te hace mal también es avanzar.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0290",
+  "texto": "Tus cicatrices son prueba de que sobreviviste.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0291",
+  "texto": "No sos tus errores. Sos lo que hacés después de ellos.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0292",
+  "texto": "Tratate con la paciencia que tendrías con tu mejor amigo.",
+  "categoria": "amor-propio",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0293",
+  "texto": "Sos suficiente.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0294",
+  "texto": "Cuidate. Sos importante.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0295",
+  "texto": "Hoy elegite.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0296",
+  "texto": "Tu paz primero.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0297",
+  "texto": "Mirate con cariño.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0298",
+  "texto": "Sos tu propio hogar.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0299",
+  "texto": "Estás haciendo lo mejor que podés.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0300",
+  "texto": "Perdonate.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0301",
+  "texto": "Merecés lo bueno que te pasa.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0302",
+  "texto": "Tu historia todavía se está escribiendo.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0303",
+  "texto": "Brillá a tu manera.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0304",
+  "texto": "Respetá tus tiempos.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0305",
+  "texto": "Decí que no sin culpa.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0306",
+  "texto": "Tu energía es valiosa: cuidá dónde la ponés.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0307",
+  "texto": "Escuchate.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0308",
+  "texto": "Abrazá tu proceso.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0309",
+  "texto": "No te achiques para caber.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0310",
+  "texto": "Sos único.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0311",
+  "texto": "Agradecele a tu cuerpo todo lo que hace por vos.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0312",
+  "texto": "Rodeate de quienes suman.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0313",
+  "texto": "Sos más fuerte de lo que pensás.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0314",
+  "texto": "Date permiso para crecer.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0315",
+  "texto": "Tu felicidad es tu responsabilidad.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0316",
+  "texto": "Querete como querés que te quieran.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0317",
+  "texto": "Merecés un descanso.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0318",
+  "texto": "Cada día te conocés un poco más.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0319",
+  "texto": "Sé amable con vos.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0320",
+  "texto": "Tu luz no necesita permiso.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0321",
+  "texto": "Aceptarte es el primer paso para mejorar.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0322",
+  "texto": "Vos también contás.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0323",
+  "texto": "Soltá lo que no es para vos.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0324",
+  "texto": "Volvé a vos.",
+  "categoria": "amor-propio",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0325",
+  "texto": "Fallé una y otra vez en mi vida. Y por eso tengo éxito.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Michael Jordan"
+ },
+ {
+  "id": "b-0326",
+  "texto": "No fracasé. Encontré diez mil maneras que no funcionan.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Thomas Edison"
+ },
+ {
+  "id": "b-0327",
+  "texto": "El éxito no es un accidente. Es trabajo duro, perseverancia, aprendizaje, estudio, sacrificio y, sobre todo, amor por lo que estás haciendo.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Pelé"
+ },
+ {
+  "id": "b-0328",
+  "texto": "Tu tiempo es limitado, así que no lo desperdicies viviendo la vida de otro.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Steve Jobs"
+ },
+ {
+  "id": "b-0329",
+  "texto": "Donde hay una gran voluntad no puede haber grandes dificultades.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Nicolás Maquiavelo"
+ },
+ {
+  "id": "b-0330",
+  "texto": "Tanto si pensás que podés como si pensás que no podés, tenés razón.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Henry Ford"
+ },
+ {
+  "id": "b-0331",
+  "texto": "La inspiración existe, pero tiene que encontrarte trabajando.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Pablo Picasso"
+ },
+ {
+  "id": "b-0332",
+  "texto": "Fallás el cien por ciento de los tiros que no hacés.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Wayne Gretzky"
+ },
+ {
+  "id": "b-0333",
+  "texto": "La única manera de hacer un gran trabajo es amar lo que hacés.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Steve Jobs"
+ },
+ {
+  "id": "b-0334",
+  "texto": "Hacé lo que puedas, con lo que tengas, donde estés.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Theodore Roosevelt"
+ },
+ {
+  "id": "b-0335",
+  "texto": "Lo que importa no es la idea, sino la ejecución.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0336",
+  "texto": "Todo lo negativo, la presión y los desafíos, es para mí una oportunidad de crecer.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Kobe Bryant"
+ },
+ {
+  "id": "b-0337",
+  "texto": "El que quiere obtener lo que desea debe estar dispuesto a cambiar de método, no de objetivo.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Nicolás Maquiavelo"
+ },
+ {
+  "id": "b-0338",
+  "texto": "Empecé temprano y me quedé hasta tarde, día tras día, año tras año. Me llevó diecisiete años y ciento catorce días convertirme en un éxito de la noche a la mañana.",
+  "categoria": "exito",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Lionel Messi"
+ },
+ {
+  "id": "b-0339",
+  "texto": "No hay secretos para el éxito. Es el resultado de la preparación, el trabajo duro y aprender del fracaso.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base",
+  "autor": "Colin Powell"
+ },
+ {
+  "id": "b-0340",
+  "texto": "Ganar no lo es todo, pero querer ganar sí.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base",
+  "autor": "Vince Lombardi"
+ },
+ {
+  "id": "b-0341",
+  "texto": "La forma de empezar es dejar de hablar y empezar a hacer.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base",
+  "autor": "Walt Disney"
+ },
+ {
+  "id": "b-0342",
+  "texto": "Mantenete hambriento, mantenete alocado.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base",
+  "autor": "Steve Jobs"
+ },
+ {
+  "id": "b-0343",
+  "texto": "El éxito es ir de fracaso en fracaso sin perder el entusiasmo.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0344",
+  "texto": "Nadie ve las horas. Todos ven los resultados.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0345",
+  "texto": "El éxito de la noche a la mañana tarda unos diez años.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0346",
+  "texto": "Trabajá en silencio y dejá que el éxito haga el ruido.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0347",
+  "texto": "Los sueños no funcionan si vos no trabajás.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0348",
+  "texto": "Si no construís tu sueño, alguien te va a contratar para construir el suyo.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0349",
+  "texto": "No busques ser el mejor del mundo. Buscá ser mejor que ayer.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0350",
+  "texto": "Las oportunidades no aparecen: se crean.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0351",
+  "texto": "El que se anima a fallar en grande es el que puede ganar en grande.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0352",
+  "texto": "Que te digan que no es solo el comienzo de la conversación.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0353",
+  "texto": "Elegí tu dolor: el de intentarlo o el de no haberlo intentado nunca.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0354",
+  "texto": "Rodeate de gente que te quede grande.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0355",
+  "texto": "La suerte favorece a los que ya estaban trabajando.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0356",
+  "texto": "Hacé tanto ruido con tus resultados que no te haga falta hablar.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0357",
+  "texto": "El éxito no se persigue; se atrae con la persona en la que te convertís.",
+  "categoria": "exito",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0358",
+  "texto": "Pensá en grande, empezá en chico.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0359",
+  "texto": "Tu meta, tu ritmo.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0360",
+  "texto": "Hoy siembra, mañana cosecha.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0361",
+  "texto": "Creé en vos.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0362",
+  "texto": "El que la sigue, la consigue.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0363",
+  "texto": "Hacelo realidad.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0364",
+  "texto": "Arriesgate.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0365",
+  "texto": "Soñá, planeá, ejecutá.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0366",
+  "texto": "Los resultados llegan.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0367",
+  "texto": "Hacé que pase.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0368",
+  "texto": "Visualizá y trabajá.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0369",
+  "texto": "El esfuerzo siempre paga.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0370",
+  "texto": "Apuntá alto.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0371",
+  "texto": "Que tus acciones hablen.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0372",
+  "texto": "Cada no te acerca a un sí.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0373",
+  "texto": "Tu momento va a llegar. Preparate.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0374",
+  "texto": "Ganar empieza en la cabeza.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0375",
+  "texto": "Invertí en vos.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0376",
+  "texto": "El éxito es una suma de pequeños esfuerzos.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0377",
+  "texto": "Hacé lo que otros no quieren hacer.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0378",
+  "texto": "Enfocate en el proceso.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0379",
+  "texto": "Sé paciente con los resultados y exigente con el esfuerzo.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0380",
+  "texto": "La ambición sana mueve montañas.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0381",
+  "texto": "Tu talento merece trabajo.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0382",
+  "texto": "Celebrá cada avance.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0383",
+  "texto": "Lo mejor está por venir.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0384",
+  "texto": "Construí algo de lo que estés orgulloso.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0385",
+  "texto": "Más acción, menos planes.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0386",
+  "texto": "El que no arriesga no gana.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0387",
+  "texto": "Hoy es el día uno.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0388",
+  "texto": "Tus metas no tienen fecha de vencimiento.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0389",
+  "texto": "Seguí tu propio camino.",
+  "categoria": "exito",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0390",
+  "texto": "Si te aflige algo externo, el dolor no se debe a la cosa en sí, sino a tu valoración de ella; y tenés el poder de revocarla en cualquier momento.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Marco Aurelio"
+ },
+ {
+  "id": "b-0391",
+  "texto": "La naturaleza no se apura, y sin embargo todo se cumple.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Lao Tsé"
+ },
+ {
+  "id": "b-0392",
+  "texto": "Hay un solo camino a la felicidad: dejar de preocuparse por las cosas que están más allá de nuestro poder.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Epicteto"
+ },
+ {
+  "id": "b-0393",
+  "texto": "Toda la desdicha de los hombres viene de no saber quedarse tranquilos en una habitación.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Blaise Pascal"
+ },
+ {
+  "id": "b-0394",
+  "texto": "Los sentimientos vienen y van como nubes en un cielo con viento. La respiración consciente es mi ancla.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Thich Nhat Hanh"
+ },
+ {
+  "id": "b-0395",
+  "texto": "No espero nada. No temo nada. Soy libre.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Nikos Kazantzakis"
+ },
+ {
+  "id": "b-0396",
+  "texto": "Después de todo, la muerte es solo un síntoma de que hubo vida.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Mario Benedetti"
+ },
+ {
+  "id": "b-0397",
+  "texto": "Sufrimos más en la imaginación que en la realidad.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Séneca"
+ },
+ {
+  "id": "b-0398",
+  "texto": "Mi vida estuvo llena de terribles desgracias, la mayoría de las cuales nunca sucedieron.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Michel de Montaigne"
+ },
+ {
+  "id": "b-0399",
+  "texto": "Si tiene solución, ¿por qué te preocupás? Si no tiene solución, ¿por qué te preocupás?",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Proverbio chino"
+ },
+ {
+  "id": "b-0400",
+  "texto": "Si estás deprimido, vivís en el pasado. Si estás ansioso, vivís en el futuro. Si estás en paz, vivís en el presente.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Lao Tsé"
+ },
+ {
+  "id": "b-0401",
+  "texto": "La paz viene de adentro. No la busques afuera.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0402",
+  "texto": "Dentro de vos hay una quietud y un santuario al que podés retirarte en cualquier momento y ser vos mismo.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Hermann Hesse"
+ },
+ {
+  "id": "b-0403",
+  "texto": "No hay amor a la vida sin desesperación de vivir.",
+  "categoria": "calma",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Albert Camus"
+ },
+ {
+  "id": "b-0404",
+  "texto": "Respirá. No tenés que resolver toda tu vida hoy.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0405",
+  "texto": "No todo merece tu energía.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0406",
+  "texto": "Lo que hoy te desvela, en un año ni lo vas a recordar.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0407",
+  "texto": "Bajá un cambio. La vida no es una carrera.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0408",
+  "texto": "Tu mente es un cielo; los pensamientos, solo nubes.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0409",
+  "texto": "No hace falta que reacciones a todo.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0410",
+  "texto": "A veces lo más productivo es descansar.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0411",
+  "texto": "El silencio también es una respuesta.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0412",
+  "texto": "Calmar la mente es el primer paso para pensar con claridad.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0413",
+  "texto": "Hay cosas que se resuelven solas si dejás de tocarlas.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0414",
+  "texto": "Elegí la paz por encima de tener razón.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0415",
+  "texto": "No apures lo que necesita tiempo.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0416",
+  "texto": "La ansiedad pregunta \"¿y si...?\". La calma responde \"ya veremos\".",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0417",
+  "texto": "Desconectarte de todo a veces es la mejor forma de reconectar con vos.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0418",
+  "texto": "Lo que es para vos, te va a encontrar.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0419",
+  "texto": "Tu valor no depende de tu productividad.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0420",
+  "texto": "Cuando el agua se calma, se ve el fondo.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0421",
+  "texto": "Soltá lo que no podés controlar y vas a tener las manos libres para lo que sí.",
+  "categoria": "calma",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0422",
+  "texto": "Respirá hondo.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0423",
+  "texto": "Una cosa a la vez.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0424",
+  "texto": "Aquí y ahora.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0425",
+  "texto": "Todo pasa.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0426",
+  "texto": "Tranquilo, vas bien.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0427",
+  "texto": "Bajá los hombros.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0428",
+  "texto": "Cerrá los ojos un minuto.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0429",
+  "texto": "Poné el celular boca abajo.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0430",
+  "texto": "Salí a caminar.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0431",
+  "texto": "Mirá el cielo.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0432",
+  "texto": "Disfrutá el silencio.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0433",
+  "texto": "El presente es un regalo.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0434",
+  "texto": "Inhalá calma, exhalá tensión.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0435",
+  "texto": "Paso a paso.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0436",
+  "texto": "Mañana es otro día.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0437",
+  "texto": "Soltá.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0438",
+  "texto": "No te lleves todo tan a pecho.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0439",
+  "texto": "Encontrá tu ritmo.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0440",
+  "texto": "Un té, un libro, un respiro.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0441",
+  "texto": "La calma es tu superpoder.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0442",
+  "texto": "Escuchá tu respiración.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0443",
+  "texto": "Hoy, menos ruido.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0444",
+  "texto": "Dejá ir.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0445",
+  "texto": "Confiá en el proceso.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0446",
+  "texto": "Desacelerá.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0447",
+  "texto": "Hacé espacio para vos.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0448",
+  "texto": "Sé paciente con vos.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0449",
+  "texto": "La tormenta también pasa.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0450",
+  "texto": "Agradecé este momento.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0451",
+  "texto": "Está todo bien.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0452",
+  "texto": "Escribí lo que te preocupa y dejalo en el papel.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0453",
+  "texto": "Volvé a tu respiración.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0454",
+  "texto": "Simplificá.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0455",
+  "texto": "Disfrutá el camino.",
+  "categoria": "calma",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0456",
+  "texto": "Quien tiene un porqué para vivir puede soportar casi cualquier cómo.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Friedrich Nietzsche"
+ },
+ {
+  "id": "b-0457",
+  "texto": "Lo que no me mata me hace más fuerte.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Friedrich Nietzsche"
+ },
+ {
+  "id": "b-0458",
+  "texto": "La herida es el lugar por donde entra la luz.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Rumi"
+ },
+ {
+  "id": "b-0459",
+  "texto": "Hay que imaginarse a Sísifo feliz.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Albert Camus"
+ },
+ {
+  "id": "b-0460",
+  "texto": "Solo hay una cosa que temo: no ser digno de mis sufrimientos.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Fiódor Dostoyevski"
+ },
+ {
+  "id": "b-0461",
+  "texto": "El dolor es inevitable; el sufrimiento es opcional.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Haruki Murakami"
+ },
+ {
+  "id": "b-0462",
+  "texto": "Siempre parece imposible hasta que se hace.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Nelson Mandela"
+ },
+ {
+  "id": "b-0463",
+  "texto": "Nuestra mayor gloria no está en no caer nunca, sino en levantarnos cada vez que caemos.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Confucio"
+ },
+ {
+  "id": "b-0464",
+  "texto": "Si no podés volar, corré; si no podés correr, caminá; si no podés caminar, gateá; pero hagas lo que hagas, seguí avanzando.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Martin Luther King Jr."
+ },
+ {
+  "id": "b-0465",
+  "texto": "El secreto de la existencia humana no está solo en vivir, sino en saber para qué se vive.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Fiódor Dostoyevski"
+ },
+ {
+  "id": "b-0466",
+  "texto": "Hay que llevar todavía un caos dentro de sí para poder dar a luz una estrella danzarina.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Friedrich Nietzsche"
+ },
+ {
+  "id": "b-0467",
+  "texto": "El carácter de un hombre es su destino.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Heráclito"
+ },
+ {
+  "id": "b-0468",
+  "texto": "Si estás atravesando el infierno, seguí caminando.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Winston Churchill"
+ },
+ {
+  "id": "b-0469",
+  "texto": "La verdadera generosidad con el futuro consiste en darlo todo al presente.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Albert Camus"
+ },
+ {
+  "id": "b-0470",
+  "texto": "El hombre se acostumbra a todo, el muy canalla.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Fiódor Dostoyevski"
+ },
+ {
+  "id": "b-0471",
+  "texto": "Tenés los pinceles y los colores: pintá el paraíso y entrá en él.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Nikos Kazantzakis"
+ },
+ {
+  "id": "b-0472",
+  "texto": "Cuando ya no podemos cambiar una situación, tenemos el desafío de cambiarnos a nosotros mismos.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Viktor Frankl"
+ },
+ {
+  "id": "b-0473",
+  "texto": "Puede que no controles todo lo que te pasa, pero podés decidir no ser reducido por ello.",
+  "categoria": "superacion",
+  "nivel": "clave",
+  "fuente": "base",
+  "autor": "Maya Angelou"
+ },
+ {
+  "id": "b-0474",
+  "texto": "Nadie se baña dos veces en el mismo río.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base",
+  "autor": "Heráclito"
+ },
+ {
+  "id": "b-0475",
+  "texto": "Caerse está permitido. Levantarse es obligatorio.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0476",
+  "texto": "Lo que hoy te rompe, mañana te va a sostener.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0477",
+  "texto": "No llegaste hasta acá para quedarte acá.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0478",
+  "texto": "El fondo no es el final: es el piso desde donde se empuja.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0479",
+  "texto": "Si te tiembla todo y seguís, eso es valentía.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0480",
+  "texto": "No tenés que ver toda la escalera. Solo el próximo escalón.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0481",
+  "texto": "Los días malos también cuentan. Te enseñan a aguantar.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0482",
+  "texto": "Volver a empezar no es empezar de cero: es empezar con experiencia.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0483",
+  "texto": "Todo lo que querés está del otro lado del miedo.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0484",
+  "texto": "Sobreviviste a todos tus peores días. Vas por buen camino.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0485",
+  "texto": "El que no se rinde no pierde nunca: solo aprende.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0486",
+  "texto": "Los diamantes se forman bajo presión.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0487",
+  "texto": "Si hoy no podés con todo, podé con una cosa.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0488",
+  "texto": "La vida no se vuelve más fácil. Vos te volvés más fuerte.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0489",
+  "texto": "Tu pasado explica, pero no decide.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0490",
+  "texto": "Las tormentas hacen que los árboles echen raíces más profundas.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0491",
+  "texto": "Hay batallas que se ganan solo por no abandonarlas.",
+  "categoria": "superacion",
+  "nivel": "buena",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0492",
+  "texto": "Seguí.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0493",
+  "texto": "No te rindas.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0494",
+  "texto": "Una vez más.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0495",
+  "texto": "Podés con esto.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0496",
+  "texto": "Lo peor ya pasó.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0497",
+  "texto": "Respirá y seguí.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0498",
+  "texto": "Cada caída te enseña algo.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0499",
+  "texto": "Estás creciendo.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0500",
+  "texto": "Valiente no es el que no tiene miedo.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0501",
+  "texto": "Hoy cuesta. Mañana vale.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0502",
+  "texto": "Confiá en tu fuerza.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0503",
+  "texto": "Mirá todo lo que ya superaste.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0504",
+  "texto": "Fuerza.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0505",
+  "texto": "Tu historia no termina acá.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0506",
+  "texto": "Avanzá aunque sea un poco.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0507",
+  "texto": "Del dolor también se aprende.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0508",
+  "texto": "Hacelo con miedo, pero hacelo.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0509",
+  "texto": "Resistí.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0510",
+  "texto": "Todo esfuerzo deja huella.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0511",
+  "texto": "Nunca es tarde para cambiar.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0512",
+  "texto": "Sos capaz de mucho más.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0513",
+  "texto": "Levantá la cabeza.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0514",
+  "texto": "El camino difícil lleva a lugares hermosos.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0515",
+  "texto": "Cada día es una nueva oportunidad.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0516",
+  "texto": "Lo que hoy es difícil, mañana es fácil.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0517",
+  "texto": "Las crisis también son puertas.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0518",
+  "texto": "Volvé a intentarlo.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0519",
+  "texto": "Tus límites están en tu cabeza.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0520",
+  "texto": "Rendirse no es una opción.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0521",
+  "texto": "Seguí adelante, pase lo que pase.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0522",
+  "texto": "Lo imposible solo tarda un poco más.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ },
+ {
+  "id": "b-0523",
+  "texto": "Tu fuerza nace de tus luchas.",
+  "categoria": "superacion",
+  "nivel": "normal",
+  "fuente": "base"
+ }
+]
