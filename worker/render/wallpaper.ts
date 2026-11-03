@@ -34,7 +34,7 @@ const el = (type: string, style: Record<string, unknown>, children?: unknown) =>
 export async function generarWallpaper(
   frase: Frase, estilo: EstiloWallpaper, w = 1179, h = 2556, foto: BajarFoto = bajarFoto,
 ): Promise<Uint8Array> {
-  const { top, fontSize, maxWidth } = calcularLayout(frase.texto, w, h);
+  const { top, fontSize, maxWidth } = calcularLayout(frase.texto, w, h, !!frase.autor);
   const idFoto = FOTOS_WALLPAPER[fnv1a(frase.id) % FOTOS_WALLPAPER.length];
   const imagen = estilo === "foto" ? await foto(`https://picsum.photos/id/${idFoto}/${w}/${h}?blur=5`) : null;
   const fondo = estilo === "degradado" ? "linear-gradient(160deg, #0f0c29, #302b63 55%, #0b0b0f)" : "#000000";

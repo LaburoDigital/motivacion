@@ -40,7 +40,9 @@ export function useFrases() {
       const lista = deduplicar([...FRASES_BASE, ...actuales.frases]);
 
       const hoy = fechaLocal(new Date(), p.zonaHoraria);
-      let delDia = guardada?.fecha === hoy ? lista.find((f) => f.id === guardada.id) ?? null : null;
+      const claveTemas = [...p.temas].sort().join(",");
+      const vigente = guardada?.fecha === hoy && (guardada.temas ?? "") === claveTemas;
+      let delDia = vigente ? lista.find((f) => f.id === guardada.id) ?? null : null;
       if (!delDia) {
         delDia = await obtenerFraseDelDiaRemota(p.temas, p.zonaHoraria);
         if (!delDia) {
@@ -48,7 +50,7 @@ export function useFrases() {
           const conPropias = lista.map((f) => (e.clavesPropias.includes(f.id) ? { ...f, nivel: "clave" as const } : f));
           delDia = calcularFraseDelDia(conPropias, hoy, p.temas);
         }
-        if (delDia) await almacen.guardarFraseDelDia({ fecha: hoy, id: delDia.id });
+        if (delDia) await almacen.guardarFraseDelDia({ fecha: hoy, id: delDia.id, temas: claveTemas });
       }
       if (vivo) {
         setFraseDelDia(delDia);

@@ -16,21 +16,23 @@ export function estimarLineas(texto: string, fontSize: number, maxWidth: number)
   return lineas;
 }
 
+/** Alto de la línea "— autor": margen (0,6 em) + línea de medio tamaño (0,65 em). */
+const ALTO_AUTOR = 0.6 + 0.65;
+
 /**
  * Tamaño y posición de la frase: el tercio de arriba queda libre para el reloj,
- * el bloque se centra un poco por debajo de la mitad y nunca pasa el 92% del alto.
+ * el bloque (frase + autor) se centra un poco por debajo de la mitad y nunca pasa
+ * el 92% del alto. Si ni con letra chica entra, se achica más antes que salirse.
  */
-export function calcularLayout(texto: string, w: number, h: number) {
+export function calcularLayout(texto: string, w: number, h: number, conAutor = false) {
   const maxWidth = Math.round(w * 0.82);
-  const min = w * 0.045;
   const piso = h / 3 + h * 0.02;
   let fontSize = w * 0.085;
   let top = piso;
-  for (; fontSize >= min; fontSize -= 1) {
-    const alto = estimarLineas(texto, fontSize, maxWidth) * fontSize * INTERLINEA;
+  for (; fontSize > 10; fontSize -= 1) {
+    const alto = estimarLineas(texto, fontSize, maxWidth) * fontSize * INTERLINEA + (conAutor ? fontSize * ALTO_AUTOR : 0);
     top = Math.max(piso, h * 0.58 - alto / 2);
     if (top + alto <= h * 0.92) break;
   }
-  fontSize = Math.max(fontSize, min);
   return { top: Math.round(top), fontSize: Math.floor(fontSize * 100) / 100, maxWidth };
 }

@@ -108,3 +108,69 @@ describe("rutas", () => {
     expect((await worker.fetch(new Request("https://w/nada"), envFalso())).status).toBe(404);
   });
 });
+
+describe("revisión final", () => {
+  const muchas: Frase[] = Array.from({ length: 3000 }, (_, i) => ({
+    id: `z-${i.toString(16)}`, texto: `Zen ${i}`, categoria: "calma", nivel: "normal", fuente: "zenquotes",
+  }));
+
+  function espiarLecturas(env: ReturnType<typeof envFalso>) {
+    const leidas: string[] = [];
+    const get = env.KV.get.bind(env.KV);
+    env.KV.get = (async (k: string, t?: "json") => { leidas.push(k); return get(k, t); }) as typeof env.KV.get;
+    return leidas;
+  }
+
+  test("el cron deja guardadas las remotas ya listas y su versión", async () => {
+    simularFetch();
+    const env = envFalso();
+    await actualizarDiario(env);
+    const remotas = JSON.parse(env.KV.datos.get("remotas")!);
+    expect(remotas.frases).toHaveLength(20);
+    expect(env.KV.datos.get("remotas:version")).toBe(JSON.stringify(remotas.version));
+  });
+
+  test("las rutas no leen ni procesan zen:frases (CPU del plan gratis)", async () => {
+    simularFetch();
+    const env = envFalso({ "zen:frases": muchas });
+    await actualizarDiario(env);
+    const leidas = espiarLecturas(env);
+    await worker.fetch(new Request("https://w/frases"), env);
+    await worker.fetch(new Request("https://w/frases?desde=x"), env);
+    await worker.fetch(new Request("https://w/frase-del-dia?temas=gym"), env);
+    await worker.fetch(new Request("https://w/wallpaper?temas=gym"), env);
+    expect(leidas).not.toContain("zen:frases");
+  });
+
+  test("/frases sin versión todavía responde vacío sin romper", async () => {
+    const cuerpo = (await (await worker.fetch(new Request("https://w/frases"), envFalso())).json()) as { frases: Frase[] };
+    expect(cuerpo.frases).toEqual([]);
+  });
+
+  test("las curadas se bajan primero aunque fallen todas las traducciones", async () => {
+    const curada: Frase = { id: "c-0001", texto: "Curada", categoria: "gym", nivel: "clave", fuente: "curada" };
+    simularFetch({ traduccionFalla: zen.map((_, i) => i), curadas: [curada] });
+    const env = envFalso();
+    await actualizarDiario(env);
+    expect(await env.KV.get("curadas", "json")).toEqual([curada]);
+  });
+
+  test("corta las traducciones después de 3 fallas seguidas (límite de 50 subpedidos)", async () => {
+    simularFetch({ traduccionFalla: zen.map((_, i) => i) });
+    const env = envFalso();
+    await actualizarDiario(env);
+    const llamadas = (fetch as unknown as { mock: { calls: [string][] } }).mock.calls.filter(([u]) => u.includes("mymemory"));
+    expect(llamadas.length).toBe(3);
+  });
+
+  test("una curada clave entra en la frase del día del servidor", async () => {
+    const curadas: Frase[] = Array.from({ length: 400 }, (_, i) => ({
+      id: `c-${String(i).padStart(4, "0")}`, texto: `Curada ${i}`, categoria: "gym", nivel: "clave", fuente: "curada",
+    }));
+    simularFetch({ curadas });
+    const env = envFalso();
+    await actualizarDiario(env);
+    const f = (await (await worker.fetch(new Request("https://w/frase-del-dia?temas=gym"), env)).json()) as Frase;
+    expect(f.fuente).toBe("curada");
+  });
+});

@@ -16,16 +16,21 @@ self.addEventListener("push", (evento) => {
   );
 });
 
+async function abrirEn(url) {
+  const ventanas = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
+  for (const v of ventanas) {
+    try {
+      const navegada = await v.navigate(url);
+      if (navegada) return navegada.focus();
+    } catch (_) {
+      // navigate falla en ventanas que el service worker no controla: probamos abrir una nueva.
+    }
+  }
+  return self.clients.openWindow(url);
+}
+
 self.addEventListener("notificationclick", (evento) => {
   evento.notification.close();
   const id = evento.notification.data && evento.notification.data.fraseId;
-  const url = id ? `/?frase=${encodeURIComponent(id)}` : "/";
-  evento.waitUntil(
-    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((ventanas) => {
-      for (const v of ventanas) {
-        if ("navigate" in v) return v.navigate(url).then((c) => c && c.focus());
-      }
-      return self.clients.openWindow(url);
-    }),
-  );
+  evento.waitUntil(abrirEn(id ? `/?frase=${encodeURIComponent(id)}` : "/"));
 });

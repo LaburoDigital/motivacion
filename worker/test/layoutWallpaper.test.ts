@@ -31,3 +31,18 @@ test("el ancho máximo deja márgenes", () => {
   expect(maxWidth).toBeLessThan(W);
   expect(maxWidth).toBeGreaterThan(W * 0.7);
 });
+
+test("con autor, el bloque completo (frase + autor) entra antes del 92%", () => {
+  const { top, fontSize, maxWidth } = calcularLayout(larga, W, H, true);
+  const alto = estimarLineas(larga, fontSize, maxWidth) * fontSize * 1.3 + fontSize * (0.6 + 0.65);
+  expect(top).toBeGreaterThanOrEqual(H / 3);
+  expect(top + alto).toBeLessThanOrEqual(H * 0.92);
+});
+
+test("una frase enorme achica la letra por debajo del mínimo antes que salirse", () => {
+  const enorme = "palabra ".repeat(400).trim();
+  const { top, fontSize, maxWidth } = calcularLayout(enorme, W, H, true);
+  const alto = estimarLineas(enorme, fontSize, maxWidth) * fontSize * 1.3 + fontSize * 1.25;
+  expect(top + alto).toBeLessThanOrEqual(H * 0.92);
+  expect(fontSize).toBeGreaterThan(10);
+});

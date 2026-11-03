@@ -1,8 +1,8 @@
 import { buildPushPayload, type PushSubscription } from "@block65/webcrypto-web-push";
 import { fechaLocal, fnv1a, type CategoriaId } from "shared";
 import type { Env } from "./env";
-import { fraseDelDiaPara, parsearTemas, todasLasFrases, zonaValida } from "./frases";
-import { aMinutos, horariosDelDia, tocaAhora } from "./horarios";
+import { destacadasServidor, fraseDelDiaPara, parsearTemas, zonaValida } from "./frases";
+import { aMinutos, horariosDelDia, minutosDesde, tocaAhora } from "./horarios";
 
 export interface Suscripcion {
   subscription: PushSubscription;
@@ -17,20 +17,32 @@ export interface Suscripcion {
 
 export const claveSuscripcion = (endpoint: string) => `sub:${fnv1a(endpoint).toString(16)}`;
 
-async function leerIndice(env: Env): Promise<string[]> {
-  return ((await env.KV.get("subs", "json")) as string[] | null) ?? [];
+/** Lo justo para decidir a quién le toca, sin leer cada suscripción. */
+interface EntradaIndice {
+  clave: string;
+  cantidad: number;
+  desde: string;
+  hasta: string;
+  zona: string;
+}
+
+async function leerIndice(env: Env): Promise<EntradaIndice[]> {
+  return ((await env.KV.get("subs", "json")) as EntradaIndice[] | null) ?? [];
 }
 
 export async function guardarSuscripcion(env: Env, sub: Suscripcion): Promise<void> {
   const clave = claveSuscripcion(sub.subscription.endpoint);
-  await env.KV.put(clave, JSON.stringify(sub));
-  const indice = await leerIndice(env);
-  if (!indice.includes(clave)) await env.KV.put("subs", JSON.stringify([...indice, clave]));
+  const previa = (await env.KV.get(clave, "json")) as Suscripcion | null;
+  // Conserva la marca de enviado: reabrir la app no tiene que repetir la última notificación.
+  await env.KV.put(clave, JSON.stringify(previa?.enviado ? { ...sub, enviado: previa.enviado } : sub));
+  const entrada: EntradaIndice = { clave, cantidad: sub.cantidad, desde: sub.desde, hasta: sub.hasta, zona: sub.zona };
+  const indice = (await leerIndice(env)).filter((e) => e.clave !== clave);
+  await env.KV.put("subs", JSON.stringify([...indice, entrada]));
 }
 
 export async function borrarSuscripcion(env: Env, clave: string): Promise<void> {
   await env.KV.delete(clave);
-  await env.KV.put("subs", JSON.stringify((await leerIndice(env)).filter((k) => k !== clave)));
+  await env.KV.put("subs", JSON.stringify((await leerIndice(env)).filter((e) => e.clave !== clave)));
 }
 
 const HORA = /^([01]\d|2[0-3]):[0-5]\d$/;
@@ -63,8 +75,7 @@ export interface MensajePush {
 export async function mensajePara(env: Env, sub: Suscripcion, indice: number, ahora: Date): Promise<MensajePush> {
   let frase = indice === 0 ? await fraseDelDiaPara(env, sub.temas, sub.zona, ahora) : null;
   if (!frase) {
-    const todas = await todasLasFrases(env);
-    const buenas = todas.filter((f) => f.nivel !== "normal");
+    const buenas = await destacadasServidor(env);
     const deTemas = sub.temas.length ? buenas.filter((f) => sub.temas.includes(f.categoria)) : buenas;
     const pool = deTemas.length ? deTemas : buenas;
     frase = pool[Math.floor(Math.random() * pool.length)];
@@ -73,33 +84,47 @@ export async function mensajePara(env: Env, sub: Suscripcion, indice: number, ah
 }
 
 /**
- * Cron cada minuto: manda como máximo `maxEnvios` notificaciones por corrida
- * (cada envío cifrado gasta ~6 ms de CPU y el plan gratis da 10 ms). Las que
- * coinciden salen en los minutos siguientes, dentro de la ventana de 15 minutos.
+ * Cron cada minuto. Cada envío cifrado gasta ~6 ms de CPU y el plan gratis da 10 ms,
+ * así que se manda uno por minuto: los que comparten horario se ordenan por clave y
+ * cada uno tiene su minuto fijo dentro de la ventana de 15 (0, 1, 2…). Que el minuto
+ * sea fijo evita repetir aunque el KV devuelva una marca de "enviado" vieja.
  */
-export async function enviarNotificaciones(env: Env, ahora = new Date(), maxEnvios = 1): Promise<void> {
-  const vapid = { subject: env.VAPID_SUBJECT, publicKey: env.VAPID_PUBLIC, privateKey: env.VAPID_PRIVATE };
-  let enviados = 0;
-  for (const clave of await leerIndice(env)) {
-    if (enviados >= maxEnvios) break;
-    const sub = (await env.KV.get(clave, "json")) as Suscripcion | null;
-    if (!sub) continue;
-    const indice = tocaAhora(horariosDelDia(sub.cantidad, sub.desde, sub.hasta), ahora, sub.zona);
+export async function enviarNotificaciones(env: Env, ahora = new Date()): Promise<void> {
+  const grupos = new Map<number, { entrada: EntradaIndice; indice: number; transcurridos: number }[]>();
+  for (const entrada of await leerIndice(env)) {
+    const horarios = horariosDelDia(entrada.cantidad, entrada.desde, entrada.hasta);
+    const indice = tocaAhora(horarios, ahora, entrada.zona);
     if (indice === null) continue;
-    const marca = `${fechaLocal(ahora, sub.zona)}|${indice}`;
-    if (sub.enviado === marca) continue;
-    enviados++;
-    try {
-      const mensaje = await mensajePara(env, sub, indice, ahora);
-      const payload = await buildPushPayload({ data: JSON.stringify(mensaje), options: { ttl: 4 * 60 * 60 } }, sub.subscription, vapid);
-      const res = await fetch(sub.subscription.endpoint, payload);
-      if (res.status === 404 || res.status === 410) {
-        await borrarSuscripcion(env, clave);
-        continue;
-      }
-    } catch {
-      // Un envío que falla no se reintenta: queda marcado igual.
-    }
-    await env.KV.put(clave, JSON.stringify({ ...sub, enviado: marca }));
+    const transcurridos = minutosDesde(horarios[indice], ahora, entrada.zona);
+    const inicio = Math.floor(ahora.getTime() / 60000) - transcurridos;
+    grupos.set(inicio, [...(grupos.get(inicio) ?? []), { entrada, indice, transcurridos }]);
   }
+
+  for (const grupo of grupos.values()) {
+    grupo.sort((a, b) => (a.entrada.clave < b.entrada.clave ? -1 : 1));
+    const turno = grupo.find((g, orden) => orden === g.transcurridos);
+    if (!turno) continue;
+    await enviarA(env, turno.entrada.clave, turno.indice, ahora);
+    return;
+  }
+}
+
+async function enviarA(env: Env, clave: string, indice: number, ahora: Date): Promise<void> {
+  const sub = (await env.KV.get(clave, "json")) as Suscripcion | null;
+  if (!sub) return;
+  const marca = `${fechaLocal(ahora, sub.zona)}|${indice}`;
+  if (sub.enviado === marca) return;
+  const vapid = { subject: env.VAPID_SUBJECT, publicKey: env.VAPID_PUBLIC, privateKey: env.VAPID_PRIVATE };
+  try {
+    const mensaje = await mensajePara(env, sub, indice, ahora);
+    const payload = await buildPushPayload({ data: JSON.stringify(mensaje), options: { ttl: 4 * 60 * 60 } }, sub.subscription, vapid);
+    const res = await fetch(sub.subscription.endpoint, payload);
+    if (res.status === 404 || res.status === 410) {
+      await borrarSuscripcion(env, clave);
+      return;
+    }
+  } catch {
+    // Un envío que falla no se reintenta: queda marcado igual.
+  }
+  await env.KV.put(clave, JSON.stringify({ ...sub, enviado: marca }));
 }

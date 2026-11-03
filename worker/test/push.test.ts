@@ -45,9 +45,9 @@ describe("/suscripcion", () => {
     expect((await post(e, config())).status).toBe(201);
     const k = `sub:${fnv1a(subscription.endpoint).toString(16)}`;
     expect(e.KV.datos.has(k)).toBe(true);
-    expect(await e.KV.get("subs", "json")).toEqual([k]);
+    expect(await e.KV.get("subs", "json")).toEqual([{ clave: k, cantidad: 3, desde: "08:00", hasta: "22:00", zona: AR }]);
     await post(e, config({ cantidad: 2 }));
-    expect(await e.KV.get("subs", "json")).toEqual([k]);
+    expect(await e.KV.get("subs", "json")).toEqual([{ clave: k, cantidad: 2, desde: "08:00", hasta: "22:00", zona: AR }]);
   });
 
   test("rechaza desde >= hasta", async () => {
@@ -80,7 +80,12 @@ describe("enviarNotificaciones", () => {
   const clave = `sub:${fnv1a("https://push.test/abc").toString(16)}`;
   const env = (inicial: Record<string, unknown> = {}) => {
     const e = envBase(inicial);
-    if (!("subs" in inicial)) void e.KV.put("subs", JSON.stringify(Object.keys(inicial).filter((k) => k.startsWith("sub:"))));
+    if (!("subs" in inicial)) {
+      const entradas = Object.entries(inicial)
+        .filter(([k]) => k.startsWith("sub:"))
+        .map(([clave, s]) => { const v = s as ReturnType<typeof config>; return { clave, cantidad: v.cantidad, desde: v.desde, hasta: v.hasta, zona: v.zona }; });
+      void e.KV.put("subs", JSON.stringify(entradas));
+    }
     return e;
   };
 
@@ -88,8 +93,8 @@ describe("enviarNotificaciones", () => {
     const enviar = vi.fn(async () => new Response(null, { status: 201 }));
     vi.stubGlobal("fetch", enviar);
     const e = env({ [clave]: config() });
-    await enviarNotificaciones(e, new Date("2026-11-03T11:01:00Z"));
-    await enviarNotificaciones(e, new Date("2026-11-03T11:02:00Z"));
+    await enviarNotificaciones(e, new Date("2026-11-03T11:00:00Z"));
+    await enviarNotificaciones(e, new Date("2026-11-03T11:00:30Z"));
     expect(enviar).toHaveBeenCalledTimes(1);
   });
 
@@ -98,11 +103,11 @@ describe("enviarNotificaciones", () => {
     vi.stubGlobal("fetch", vi.fn(async (url: string) => { enviados.push(url); return new Response(null, { status: 201 }); }));
     const otra = { ...config(), subscription: { ...subscription, endpoint: "https://push.test/otra" } };
     const e = env({ [clave]: config(), [`sub:${fnv1a("https://push.test/otra").toString(16)}`]: otra });
-    await enviarNotificaciones(e, new Date("2026-11-03T11:01:00Z"));
+    await enviarNotificaciones(e, new Date("2026-11-03T11:00:00Z"));
     expect(enviados).toHaveLength(1);
-    await enviarNotificaciones(e, new Date("2026-11-03T11:02:00Z"));
+    await enviarNotificaciones(e, new Date("2026-11-03T11:01:00Z"));
     expect(new Set(enviados)).toEqual(new Set(["https://push.test/abc", "https://push.test/otra"]));
-    await enviarNotificaciones(e, new Date("2026-11-03T11:03:00Z"));
+    await enviarNotificaciones(e, new Date("2026-11-03T11:02:00Z"));
     expect(enviados).toHaveLength(2);
   });
 
@@ -113,7 +118,7 @@ describe("enviarNotificaciones", () => {
       return new Response(null, { status: 201 });
     }));
     const e = env({ [clave]: config() });
-    const ahora = new Date("2026-11-03T11:05:00Z"); // 08:05 en Argentina
+    const ahora = new Date("2026-11-03T11:00:00Z"); // 08:00 en Argentina
     await enviarNotificaciones(e, ahora);
     expect(enviados).toHaveLength(1);
     expect(enviados[0].url).toBe(subscription.endpoint);
@@ -130,7 +135,7 @@ describe("enviarNotificaciones", () => {
   test("si el servicio responde 410 borra la suscripción", async () => {
     vi.stubGlobal("fetch", vi.fn(async () => new Response(null, { status: 410 })));
     const e = env({ [clave]: config() });
-    await enviarNotificaciones(e, new Date("2026-11-03T11:05:00Z"));
+    await enviarNotificaciones(e, new Date("2026-11-03T11:00:00Z"));
     expect(e.KV.datos.has(clave)).toBe(false);
     expect(await e.KV.get("subs", "json")).toEqual([]);
   });
@@ -149,4 +154,51 @@ test("el mensaje de la mañana es la Clave del día y las demás son buena o cla
   }
   expect(primera.titulo).toBe("Motivación");
   expect(primera.cuerpo).toContain("—");
+});
+
+describe("revisión final: push", () => {
+  const clave = `sub:${fnv1a("https://push.test/abc").toString(16)}`;
+  const claveOtra = `sub:${fnv1a("https://push.test/otra").toString(16)}`;
+
+  test("volver a suscribirse no borra la marca de enviado", async () => {
+    const e = env();
+    await post(e, config());
+    await e.KV.put(clave, JSON.stringify({ ...((await e.KV.get(clave, "json")) as object), enviado: "2026-11-03|0" }));
+    await post(e, config());
+    expect(((await e.KV.get(clave, "json")) as { enviado?: string }).enviado).toBe("2026-11-03|0");
+  });
+
+  test("si nadie tiene notificación ahora, solo lee el índice", async () => {
+    const e = env();
+    for (let i = 0; i < 5; i++) await post(e, config({ subscription: { ...subscription, endpoint: `https://push.test/${i}` } }));
+    const leidas: string[] = [];
+    const get = e.KV.get.bind(e.KV);
+    e.KV.get = (async (k: string, t?: "json") => { leidas.push(k); return get(k, t); }) as typeof e.KV.get;
+    vi.stubGlobal("fetch", vi.fn(async () => new Response(null, { status: 201 })));
+    await enviarNotificaciones(e, new Date("2026-11-03T12:05:00Z"));
+    expect(leidas).toEqual(["subs"]);
+  });
+
+  test("cada usuario tiene su minuto: una lectura vieja no hace que se repita", async () => {
+    const enviados: string[] = [];
+    vi.stubGlobal("fetch", vi.fn(async (url: string) => { enviados.push(url); return new Response(null, { status: 201 }); }));
+    const e = env();
+    await post(e, config());
+    await post(e, config({ subscription: { ...subscription, endpoint: "https://push.test/otra" } }));
+    const orden = [clave, claveOtra].sort();
+    const primero = orden[0] === clave ? "https://push.test/abc" : "https://push.test/otra";
+    const segundo = primero === "https://push.test/abc" ? "https://push.test/otra" : "https://push.test/abc";
+
+    await enviarNotificaciones(e, new Date("2026-11-03T11:00:00Z"));
+    expect(enviados).toEqual([primero]);
+    // Simula una lectura vieja del KV: se pierde la marca de enviado del primero.
+    const k = orden[0];
+    const s = (await e.KV.get(k, "json")) as Record<string, unknown>;
+    delete s.enviado;
+    await e.KV.put(k, JSON.stringify(s));
+    await enviarNotificaciones(e, new Date("2026-11-03T11:01:00Z"));
+    expect(enviados).toEqual([primero, segundo]);
+    await enviarNotificaciones(e, new Date("2026-11-03T11:02:00Z"));
+    expect(enviados).toEqual([primero, segundo]);
+  });
 });

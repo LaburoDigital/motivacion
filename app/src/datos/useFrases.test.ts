@@ -53,7 +53,7 @@ test("si el Worker responde la misma versión, no reemplaza las remotas", async 
 test("reutiliza la frase del día guardada hoy sin volver a pedirla", async () => {
   const hoy = fechaLocal(new Date(), Intl.DateTimeFormat().resolvedOptions().timeZone);
   const clave = FRASES_BASE.find((f) => f.nivel === "clave")!;
-  await almacen.guardarFraseDelDia({ fecha: hoy, id: clave.id });
+  await almacen.guardarFraseDelDia({ fecha: hoy, id: clave.id, temas: "" });
   const llamadas = responder({ "/frases": { version: "v1", frases: [] } });
   const { result } = renderHook(() => useFrases());
   await waitFor(() => expect(result.current.fraseDelDia?.id).toBe(clave.id));
@@ -78,4 +78,15 @@ test("siguientes no repite las excluidas", async () => {
   const primeras = result.current.siguientes(10);
   const otras = result.current.siguientes(10, primeras.map((f) => f.id));
   expect(otras.some((f) => primeras.some((p) => p.id === f.id))).toBe(false);
+});
+
+test("si cambiaron los temas, la frase del día guardada no se reutiliza", async () => {
+  const hoy = fechaLocal(new Date(), Intl.DateTimeFormat().resolvedOptions().timeZone);
+  await almacen.guardarFraseDelDia({ fecha: hoy, id: "b-0001", temas: "calma" });
+  await almacen.guardarPrefs({ ...(await almacen.leerPrefs()), temas: ["gym"] });
+  const gym = FRASES_BASE.find((f) => f.nivel === "clave" && f.categoria === "gym")!;
+  const llamadas = responder({ "/frases": { version: "v1", frases: [] }, "/frase-del-dia": gym });
+  const { result } = renderHook(() => useFrases());
+  await waitFor(() => expect(result.current.fraseDelDia?.id).toBe(gym.id));
+  expect(llamadas.some((u) => u.includes("/frase-del-dia?temas=gym"))).toBe(true);
 });

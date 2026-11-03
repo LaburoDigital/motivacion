@@ -8,22 +8,60 @@ import { categoriaPorTexto, traerZenQuotes } from "./zenquotes";
 
 const POR_DIA = 20;
 const MAX_ZEN = 3000;
+const FALLAS_SEGUIDAS = 3;
 export const ZONA_DEFAULT = "America/Argentina/Buenos_Aires";
+
+// Lo de la base ya viene deduplicado (lo garantiza un test de shared): se calcula una vez por isolate.
+const CLAVES_BASE = FRASES_BASE.filter((f) => f.nivel === "clave");
+const DESTACADAS_BASE = FRASES_BASE.filter((f) => f.nivel !== "normal");
 
 async function leerLista(env: Env, clave: string): Promise<Frase[]> {
   return ((await env.KV.get(clave, "json")) as Frase[] | null) ?? [];
 }
 
-/** Curadas + ZenQuotes, sin las que repiten una de la base. */
-export async function frasesRemotas(env: Env): Promise<{ version: string; frases: Frase[] }> {
+/**
+ * Deja listo en KV todo lo que piden las rutas, para que cada pedido gaste poca CPU:
+ * - "remotas" / "remotas:version": el JSON de /frases tal cual se responde.
+ * - "claves:curadas" / "destacadas:curadas": las curadas que entran en la frase del día y en las notificaciones.
+ */
+export async function recalcularRemotas(env: Env): Promise<void> {
   const [curadas, zen] = await Promise.all([leerLista(env, "curadas"), leerLista(env, "zen:frases")]);
   const frases = deduplicar([...FRASES_BASE, ...curadas, ...zen]).filter((f) => f.fuente !== "base");
-  return { version: fnv1a(JSON.stringify(frases)).toString(16), frases };
+  const version = fnv1a(JSON.stringify(frases)).toString(16);
+  const curadasUnicas = frases.filter((f) => f.fuente === "curada");
+  await Promise.all([
+    env.KV.put("remotas", JSON.stringify({ version, frases })),
+    env.KV.put("remotas:version", JSON.stringify(version)),
+    env.KV.put("claves:curadas", JSON.stringify(curadasUnicas.filter((f) => f.nivel === "clave"))),
+    env.KV.put("destacadas:curadas", JSON.stringify(curadasUnicas.filter((f) => f.nivel !== "normal"))),
+  ]);
 }
 
-/** Todas las frases que el servidor conoce (base + remotas). */
-export async function todasLasFrases(env: Env): Promise<Frase[]> {
-  return [...FRASES_BASE, ...(await frasesRemotas(env)).frases];
+async function leerPrecalculado<T>(env: Env, clave: string): Promise<T> {
+  let valor = (await env.KV.get(clave, "json")) as T | null;
+  if (valor === null) {
+    // Primera vez (antes del primer cron): se calcula una sola vez y queda guardado.
+    await recalcularRemotas(env);
+    valor = (await env.KV.get(clave, "json")) as T;
+  }
+  return valor;
+}
+
+/** Cuerpo de GET /frases, ya armado; vacío si `desde` es la versión actual. */
+export async function cuerpoFrases(env: Env, desde: string | null): Promise<string> {
+  const version = await leerPrecalculado<string>(env, "remotas:version");
+  if (desde === version) return JSON.stringify({ version, frases: [] });
+  return ((await env.KV.get("remotas")) as string | null) ?? JSON.stringify({ version: "", frases: [] });
+}
+
+/** Clave del servidor: base + curadas. */
+export async function clavesServidor(env: Env): Promise<Frase[]> {
+  return [...CLAVES_BASE, ...(await leerPrecalculado<Frase[]>(env, "claves:curadas"))];
+}
+
+/** Buenas y Clave del servidor, para las notificaciones que no son la primera del día. */
+export async function destacadasServidor(env: Env): Promise<Frase[]> {
+  return [...DESTACADAS_BASE, ...(await leerPrecalculado<Frase[]>(env, "destacadas:curadas"))];
 }
 
 export function parsearTemas(texto: string | null): CategoriaId[] {
@@ -41,20 +79,42 @@ export function zonaValida(zona: string | null): string {
 }
 
 export async function fraseDelDiaPara(env: Env, temas: CategoriaId[], zona: string, ahora = new Date()): Promise<Frase | null> {
-  return fraseDelDia(await todasLasFrases(env), fechaLocal(ahora, zona), temas);
+  return fraseDelDia(await clavesServidor(env), fechaLocal(ahora, zona), temas);
 }
 
-/** Cron diario: suma 20 frases de ZenQuotes traducidas y baja las curadas. */
+async function bajarCuradas(env: Env): Promise<void> {
+  try {
+    const res = await fetch(env.CURADAS_URL);
+    if (!res.ok) return;
+    const curadas = (await res.json()) as Frase[];
+    if (Array.isArray(curadas)) await env.KV.put("curadas", JSON.stringify(curadas));
+  } catch {
+    // Si GitHub no responde, quedan las curadas de ayer.
+  }
+}
+
+/**
+ * Cron diario: baja las curadas, suma hasta 20 frases de ZenQuotes traducidas y
+ * recalcula lo precalculado. Las curadas van primero y las traducciones se cortan
+ * tras 3 fallas seguidas, para no pasar los 50 subpedidos del plan gratis.
+ */
 export async function actualizarDiario(env: Env): Promise<void> {
+  await bajarCuradas(env);
+
   const previas = await leerLista(env, "zen:frases");
   const ids = new Set(previas.map((f) => f.id));
   const nuevas: Frase[] = [];
+  let fallas = 0;
   for (const cita of await traerZenQuotes()) {
-    if (nuevas.length >= POR_DIA) break;
+    if (nuevas.length >= POR_DIA || fallas >= FALLAS_SEGUIDAS) break;
     const id = `z-${fnv1a(cita.q).toString(16)}`;
     if (ids.has(id)) continue;
     const texto = await traducir(cita.q);
-    if (!texto) continue;
+    if (!texto) {
+      fallas++;
+      continue;
+    }
+    fallas = 0;
     ids.add(id);
     nuevas.push({ id, texto, autor: cita.a, categoria: categoriaPorTexto(cita.q), nivel: "normal", fuente: "zenquotes" });
   }
@@ -62,13 +122,5 @@ export async function actualizarDiario(env: Env): Promise<void> {
     await env.KV.put("zen:frases", JSON.stringify([...previas, ...nuevas].slice(-MAX_ZEN)));
   }
 
-  try {
-    const res = await fetch(env.CURADAS_URL);
-    if (res.ok) {
-      const curadas = (await res.json()) as Frase[];
-      if (Array.isArray(curadas)) await env.KV.put("curadas", JSON.stringify(curadas));
-    }
-  } catch {
-    // Si GitHub no responde, quedan las curadas de ayer.
-  }
+  await recalcularRemotas(env);
 }

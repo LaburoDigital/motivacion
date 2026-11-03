@@ -30,3 +30,8 @@ export function tocaAhora(horarios: string[], ahora: Date, zona: string): number
   });
   return i === -1 ? null : i;
 }
+
+/** Minutos que pasaron desde `hhmm` hasta ahora, en la zona del usuario. */
+export function minutosDesde(hhmm: string, ahora: Date, zona: string): number {
+  return minutosLocales(ahora, zona) - aMinutos(hhmm);
+}

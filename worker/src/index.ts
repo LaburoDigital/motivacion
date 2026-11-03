@@ -1,5 +1,5 @@
 import type { Env } from "./env";
-import { actualizarDiario, fraseDelDiaPara, frasesRemotas, parsearTemas, zonaValida } from "./frases";
+import { actualizarDiario, cuerpoFrases, fraseDelDiaPara, parsearTemas, zonaValida } from "./frases";
 import { borrarSuscripcion, claveSuscripcion, enviarNotificaciones, guardarSuscripcion, validarSuscripcion } from "./push";
 import { ESTILOS_WALLPAPER, urlWallpaper, type EstiloWallpaper } from "./wallpaper";
 
@@ -18,9 +18,8 @@ async function rutear(req: Request, env: Env): Promise<Response> {
   if (req.method === "OPTIONS") return new Response(null, { headers: CORS });
 
   if (req.method === "GET" && url.pathname === "/frases") {
-    const remotas = await frasesRemotas(env);
-    const desde = url.searchParams.get("desde");
-    return json(desde === remotas.version ? { version: remotas.version, frases: [] } : remotas);
+    const cuerpo = await cuerpoFrases(env, url.searchParams.get("desde"));
+    return new Response(cuerpo, { headers: { ...CORS, "content-type": "application/json" } });
   }
 
   if (req.method === "GET" && url.pathname === "/frase-del-dia") {

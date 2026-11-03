@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BarraNav, type Seccion } from "./componentes/BarraNav";
 import { CartelInstalar } from "./componentes/CartelInstalar";
-import { activarNotificaciones } from "./datos/notificaciones";
 import { useFrases } from "./datos/useFrases";
+import { useResincronizarNotificaciones } from "./datos/useResincronizar";
 import { Ajustes } from "./pantallas/Ajustes";
 import { Favoritos } from "./pantallas/Favoritos";
 import { Inicio } from "./pantallas/Inicio";
@@ -14,14 +14,7 @@ export default function App() {
   const [seccion, setSeccion] = useState<Seccion>("inicio");
   const [fraseInicial] = useState(() => new URLSearchParams(location.search).get("frase"));
 
-  // Si cambian los temas con las notificaciones activas, el Worker tiene que saberlo.
-  const temas = api.prefs?.temas.join(",");
-  useEffect(() => {
-    const p = api.prefs;
-    if (!p?.notificaciones.activas) return;
-    void activarNotificaciones({ ...p.notificaciones, temas: p.temas, zona: p.zonaHoraria });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [temas]);
+  useResincronizarNotificaciones(api.prefs);
 
   return (
     <div className="app">

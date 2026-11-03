@@ -26,6 +26,8 @@ export interface Remotas {
 export interface FraseDelDiaGuardada {
   fecha: string;
   id: string;
+  /** Temas con los que se eligió (ordenados, separados por coma). */
+  temas?: string;
 }
 
 const estadoVacio = (): EstadoFeed => ({ vistas: {}, likes: {}, malas: [], clavesPropias: [] });
