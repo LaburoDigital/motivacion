@@ -9,7 +9,7 @@ const { activarNotificaciones } = await import("./notificaciones");
 afterEach(() => vi.clearAllMocks());
 
 const prefs = (cambios: Partial<Preferencias>): Preferencias => ({
-  ...apiFalsa().prefs!, notificaciones: { activas: true, cantidad: 3, desde: "08:00", hasta: "22:00" }, ...cambios,
+  ...apiFalsa().prefs!, notificaciones: { activas: true, cantidad: 3, cadaHoras: null, desde: "08:00", hasta: "22:00" }, ...cambios,
 });
 
 test("al abrir la app no reenvía la suscripción", () => {
@@ -26,7 +26,7 @@ test("si cambian los temas con notificaciones activas, la reenvía", () => {
 });
 
 test("con notificaciones apagadas no reenvía nada", () => {
-  const apagadas = { activas: false, cantidad: 3, desde: "08:00", hasta: "22:00" };
+  const apagadas = { activas: false, cantidad: 3, cadaHoras: null, desde: "08:00", hasta: "22:00" };
   const { rerender } = renderHook(({ p }) => useResincronizarNotificaciones(p), { initialProps: { p: prefs({ notificaciones: apagadas }) } });
   rerender({ p: prefs({ temas: ["calma"], notificaciones: apagadas }) });
   expect(activarNotificaciones).not.toHaveBeenCalled();

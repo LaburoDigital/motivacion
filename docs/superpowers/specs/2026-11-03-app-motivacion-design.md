@@ -77,7 +77,7 @@ Barra inferior con 4 secciones: **Inicio · Temas · Favoritos · Ajustes**.
 1. **Inicio (feed):** frase a pantalla completa sobre el fondo del tema visual. Deslizás hacia arriba para la siguiente. Botones: ❤️ like, 📤 compartir (genera una imagen y abre el menú de compartir de iOS), 🔄 cambiar fondo. Doble tap = like. Mantener apretado → menú: marcar 🔥 Clave, 🚫 mala traducción.
 2. **Temas:** pestaña **Contenido** (grilla de categorías para marcar, más "Mezcla general") y pestaña **Visual** (sub-pestañas Fotos y Minimalista, con vista previa, ⭐ para marcar fondos favoritos y el modo "Solo mis favoritos").
 3. **Favoritos:** pestaña Frases (likes) y pestaña Fondos (⭐). Tocás una frase y se abre en grande para compartirla.
-4. **Ajustes:** notificaciones (activar, 1–5 por día, horario desde–hasta), pantalla bloqueada (guía paso a paso para instalar el atajo y elegir el estilo), cartel "cómo instalar" si la app se abrió en Safari sin instalar.
+4. **Ajustes:** notificaciones (activar; frecuencia: cada 1, 2, 3 o 4 horas, o de 1 a 5 por día; por defecto, cada 2 horas; horario desde–hasta), pantalla bloqueada (guía paso a paso para instalar el atajo y elegir el estilo), cartel "cómo instalar" si la app se abrió en Safari sin instalar.
 
 ### Temas visuales
 
@@ -91,13 +91,13 @@ Barra inferior con 4 secciones: **Inicio · Temas · Favoritos · Ajustes**.
 |---|---|
 | `GET /frases?desde=<version>` | Devuelve frases curadas y de ZenQuotes posteriores a la versión que ya tiene la app |
 | `GET /frase-del-dia?temas=...` | Devuelve la 🔥 Clave del día |
-| `GET /wallpaper?temas=...&estilo=...&w=...&h=...` | PNG del tamaño del iPhone con la frase del día |
+| `GET /wallpaper?temas=...&zona=...&estilo=...` | Redirige (302) a la imagen ya generada de la frase del día |
 | `POST /suscripcion` / `DELETE /suscripcion` | Guarda o borra la suscripción push (endpoint, horario, cantidad, temas, zona horaria) |
 | Cron diario | Trae unas 20 frases de ZenQuotes, las traduce con MyMemory, las guarda en KV como ➖ Normal. Además lee `frases.json` de GitHub y lo cachea |
-| Cron cada 15 min | Revisa las suscripciones a las que les toca notificación y envía Web Push (VAPID) |
+| Cron cada minuto | Manda como máximo una notificación Web Push (VAPID) por corrida; cada usuario tiene un minuto fijo dentro de la ventana de 15 minutos de su horario |
 
-- Las notificaciones de cada usuario se reparten dentro de su horario. La primera del día es la frase del día; las demás son ✅ Buenas o 🔥 Clave de sus temas.
-- La notificación incluye el texto completo de la frase. Al tocarla, abre la app en esa frase.
+- Las notificaciones de cada usuario se reparten dentro de su horario (o una cada N horas). La primera del día es la frase del día; las demás son ✅ Buenas o 🔥 Clave de sus temas.
+- La notificación incluye el texto completo de la frase. Al tocarla, la app se abre con una **vista previa**: la frase como imagen, con botones para guardarla o compartirla y para seguir al feed. (iOS no permite imágenes dentro de las notificaciones de apps web.)
 - Las suscripciones vencidas (respuesta 404/410 del servicio de push) se borran automáticamente.
 - No se guardan datos personales, solo la suscripción push y las preferencias.
 
@@ -106,12 +106,12 @@ Barra inferior con 4 secciones: **Inicio · Temas · Favoritos · Ajustes**.
 - El tercio superior queda libre para el reloj de iOS. La frase va centrada, un poco por debajo de la mitad.
 - Letra grande, de alto contraste. El tamaño se ajusta al largo de la frase.
 - 3 estilos: **Negro puro**, **Degradado oscuro**, **Foto oscurecida**.
-- Se genera con una librería de renderizado compatible con Workers (por ejemplo, satori + resvg-wasm). Se valida en la etapa de plan.
+- Se genera **al publicar la app** (satori + resvg + JPEG, en Node), una imagen por cada frase Clave y estilo, en `wallpapers/<estilo>/<id>.jpg` de Cloudflare Pages. Generarlas en el Worker gratis no entra en los 10 ms de CPU por pedido (cada una lleva ~1 s). Una curada Clave nueva necesita volver a publicar la app para tener imagen; mientras tanto se usa una Clave de la base.
 
 ## 8. Atajo de iPhone
 
 - Se distribuye como un link de iCloud al atajo, generado una vez.
-- Pasos del atajo: obtener el contenido de la URL de `/wallpaper` con los parámetros del usuario → poner como fondo de pantalla bloqueada.
+- Pasos del atajo: obtener el contenido de la URL de `/wallpaper` con los parámetros del usuario (sigue la redirección) → poner como fondo de pantalla bloqueada.
 - El usuario crea una automatización diaria en Atajos ("Ejecutar inmediatamente"). La app muestra los parámetros personalizados para copiar y una guía con capturas.
 
 ## 9. Manejo de errores
@@ -138,3 +138,8 @@ Barra inferior con 4 secciones: **Inicio · Temas · Favoritos · Ajustes**.
 ## 12. Costos
 
 Cloudflare Pages, Workers (plan gratis, 100.000 pedidos por día), KV (plan gratis) y GitHub son gratis. ZenQuotes y MyMemory son gratis con sus límites. **Total: $0.**
+
+## 13. Límites del plan gratis (decisiones de implementación)
+
+- **CPU 10 ms por pedido (Workers):** el cron diario precalcula en KV lo que piden `/frases`, la frase del día y las notificaciones; los wallpapers se generan al publicar; se manda una notificación por minuto (~6 ms cada una).
+- **KV:** 100.000 lecturas, 1.000 escrituras y 1.000 listados por día. Las suscripciones se guardan en un índice (`subs`) con los horarios, así cada minuto se hace una sola lectura cuando no le toca a nadie. Hasta 15 usuarios pueden compartir el mismo horario.

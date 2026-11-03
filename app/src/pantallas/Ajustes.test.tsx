@@ -16,7 +16,7 @@ afterEach(() => vi.clearAllMocks());
 const prefsCon = (cambios: object) => ({ ...apiFalsa().prefs!, ...cambios });
 
 test("con hasta antes que desde, el interruptor se deshabilita y muestra el error", () => {
-  const api = apiFalsa({ prefs: prefsCon({ notificaciones: { activas: false, cantidad: 3, desde: "22:00", hasta: "08:00" } }) });
+  const api = apiFalsa({ prefs: prefsCon({ notificaciones: { activas: false, cantidad: 3, cadaHoras: null, desde: "22:00", hasta: "08:00" } }) });
   render(<Ajustes api={api} />);
   expect((screen.getByLabelText(/Recibir notificaciones/) as HTMLInputElement).disabled).toBe(true);
   expect(screen.getByText(/tiene que ser antes/)).toBeTruthy();
@@ -53,4 +53,20 @@ test("'Copiar mi link' copia la URL del wallpaper con temas, zona y estilo", asy
 test("el botón de instalar el atajo apunta al link de iCloud", () => {
   render(<Ajustes api={apiFalsa()} />);
   expect(screen.getByRole("link", { name: /Instalar atajo/ }).getAttribute("href")).toBe("https://www.icloud.com/shortcuts/abc");
+});
+
+test("por defecto la frecuencia es cada 2 horas y se manda al activar", async () => {
+  const api = apiFalsa();
+  render(<Ajustes api={api} />);
+  expect((screen.getByLabelText("Frecuencia") as HTMLSelectElement).value).toBe("h2");
+  expect(screen.getByText(/8 notificaciones por día/)).toBeTruthy();
+  fireEvent.click(screen.getByLabelText(/Recibir notificaciones/));
+  await waitFor(() => expect(activarNotificaciones).toHaveBeenCalledWith(expect.objectContaining({ cadaHoras: 2 })));
+});
+
+test("elegir '3 por día' saca el cada N horas", () => {
+  const api = apiFalsa();
+  render(<Ajustes api={api} />);
+  fireEvent.change(screen.getByLabelText("Frecuencia"), { target: { value: "d3" } });
+  expect(api.setPrefs).toHaveBeenCalledWith({ notificaciones: expect.objectContaining({ cantidad: 3, cadaHoras: null }) });
 });

@@ -17,6 +17,21 @@ const ESTILOS_WP: { id: Preferencias["estiloWallpaper"]; nombre: string }[] = [
   { id: "foto", nombre: "Foto oscurecida" },
 ];
 
+const FRECUENCIAS: { valor: string; nombre: string }[] = [
+  { valor: "h1", nombre: "Cada 1 hora" },
+  { valor: "h2", nombre: "Cada 2 horas" },
+  { valor: "h3", nombre: "Cada 3 horas" },
+  { valor: "h4", nombre: "Cada 4 horas" },
+  ...[1, 2, 3, 4, 5].map((c) => ({ valor: `d${c}`, nombre: `${c} por día` })),
+];
+
+const aMin = (hhmm: string) => Number(hhmm.slice(0, 2)) * 60 + Number(hhmm.slice(3, 5));
+
+function cuantasPorDia(n: PrefsNotificaciones): number {
+  if (!n.cadaHoras) return n.cantidad;
+  return Math.max(0, Math.floor((aMin(n.hasta) - aMin(n.desde)) / (n.cadaHoras * 60)) + 1);
+}
+
 export function urlWallpaper(prefs: Preferencias): string {
   const q = new URLSearchParams({ temas: prefs.temas.join(","), zona: prefs.zonaHoraria, estilo: prefs.estiloWallpaper });
   return `${WORKER_URL}/wallpaper?${q}`;
@@ -46,7 +61,9 @@ export function Ajustes({ api }: { api: FrasesApi }) {
       api.setPrefs({ notificaciones: { ...n, activas: false } });
       return;
     }
-    const r = await activarNotificaciones({ cantidad: n.cantidad, desde: n.desde, hasta: n.hasta, temas: prefs.temas, zona: prefs.zonaHoraria });
+    const r = await activarNotificaciones({
+      cantidad: n.cantidad, cadaHoras: n.cadaHoras, desde: n.desde, hasta: n.hasta, temas: prefs.temas, zona: prefs.zonaHoraria,
+    });
     if (r === "ok") api.setPrefs({ notificaciones: { ...n, activas: true } });
     else setAviso(MENSAJES[r]);
   };
@@ -73,9 +90,15 @@ export function Ajustes({ api }: { api: FrasesApi }) {
           />
         </label>
         <label className="fila">
-          Por día
-          <select value={n.cantidad} onChange={(e) => void cambiarNotif({ cantidad: Number(e.target.value) })}>
-            {[1, 2, 3, 4, 5].map((c) => <option key={c} value={c}>{c}</option>)}
+          Frecuencia
+          <select
+            value={n.cadaHoras ? `h${n.cadaHoras}` : `d${n.cantidad}`}
+            onChange={(e) => {
+              const v = e.target.value;
+              void cambiarNotif(v.startsWith("h") ? { cadaHoras: Number(v.slice(1)) } : { cantidad: Number(v.slice(1)), cadaHoras: null });
+            }}
+          >
+            {FRECUENCIAS.map((f) => <option key={f.valor} value={f.valor}>{f.nombre}</option>)}
           </select>
         </label>
         <label className="fila">
@@ -88,7 +111,7 @@ export function Ajustes({ api }: { api: FrasesApi }) {
         </label>
         {!horarioValido && <p className="error">La hora de inicio tiene que ser antes que la de fin.</p>}
         {aviso && <p className="aviso">{aviso}</p>}
-        <p className="aviso">La primera del día es siempre tu 🔥 Frase del día.</p>
+        {horarioValido && <p className="aviso">{cuantasPorDia(n)} notificaciones por día. La primera es siempre tu 🔥 Frase del día.</p>}
       </section>
 
       <section className="seccion">

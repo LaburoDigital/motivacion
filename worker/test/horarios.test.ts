@@ -27,3 +27,11 @@ test("el borde de la ventana: justo a la hora sí, 15 minutos después no", () =
   expect(tocaAhora(["08:00"], new Date("2026-11-03T11:00:00Z"), AR)).toBe(0);
   expect(tocaAhora(["08:00"], new Date("2026-11-03T11:15:00Z"), AR)).toBeNull();
 });
+
+test("cada 2 horas de 8 a 22 son 8 notificaciones", () => {
+  expect(horariosDelDia(3, "08:00", "22:00", 2)).toEqual(["08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"]);
+});
+
+test("cada 3 horas no se pasa del horario de fin", () => {
+  expect(horariosDelDia(1, "09:00", "20:00", 3)).toEqual(["09:00", "12:00", "15:00", "18:00"]);
+});

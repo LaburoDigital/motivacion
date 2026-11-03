@@ -3,6 +3,7 @@ import { WORKER_URL } from "../config";
 
 export interface ConfigNotificaciones {
   cantidad: number;
+  cadaHoras?: number | null;
   desde: string;
   hasta: string;
   temas: CategoriaId[];

@@ -11,6 +11,8 @@ export interface Suscripcion {
   hasta: string;
   temas: CategoriaId[];
   zona: string;
+  /** Si está, una notificación cada N horas (1 a 6) en vez de `cantidad` por día. */
+  cadaHoras?: number;
   /** "<fecha>|<índice>" de la última notificación mandada, para no repetirla. */
   enviado?: string;
 }
@@ -24,6 +26,7 @@ interface EntradaIndice {
   desde: string;
   hasta: string;
   zona: string;
+  cadaHoras?: number;
 }
 
 async function leerIndice(env: Env): Promise<EntradaIndice[]> {
@@ -36,6 +39,7 @@ export async function guardarSuscripcion(env: Env, sub: Suscripcion): Promise<vo
   // Conserva la marca de enviado: reabrir la app no tiene que repetir la última notificación.
   await env.KV.put(clave, JSON.stringify(previa?.enviado ? { ...sub, enviado: previa.enviado } : sub));
   const entrada: EntradaIndice = { clave, cantidad: sub.cantidad, desde: sub.desde, hasta: sub.hasta, zona: sub.zona };
+  if (sub.cadaHoras) entrada.cadaHoras = sub.cadaHoras;
   const indice = (await leerIndice(env)).filter((e) => e.clave !== clave);
   await env.KV.put("subs", JSON.stringify([...indice, entrada]));
 }
@@ -55,7 +59,10 @@ export function validarSuscripcion(cuerpo: unknown): Suscripcion | null {
   if (!Number.isInteger(c!.cantidad) || c!.cantidad! < 1 || c!.cantidad! > 5) return null;
   if (!HORA.test(c!.desde ?? "") || !HORA.test(c!.hasta ?? "")) return null;
   if (aMinutos(c!.desde!) >= aMinutos(c!.hasta!)) return null;
+  const cadaHoras = c!.cadaHoras;
+  if (cadaHoras !== undefined && cadaHoras !== null && (!Number.isInteger(cadaHoras) || cadaHoras < 1 || cadaHoras > 6)) return null;
   return {
+    ...(cadaHoras ? { cadaHoras } : {}),
     subscription: { endpoint: s.endpoint, expirationTime: s.expirationTime ?? null, keys: { p256dh: s.keys.p256dh, auth: s.keys.auth } },
     cantidad: c!.cantidad!,
     desde: c!.desde!,
@@ -92,7 +99,7 @@ export async function mensajePara(env: Env, sub: Suscripcion, indice: number, ah
 export async function enviarNotificaciones(env: Env, ahora = new Date()): Promise<void> {
   const grupos = new Map<number, { entrada: EntradaIndice; indice: number; transcurridos: number }[]>();
   for (const entrada of await leerIndice(env)) {
-    const horarios = horariosDelDia(entrada.cantidad, entrada.desde, entrada.hasta);
+    const horarios = horariosDelDia(entrada.cantidad, entrada.desde, entrada.hasta, entrada.cadaHoras);
     const indice = tocaAhora(horarios, ahora, entrada.zona);
     if (indice === null) continue;
     const transcurridos = minutosDesde(horarios[indice], ahora, entrada.zona);

@@ -4,7 +4,7 @@ import { ESTILOS, elegirFondo, estiloPorId, urlFoto } from "./estilos";
 
 const prefs = (p: Partial<Preferencias> = {}): Preferencias => ({
   temas: [], estiloVisual: "min-noche", soloFondosFavoritos: false, fondosFavoritos: [], zonaHoraria: "UTC",
-  notificaciones: { activas: false, cantidad: 3, desde: "08:00", hasta: "22:00" }, estiloWallpaper: "negro", ...p,
+  notificaciones: { activas: false, cantidad: 3, cadaHoras: null, desde: "08:00", hasta: "22:00" }, estiloWallpaper: "negro", ...p,
 });
 
 test("ids únicos y cantidades mínimas", () => {

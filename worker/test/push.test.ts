@@ -202,3 +202,26 @@ describe("revisión final: push", () => {
     expect(enviados).toEqual([primero, segundo]);
   });
 });
+
+describe("cada N horas", () => {
+  test("acepta cadaHoras de 1 a 6 y lo guarda en el índice", async () => {
+    const e = env();
+    expect((await post(e, config({ cadaHoras: 2 }))).status).toBe(201);
+    const [entrada] = (await e.KV.get("subs", "json")) as { cadaHoras?: number }[];
+    expect(entrada.cadaHoras).toBe(2);
+  });
+
+  test("rechaza cadaHoras fuera de rango", async () => {
+    expect((await post(env(), config({ cadaHoras: 0 }))).status).toBe(400);
+    expect((await post(env(), config({ cadaHoras: 7 }))).status).toBe(400);
+  });
+
+  test("con cada 2 horas manda a las 10 (y no con 3 por día)", async () => {
+    const enviar = vi.fn(async () => new Response(null, { status: 201 }));
+    vi.stubGlobal("fetch", enviar);
+    const e = env();
+    await post(e, config({ cadaHoras: 2 }));
+    await enviarNotificaciones(e, new Date("2026-11-03T13:00:00Z")); // 10:00 en Argentina
+    expect(enviar).toHaveBeenCalledTimes(1);
+  });
+});

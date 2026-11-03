@@ -6,10 +6,18 @@ export const aMinutos = (hhmm: string) => {
 };
 const aHora = (min: number) => `${String(Math.floor(min / 60)).padStart(2, "0")}:${String(min % 60).padStart(2, "0")}`;
 
-/** Horarios repartidos parejo de desde a hasta (inclusive), en múltiplos de 15 minutos. */
-export function horariosDelDia(cantidad: number, desde: string, hasta: string): string[] {
+/**
+ * Horarios del día, en múltiplos de 15 minutos. Con `cadaHoras`, uno cada N horas
+ * desde `desde` sin pasarse de `hasta`; si no, `cantidad` repartidos parejo (inclusive).
+ */
+export function horariosDelDia(cantidad: number, desde: string, hasta: string, cadaHoras?: number): string[] {
   const ini = aMinutos(desde);
   const fin = aMinutos(hasta);
+  if (cadaHoras) {
+    const lista: string[] = [];
+    for (let m = ini; m <= fin; m += cadaHoras * 60) lista.push(aHora(Math.round(m / VENTANA) * VENTANA));
+    return lista;
+  }
   if (cantidad <= 1) return [aHora(Math.round(ini / VENTANA) * VENTANA)];
   const paso = (fin - ini) / (cantidad - 1);
   return Array.from({ length: cantidad }, (_, i) => aHora(Math.round((ini + paso * i) / VENTANA) * VENTANA));
