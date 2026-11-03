@@ -2,6 +2,15 @@ name = "motivacion-worker"
 main = "src/index.ts"
 compatibility_date = "2026-10-01"
 
+[triggers]
+crons = ["0 9 * * *", "*/15 * * * *"]
+
+[vars]
+# Se completa en el deploy con la URL raw de curadas/frases.json en GitHub.
+CURADAS_URL = "https://raw.githubusercontent.com/USUARIO/REPO/main/curadas/frases.json"
+VAPID_SUBJECT = "mailto:motivacion@example.com"
+# VAPID_PUBLIC y VAPID_PRIVATE van como secrets (npx wrangler secret put).
+
 [[kv_namespaces]]
 binding = "KV"
 id = "REEMPLAZAR_CON_ID_DEL_KV"
