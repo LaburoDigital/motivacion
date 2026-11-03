@@ -9,16 +9,17 @@
     "wallpapers": "vite-node scripts/wallpapers.ts"
   },
   "dependencies": {
+    "@block65/webcrypto-web-push": "^1.0.2",
     "shared": "*"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "4.20241106.0",
+    "@fontsource/playfair-display": "5.1.0",
+    "@resvg/resvg-wasm": "2.6.2",
+    "jpeg-js": "0.4.4",
+    "satori": "0.10.14",
     "typescript": "5.6.3",
     "vitest": "2.1.9",
-    "wrangler": "3.87.0",
-    "satori": "0.10.14",
-    "@resvg/resvg-wasm": "2.6.2",
-    "@fontsource/playfair-display": "5.1.0",
-    "jpeg-js": "0.4.4"
+    "wrangler": "3.87.0"
   }
 }

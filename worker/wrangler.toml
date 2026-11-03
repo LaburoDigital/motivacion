@@ -3,7 +3,7 @@ main = "src/index.ts"
 compatibility_date = "2026-10-01"
 
 [triggers]
-crons = ["0 9 * * *", "*/15 * * * *"]
+crons = ["0 9 * * *", "* * * * *"]
 
 [vars]
 # Se completa en el deploy con la URL raw de curadas/frases.json en GitHub.
