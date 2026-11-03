@@ -1,5 +1,9 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
+import { ajustarAltoAhora } from "./visual/pantalla";
+
+ajustarAltoAhora();
+window.addEventListener("resize", ajustarAltoAhora);
 
 // Cuando se publica una versión nueva, el service worker nuevo toma el control: recargamos para verla.
 if ("serviceWorker" in navigator && navigator.serviceWorker.controller) {

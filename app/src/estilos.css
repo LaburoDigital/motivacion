@@ -20,6 +20,9 @@
 
 * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 html, body, #root { margin: 0; height: 100%; background: var(--fondo); color: var(--texto); overflow: hidden; }
+/* Sin barras de scroll visibles: se sigue pudiendo deslizar. */
+* { scrollbar-width: none; }
+*::-webkit-scrollbar { display: none; width: 0; height: 0; }
 body { font-family: "Outfit", system-ui, sans-serif; overscroll-behavior: none; -webkit-font-smoothing: antialiased; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
@@ -27,7 +30,7 @@ h1 { font-family: "Fraunces", Georgia, serif; font-weight: 500; font-size: 32px;
 h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
 
 /* La app ocupa toda la pantalla del iPhone, debajo de la barra de estado y del indicador de inicio. */
-.app { position: fixed; inset: 0; width: 100vw; height: 100dvh; overflow: hidden; }
+.app { position: fixed; top: 0; left: 0; right: 0; height: var(--alto-app, 100dvh); overflow: hidden; }
 .contenido { position: absolute; inset: 0; overflow: hidden; }
 .pantalla { height: 100%; overflow-y: auto; overflow-x: hidden; padding: calc(env(safe-area-inset-top) + 20px) 18px calc(var(--nav-espacio) + 16px); }
 .cargando, .vacio { color: var(--tenue); text-align: center; padding: 56px 24px; line-height: 1.5; }

@@ -13,6 +13,7 @@ export default defineConfig({
         short_name: "Motivación",
         lang: "es",
         display: "standalone",
+        orientation: "portrait",
         start_url: "/",
         theme_color: "#101114",
         background_color: "#101114",
