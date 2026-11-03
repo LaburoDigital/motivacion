@@ -8,7 +8,8 @@ import { Ajustes } from "./pantallas/Ajustes";
 import { Favoritos } from "./pantallas/Favoritos";
 import { Inicio } from "./pantallas/Inicio";
 import { Temas } from "./pantallas/Temas";
-import { ESTILO_RESPALDO, estiloPorId } from "./visual/estilos";
+import { fondoPara } from "./visual/fondos";
+import { letraPorId } from "./visual/letras";
 import "./estilos.css";
 
 export default function App() {
@@ -17,7 +18,6 @@ export default function App() {
   const [fraseInicial] = useState(() => new URLSearchParams(location.search).get("frase"));
   const [verPrevia, setVerPrevia] = useState(!!fraseInicial);
   const previa = verPrevia && fraseInicial ? api.todas.find((f) => f.id === fraseInicial) : undefined;
-  const estilo = (api.prefs && estiloPorId(api.prefs.estiloVisual)) || ESTILO_RESPALDO;
 
   const cerrarPrevia = () => {
     setVerPrevia(false);
@@ -35,7 +35,9 @@ export default function App() {
         {seccion === "favoritos" && <Favoritos api={api} />}
         {seccion === "ajustes" && <Ajustes api={api} />}
       </main>
-      {previa && api.cargado && <VistaPrevia frase={previa} estilo={estilo} onCerrar={cerrarPrevia} />}
+      {previa && api.cargado && api.prefs && (
+        <VistaPrevia frase={previa} estilo={{ foto: fondoPara(previa, api.prefs), letra: letraPorId(api.prefs.letra) }} onCerrar={cerrarPrevia} />
+      )}
       <CartelInstalar />
       <BarraNav actual={seccion} onCambiar={setSeccion} />
     </div>

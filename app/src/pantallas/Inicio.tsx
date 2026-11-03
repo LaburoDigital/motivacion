@@ -4,7 +4,9 @@ import { compartirFrase } from "../compartir/imagenFrase";
 import { MenuFrase } from "../componentes/MenuFrase";
 import { TarjetaFrase } from "../componentes/TarjetaFrase";
 import type { FrasesApi } from "../datos/useFrases";
-import { ESTILOS, ESTILO_RESPALDO, elegirFondo, type EstiloVisual } from "../visual/estilos";
+import type { Apariencia } from "../visual/Fondo";
+import { fondoPara } from "../visual/fondos";
+import { letraPorId } from "../visual/letras";
 
 interface Props {
   api: FrasesApi;
@@ -16,7 +18,7 @@ const LOTE = 10;
 export function Inicio({ api, fraseInicial }: Props) {
   const { cargado, fraseDelDia, todas, siguientes, prefs, estado } = api;
   const [feed, setFeed] = useState<Frase[]>([]);
-  const [fondoElegido, setFondoElegido] = useState<Record<string, EstiloVisual>>({});
+  const [cambios, setCambios] = useState<Record<string, number>>({});
   const [menu, setMenu] = useState<Frase | null>(null);
 
   // Arma el feed una vez cargado; después crece con cargarMas.
@@ -34,10 +36,10 @@ export function Inicio({ api, fraseInicial }: Props) {
     setFeed((actual) => [...actual, ...siguientes(LOTE, actual.map((f) => f.id))]);
   }, [siguientes]);
 
-  const estiloDe = (frase: Frase, i: number) =>
-    fondoElegido[frase.id] ?? (prefs ? elegirFondo(prefs, i) : ESTILO_RESPALDO);
+  if (!cargado || !prefs) return <div className="cargando">Cargando frases…</div>;
 
-  if (!cargado) return <div className="cargando">Cargando frases…</div>;
+  const letra = letraPorId(prefs.letra);
+  const aparienciaDe = (frase: Frase): Apariencia => ({ foto: fondoPara(frase, prefs, cambios[frase.id] ?? 0), letra });
 
   return (
     <div className="feed">
@@ -45,14 +47,12 @@ export function Inicio({ api, fraseInicial }: Props) {
         <TarjetaFrase
           key={frase.id}
           frase={frase}
-          estilo={estiloDe(frase, i)}
+          apariencia={aparienciaDe(frase)}
           liked={frase.id in estado.likes}
           delDia={frase.id === fraseDelDia?.id}
           onLike={() => api.alternarLike(frase.id)}
-          onCompartir={() => void compartirFrase(frase, estiloDe(frase, i))}
-          onCambiarFondo={() =>
-            setFondoElegido((f) => ({ ...f, [frase.id]: ESTILOS[Math.floor(Math.random() * ESTILOS.length)] }))
-          }
+          onCompartir={() => void compartirFrase(frase, aparienciaDe(frase))}
+          onCambiarFondo={() => setCambios((c) => ({ ...c, [frase.id]: (c[frase.id] ?? 0) + 1 }))}
           onMantener={() => setMenu(frase)}
           onVisible={() => {
             api.marcarVista(frase.id);

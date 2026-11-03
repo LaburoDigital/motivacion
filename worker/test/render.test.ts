@@ -23,3 +23,12 @@ test("renderiza solo las Clave de la base y las curadas", () => {
   expect(ids).not.toContain("c-0002");
   expect(ids.length).toBe(FRASES_BASE.filter((f) => f.nivel === "clave").length + 1);
 });
+
+test("la foto del wallpaper es la misma que la app elige en Automático", async () => {
+  const { fotoParaWallpaper } = await import("../render/wallpaper");
+  const { FOTOS, PACKS_POR_CATEGORIA } = await import("shared");
+  const gym = FRASES_BASE.find((f) => f.categoria === "gym")!;
+  const foto = fotoParaWallpaper(gym);
+  expect(PACKS_POR_CATEGORIA.gym).toContain(foto.pack);
+  expect(FOTOS).toContainEqual(foto);
+});

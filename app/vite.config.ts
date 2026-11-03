@@ -14,8 +14,8 @@ export default defineConfig({
         lang: "es",
         display: "standalone",
         start_url: "/",
-        theme_color: "#0b0b0f",
-        background_color: "#0b0b0f",
+        theme_color: "#101114",
+        background_color: "#101114",
         icons: [
           { src: "icono-192.png", sizes: "192x192", type: "image/png" },
           { src: "icono-512.png", sizes: "512x512", type: "image/png" },
@@ -31,9 +31,9 @@ export default defineConfig({
             options: { cacheName: "fuentes", expiration: { maxEntries: 20 } },
           },
           {
-            urlPattern: /^https:\/\/(picsum\.photos|fastly\.picsum\.photos)\//,
+            urlPattern: /^https:\/\/images\.unsplash\.com\//,
             handler: "CacheFirst",
-            options: { cacheName: "fotos", expiration: { maxEntries: 80 } },
+            options: { cacheName: "fotos", expiration: { maxEntries: 150 } },
           },
         ],
       },

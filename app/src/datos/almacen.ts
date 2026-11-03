@@ -1,9 +1,11 @@
 import { get, set } from "idb-keyval";
-import type { CategoriaId, EstadoFeed, Frase } from "shared";
+import type { CategoriaId, EstadoFeed, Frase, PackId } from "shared";
 
 export interface Preferencias {
   temas: CategoriaId[];
-  estiloVisual: string;
+  /** "auto" (según el tema de cada frase) o un pack de fotos. */
+  fondo: "auto" | PackId;
+  letra: string;
   soloFondosFavoritos: boolean;
   fondosFavoritos: string[];
   zonaHoraria: string;
@@ -35,7 +37,8 @@ export interface FraseDelDiaGuardada {
 const estadoVacio = (): EstadoFeed => ({ vistas: {}, likes: {}, malas: [], clavesPropias: [] });
 const prefsDefault = (): Preferencias => ({
   temas: [],
-  estiloVisual: "min-noche",
+  fondo: "auto",
+  letra: "playfair",
   soloFondosFavoritos: false,
   fondosFavoritos: [],
   zonaHoraria: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -50,7 +53,10 @@ async function leer<T>(clave: string, porDefecto: () => T): Promise<T> {
 export const almacen = {
   leerEstado: () => leer("estado", estadoVacio),
   guardarEstado: (e: EstadoFeed) => set("estado", e),
-  leerPrefs: async () => ({ ...prefsDefault(), ...(await leer<Partial<Preferencias>>("prefs", () => ({}))) }),
+  leerPrefs: async () => {
+    const { estiloVisual: _viejo, ...guardadas } = await leer<Partial<Preferencias> & { estiloVisual?: string }>("prefs", () => ({}));
+    return { ...prefsDefault(), ...guardadas };
+  },
   guardarPrefs: (p: Preferencias) => set("prefs", p),
   leerRemotas: () => leer<Remotas>("remotas", () => ({ version: "", frases: [] })),
   guardarRemotas: (r: Remotas) => set("remotas", r),

@@ -1,3 +1,4 @@
+import { IconX } from "@tabler/icons-react";
 import { useState } from "react";
 
 export function estaInstalada(): boolean {
@@ -13,10 +14,10 @@ export function CartelInstalar() {
   return (
     <div className="cartel-instalar" role="note">
       <p>
-        Instalá la app: tocá <strong>Compartir</strong> <span aria-hidden>⬆️</span> y después
+        Instalá la app: tocá <strong>Compartir</strong> y después
         <strong> “Agregar a inicio”</strong>.
       </p>
-      <button aria-label="Cerrar" onClick={() => setCerrado(true)}>✕</button>
+      <button aria-label="Cerrar" onClick={() => setCerrado(true)}><IconX size={18} /></button>
     </div>
   );
 }

@@ -1,11 +1,11 @@
+import { IconHeart, IconHeartFilled, IconPhoto, IconShare3 } from "@tabler/icons-react";
 import { useEffect, useRef } from "react";
-import type { Frase } from "shared";
-import { Fondo } from "../visual/Fondo";
-import type { EstiloVisual } from "../visual/estilos";
+import { CATEGORIAS, type Frase } from "shared";
+import { Fondo, type Apariencia } from "../visual/Fondo";
 
 interface Props {
   frase: Frase;
-  estilo: EstiloVisual;
+  apariencia: Apariencia;
   liked: boolean;
   delDia?: boolean;
   onLike: () => void;
@@ -23,7 +23,7 @@ export function tamanoTexto(texto: string): "grande" | "medio" | "chico" {
   return "grande";
 }
 
-export function TarjetaFrase({ frase, estilo, liked, delDia, onLike, onCompartir, onCambiarFondo, onMantener, onVisible }: Props) {
+export function TarjetaFrase({ frase, apariencia, liked, delDia, onLike, onCompartir, onCambiarFondo, onMantener, onVisible }: Props) {
   const ref = useRef<HTMLElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>();
   const visible = useRef(onVisible);
@@ -37,14 +37,24 @@ export function TarjetaFrase({ frase, estilo, liked, delDia, onLike, onCompartir
   }, []);
 
   const soltar = () => clearTimeout(timer.current);
+  const { letra } = apariencia;
+  const tema = CATEGORIAS.find((c) => c.id === frase.categoria)?.etiqueta;
 
   return (
     <section ref={ref} className="tarjeta" data-testid="tarjeta">
-      <Fondo estilo={estilo}>
-        {delDia && <div className="etiqueta-dia">🔥 Frase del día</div>}
+      <Fondo foto={apariencia.foto}>
+        <div className="tarjeta-arriba">
+          {delDia ? <span className="etiqueta etiqueta-dia">Frase del día</span> : <span className="etiqueta">{tema}</span>}
+        </div>
         <blockquote
           data-testid="tarjeta-texto"
           className={`frase frase-${tamanoTexto(frase.texto)}`}
+          style={{
+            fontFamily: letra.familia,
+            fontWeight: letra.peso,
+            textTransform: letra.mayusculas ? "uppercase" : undefined,
+            ["--escala" as string]: letra.escala,
+          }}
           onDoubleClick={onLike}
           onPointerDown={() => { timer.current = setTimeout(onMantener, MANTENER_MS); }}
           onPointerUp={soltar}
@@ -53,12 +63,18 @@ export function TarjetaFrase({ frase, estilo, liked, delDia, onLike, onCompartir
           onContextMenu={(e) => e.preventDefault()}
         >
           <p>{frase.texto}</p>
-          {frase.autor && <footer>— {frase.autor}</footer>}
+          {frase.autor && <footer>{frase.autor}</footer>}
         </blockquote>
         <div className="acciones">
-          <button aria-label={liked ? "Quitar me gusta" : "Me gusta"} onClick={onLike}>{liked ? "❤️" : "🤍"}</button>
-          <button aria-label="Compartir" onClick={onCompartir}>📤</button>
-          <button aria-label="Cambiar fondo" onClick={onCambiarFondo}>🔄</button>
+          <button className={`accion ${liked ? "activa" : ""}`} aria-label={liked ? "Quitar me gusta" : "Me gusta"} onClick={onLike}>
+            {liked ? <IconHeartFilled size={26} /> : <IconHeart size={26} stroke={1.6} />}
+          </button>
+          <button className="accion" aria-label="Compartir" onClick={onCompartir}>
+            <IconShare3 size={26} stroke={1.6} />
+          </button>
+          <button className="accion" aria-label="Cambiar fondo" onClick={onCambiarFondo}>
+            <IconPhoto size={26} stroke={1.6} />
+          </button>
         </div>
       </Fondo>
     </section>

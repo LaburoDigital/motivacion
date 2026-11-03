@@ -1,3 +1,4 @@
+import { IconBell, IconBolt, IconCopy, IconLock } from "@tabler/icons-react";
 import { useState } from "react";
 import { ATAJO_URL, WORKER_URL } from "../config";
 import { GuiaAtajo } from "../componentes/GuiaAtajo";
@@ -79,7 +80,7 @@ export function Ajustes({ api }: { api: FrasesApi }) {
       <h1>Ajustes</h1>
 
       <section className="seccion">
-        <h2>🔔 Notificaciones</h2>
+        <h2><IconBell size={20} stroke={1.7} /> Notificaciones</h2>
         <label className="fila">
           Recibir notificaciones
           <input
@@ -111,11 +112,11 @@ export function Ajustes({ api }: { api: FrasesApi }) {
         </label>
         {!horarioValido && <p className="error">La hora de inicio tiene que ser antes que la de fin.</p>}
         {aviso && <p className="aviso">{aviso}</p>}
-        {horarioValido && <p className="aviso">{cuantasPorDia(n)} notificaciones por día. La primera es siempre tu 🔥 Frase del día.</p>}
+        {horarioValido && <p className="aviso">{cuantasPorDia(n)} notificaciones por día. La primera es siempre tu frase del día.</p>}
       </section>
 
       <section className="seccion">
-        <h2>🔒 Pantalla bloqueada</h2>
+        <h2><IconLock size={20} stroke={1.7} /> Pantalla bloqueada</h2>
         <label className="fila">
           Estilo
           <select
@@ -126,8 +127,8 @@ export function Ajustes({ api }: { api: FrasesApi }) {
           </select>
         </label>
         {WORKER_URL && <img className="vista-previa" src={urlWallpaper(prefs)} alt="Vista previa del wallpaper de hoy" />}
-        <button className="boton secundario" onClick={() => void copiar()}>{copiado ? "¡Copiado!" : "📋 Copiar mi link"}</button>
-        <a className="boton" href={ATAJO_URL || undefined} target="_blank" rel="noreferrer">⚡ Instalar atajo</a>
+        <button className="boton secundario" onClick={() => void copiar()}><IconCopy size={18} stroke={1.8} /> {copiado ? "Copiado" : "Copiar mi link"}</button>
+        <a className="boton" href={ATAJO_URL || undefined} target="_blank" rel="noreferrer"><IconBolt size={18} stroke={1.8} /> Instalar atajo</a>
         <GuiaAtajo />
         <p className="aviso">Si cambiás tus temas o el estilo, volvé a copiar el link y pegalo en el atajo.</p>
       </section>

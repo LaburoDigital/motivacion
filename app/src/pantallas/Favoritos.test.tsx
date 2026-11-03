@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { FRASES_BASE } from "shared";
+import { FOTOS, FRASES_BASE } from "shared";
 import { expect, test } from "vitest";
 import { apiFalsa } from "../test/apiFalsa";
 import { Favoritos } from "./Favoritos";
@@ -19,9 +19,9 @@ test("sin likes muestra un mensaje", () => {
   expect(screen.getByText(/Todavía no/)).toBeTruthy();
 });
 
-test("la pestaña Fondos muestra los fondos favoritos", () => {
-  const api = apiFalsa({ prefs: { ...apiFalsa().prefs!, fondosFavoritos: ["min-oceano"] } });
+test("la pestaña Fondos muestra las fotos favoritas", () => {
+  const api = apiFalsa({ prefs: { ...apiFalsa().prefs!, fondosFavoritos: [FOTOS[3].id] } });
   render(<Favoritos api={api} />);
   fireEvent.click(screen.getByRole("tab", { name: "Fondos" }));
-  expect(screen.getByText("Océano")).toBeTruthy();
+  expect(screen.getAllByRole("img", { name: /Fondo favorito/ })).toHaveLength(1);
 });

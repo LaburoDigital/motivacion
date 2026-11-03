@@ -1,17 +1,29 @@
 import { useState, type ReactNode } from "react";
-import { ESTILO_RESPALDO, urlFoto, type EstiloVisual } from "./estilos";
+import type { Foto } from "shared";
+import { urlFoto } from "./fondos";
+import type { Letra } from "./letras";
 
-export function Fondo({ estilo, children }: { estilo: EstiloVisual; children: ReactNode }) {
+export interface Apariencia {
+  foto: Foto;
+  letra: Letra;
+}
+
+/** Foto a pantalla completa con un velo para que el texto se lea; si no carga, queda un degradado oscuro. */
+export function Fondo({ foto, children }: { foto: Foto; children: ReactNode }) {
   const [fallo, setFallo] = useState(false);
-  const usar = estilo.tipo === "foto" && fallo ? ESTILO_RESPALDO : estilo;
   return (
-    <div className="fondo" style={{ background: usar.fondoCss ?? "#0b0b0f", color: usar.colorTexto, fontFamily: usar.fuente }}>
-      {usar.tipo === "foto" && (
-        <>
-          <img className="fondo-foto" src={urlFoto(usar, 1080, 1920)} alt="" onError={() => setFallo(true)} />
-          <div className="fondo-capa" />
-        </>
+    <div className="fondo">
+      {!fallo && (
+        <img
+          className="fondo-foto"
+          src={urlFoto(foto, 1080, 1920)}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          onError={() => setFallo(true)}
+        />
       )}
+      <div className="fondo-velo" />
       <div className="fondo-contenido">{children}</div>
     </div>
   );

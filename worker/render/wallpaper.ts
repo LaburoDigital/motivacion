@@ -4,13 +4,17 @@ import { createRequire } from "node:module";
 import { Resvg, initWasm } from "@resvg/resvg-wasm";
 import jpeg from "jpeg-js";
 import satori from "satori";
-import { FRASES_BASE, fnv1a, type Frase } from "shared";
+import { FOTOS, FRASES_BASE, PACKS_POR_CATEGORIA, fnv1a, urlFotoUnsplash, type Foto, type Frase } from "shared";
 import type { EstiloWallpaper } from "../src/wallpaper";
 import { FUENTE_BASE64 } from "./fuente";
 import { calcularLayout } from "./layoutWallpaper";
 
-/** Fotos de Picsum para el estilo "foto"; cada frase tiene la suya. */
-export const FOTOS_WALLPAPER = [10, 15, 16, 28, 29, 39, 46, 54, 57, 58, 76, 84];
+/** La misma foto que la app elige en "Automático" para esa frase. */
+export function fotoParaWallpaper(frase: Frase): Foto {
+  const packs = PACKS_POR_CATEGORIA[frase.categoria];
+  const pool = FOTOS.filter((f) => packs.includes(f.pack));
+  return pool[fnv1a(frase.id) % pool.length];
+}
 
 const require = createRequire(import.meta.url);
 const fuente = Buffer.from(FUENTE_BASE64, "base64");
@@ -35,14 +39,13 @@ export async function generarWallpaper(
   frase: Frase, estilo: EstiloWallpaper, w = 1179, h = 2556, foto: BajarFoto = bajarFoto,
 ): Promise<Uint8Array> {
   const { top, fontSize, maxWidth } = calcularLayout(frase.texto, w, h, !!frase.autor);
-  const idFoto = FOTOS_WALLPAPER[fnv1a(frase.id) % FOTOS_WALLPAPER.length];
-  const imagen = estilo === "foto" ? await foto(`https://picsum.photos/id/${idFoto}/${w}/${h}?blur=5`) : null;
+  const imagen = estilo === "foto" ? await foto(`${urlFotoUnsplash(fotoParaWallpaper(frase).id, w, h)}&blur=25`) : null;
   const fondo = estilo === "degradado" ? "linear-gradient(160deg, #0f0c29, #302b63 55%, #0b0b0f)" : "#000000";
 
   const capas: unknown[] = [];
   if (imagen) {
     capas.push({ type: "img", props: { src: imagen, width: w, height: h, style: { position: "absolute", top: 0, left: 0 } } });
-    capas.push(el("div", { position: "absolute", top: 0, left: 0, width: w, height: h, backgroundColor: "rgba(0,0,0,0.65)" }));
+    capas.push(el("div", { position: "absolute", top: 0, left: 0, width: w, height: h, backgroundColor: "rgba(0,0,0,0.5)" }));
   }
   capas.push(
     el(

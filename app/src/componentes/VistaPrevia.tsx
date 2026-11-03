@@ -1,14 +1,15 @@
+import { IconDownload } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import type { Frase } from "shared";
 import { compartirFrase, generarImagenFrase } from "../compartir/imagenFrase";
-import type { EstiloVisual } from "../visual/estilos";
+import type { Apariencia } from "../visual/Fondo";
 
 interface Props {
   frase: Frase;
-  estilo: EstiloVisual;
+  estilo: Apariencia;
   onCerrar: () => void;
-  generar?: (f: Frase, e: EstiloVisual) => Promise<Blob>;
-  compartir?: (f: Frase, e: EstiloVisual) => Promise<void>;
+  generar?: (f: Frase, a: Apariencia) => Promise<Blob>;
+  compartir?: (f: Frase, a: Apariencia) => Promise<void>;
 }
 
 /** Lo que se ve al tocar una notificación: la frase como imagen, lista para guardar o compartir. */
@@ -33,7 +34,9 @@ export function VistaPrevia({ frase, estilo, onCerrar, generar = generarImagenFr
     <div className="vista-previa-fondo" role="dialog" aria-label="Vista previa de la frase">
       {src ? <img className="vista-previa-imagen" src={src} alt={frase.texto} /> : <div className="vista-previa-imagen cargando">Armando la imagen…</div>}
       <div className="vista-previa-botones">
-        <button className="boton" onClick={() => void compartir(frase, estilo)}>📥 Guardar o compartir</button>
+        <button className="boton" onClick={() => void compartir(frase, estilo)}>
+          <IconDownload size={20} stroke={1.8} /> Guardar o compartir
+        </button>
         <button className="boton secundario" onClick={onCerrar}>Ver más frases</button>
       </div>
     </div>
