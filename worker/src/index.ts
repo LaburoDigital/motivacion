@@ -1,5 +1,6 @@
 import type { Env } from "./env";
 import { actualizarDiario, fraseDelDiaPara, frasesRemotas, parsearTemas, zonaValida } from "./frases";
+import { ESTILOS_WALLPAPER, urlWallpaper, type EstiloWallpaper } from "./wallpaper";
 
 export type { Env };
 
@@ -24,6 +25,14 @@ async function rutear(req: Request, env: Env): Promise<Response> {
   if (req.method === "GET" && url.pathname === "/frase-del-dia") {
     const frase = await fraseDelDiaPara(env, parsearTemas(url.searchParams.get("temas")), zonaValida(url.searchParams.get("zona")));
     return frase ? json(frase) : json({ error: "sin frases clave" }, 404);
+  }
+
+  if (req.method === "GET" && url.pathname === "/wallpaper") {
+    const pedido = url.searchParams.get("estilo") as EstiloWallpaper;
+    const estilo = ESTILOS_WALLPAPER.includes(pedido) ? pedido : "negro";
+    const destino = await urlWallpaper(env, parsearTemas(url.searchParams.get("temas")), zonaValida(url.searchParams.get("zona")), estilo);
+    if (!destino) return json({ error: "sin frases clave" }, 404);
+    return new Response(null, { status: 302, headers: { ...CORS, location: destino, "cache-control": "max-age=1800" } });
   }
 
   return json({ error: "no encontrado" }, 404);

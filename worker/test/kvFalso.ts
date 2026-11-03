@@ -26,6 +26,7 @@ export function envFalso(inicial: Record<string, unknown> = {}): Env & { KV: Ret
   return {
     KV: kvFalso(inicial) as never,
     CURADAS_URL: "https://curadas.test/frases.json",
+    PAGES_URL: "https://app.test",
     VAPID_PUBLIC: "",
     VAPID_PRIVATE: "",
     VAPID_SUBJECT: "mailto:test@example.com",

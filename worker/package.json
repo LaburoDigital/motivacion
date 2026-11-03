@@ -5,13 +5,20 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "test": "vitest run"
+    "test": "vitest run",
+    "wallpapers": "vite-node scripts/wallpapers.ts"
   },
-  "dependencies": { "shared": "*" },
+  "dependencies": {
+    "shared": "*"
+  },
   "devDependencies": {
     "@cloudflare/workers-types": "4.20241106.0",
     "typescript": "5.6.3",
     "vitest": "2.1.9",
-    "wrangler": "3.87.0"
+    "wrangler": "3.87.0",
+    "satori": "0.10.14",
+    "@resvg/resvg-wasm": "2.6.2",
+    "@fontsource/playfair-display": "5.1.0",
+    "jpeg-js": "0.4.4"
   }
 }
