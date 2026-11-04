@@ -1,5 +1,9 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
+import { marcarRecorteAhora } from "./visual/recorte";
+
+marcarRecorteAhora();
+window.addEventListener("resize", marcarRecorteAhora);
 
 
 // Cuando se publica una versión nueva, el service worker nuevo toma el control: recargamos para verla.
