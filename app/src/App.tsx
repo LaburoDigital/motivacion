@@ -9,6 +9,7 @@ import { useRachas } from "./rachas/useRachas";
 import { useFrases } from "./datos/useFrases";
 import { useResincronizarNotificaciones } from "./datos/useResincronizar";
 import { Ajustes } from "./pantallas/Ajustes";
+import { Bienvenida } from "./pantallas/Bienvenida";
 import { Favoritos } from "./pantallas/Favoritos";
 import { Inicio } from "./pantallas/Inicio";
 import { Temas } from "./pantallas/Temas";
@@ -66,6 +67,7 @@ export default function App() {
           onSeguir={() => rachas.festejar(festejo.r.id, festejo.hito!)}
         />
       )}
+      {api.cargado && api.prefs && !api.prefs.bienvenida && <Bienvenida api={api} />}
       <CartelInstalar />
       <BarraNav actual={seccion} onCambiar={setSeccion} />
     </div>

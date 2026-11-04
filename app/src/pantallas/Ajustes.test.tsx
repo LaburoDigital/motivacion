@@ -148,3 +148,15 @@ test("con rachas prendidas se elige la hora del aviso", () => {
   fireEvent.change(screen.getByLabelText("Hora del aviso de racha"), { target: { value: "22:30" } });
   expect(rachas.setHora).toHaveBeenCalledWith("22:30");
 });
+
+test("tocar tres veces el pie muestra las medidas de la pantalla", () => {
+  render(<Ajustes api={apiFalsa()} />);
+  const pie = screen.getByText(/Hecha con ganas/);
+  fireEvent.click(pie); fireEvent.click(pie);
+  expect(screen.queryByTestId("diagnostico")).toBeNull();
+  fireEvent.click(pie);
+  const d = screen.getByTestId("diagnostico").textContent!;
+  expect(d).toContain("innerHeight");
+  expect(d).toContain("screen");
+  expect(d).toContain("safe-bottom");
+});

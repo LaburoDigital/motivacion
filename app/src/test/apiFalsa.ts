@@ -12,7 +12,7 @@ export function apiFalsa(cambios: Partial<FrasesApi> = {}): FrasesApi {
     fraseDelDia: delDia,
     estado: { vistas: {}, likes: {}, malas: [], clavesPropias: [] },
     prefs: {
-      temas: [], fondo: "auto", letra: "playfair", icono: "llama", soloFondosFavoritos: false, fondosFavoritos: [], zonaHoraria: "UTC",
+      temas: [], fondo: "auto", letra: "playfair", icono: "llama", bienvenida: true, soloFondosFavoritos: false, fondosFavoritos: [], zonaHoraria: "UTC",
       notificaciones: { activas: false, cantidad: 3, cadaHoras: 2, desde: "08:00", hasta: "22:00" }, estiloWallpaper: "negro",
     },
     siguientes: vi.fn((n: number) => [zen, ...otras].slice(0, n)),

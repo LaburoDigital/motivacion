@@ -16,7 +16,7 @@ test("sin datos devuelve los defaults", async () => {
 
 test("guarda y vuelve a leer los 4 grupos", async () => {
   const estado = { vistas: { a: 1 }, likes: { b: 2 }, malas: ["c"], clavesPropias: ["d"] };
-  const prefs = { temas: ["gym" as const], fondo: "ciudad" as const, letra: "bebas", icono: "pesa", soloFondosFavoritos: true, fondosFavoritos: ["x"], zonaHoraria: "UTC",
+  const prefs = { temas: ["gym" as const], fondo: "ciudad" as const, letra: "bebas", icono: "pesa", bienvenida: true, soloFondosFavoritos: true, fondosFavoritos: ["x"], zonaHoraria: "UTC",
     notificaciones: { activas: true, cantidad: 2, cadaHoras: null, desde: "09:00", hasta: "21:00" }, estiloWallpaper: "foto" as const };
   const remotas = { version: "v1", frases: [{ id: "c-0001", texto: "x", categoria: "gym" as const, nivel: "buena" as const, fuente: "curada" as const }] };
   await almacen.guardarEstado(estado);
@@ -27,4 +27,11 @@ test("guarda y vuelve a leer los 4 grupos", async () => {
   expect(await almacen.leerPrefs()).toEqual(prefs);
   expect(await almacen.leerRemotas()).toEqual(remotas);
   expect(await almacen.leerFraseDelDia()).toEqual({ fecha: "2026-11-03", id: "b-0001" });
+});
+
+test("un usuario nuevo ve la bienvenida; uno que ya usaba la app no", async () => {
+  expect((await almacen.leerPrefs()).bienvenida).toBe(false);
+  const { set } = await import("idb-keyval");
+  await set("prefs", { temas: ["gym"], letra: "bebas" });
+  expect((await almacen.leerPrefs()).bienvenida).toBe(true);
 });

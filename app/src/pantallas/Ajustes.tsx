@@ -4,7 +4,9 @@ import { ATAJO_URL, WORKER_URL } from "../config";
 import {
   DibujoBloqueo, DibujoFondos, DibujoIcono, DibujoNotificaciones, DibujoRachas, DibujoTemas,
 } from "../componentes/Dibujos";
+import { Diagnostico } from "../componentes/Diagnostico";
 import { GuiaAtajo } from "../componentes/GuiaAtajo";
+import { GuiaCrearAtajo } from "../componentes/GuiaCrearAtajo";
 import { Pestanas } from "../componentes/Pestanas";
 import type { Preferencias, PrefsNotificaciones } from "../datos/almacen";
 import { activarNotificaciones, desactivarNotificaciones, type ResultadoActivar } from "../datos/notificaciones";
@@ -59,6 +61,7 @@ interface Props {
 
 export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
   const [vista, setVista] = useState<Vista | null>(null);
+  const [toques, setToques] = useState(0);
   const [aviso, setAviso] = useState<string | null>(null);
   const [copiado, setCopiado] = useState<string | null>(null);
   const [modoBloqueo, setModoBloqueo] = useState<"Fondo de pantalla" | "Widget de texto">("Fondo de pantalla");
@@ -117,7 +120,8 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
             </button>
           ))}
         </div>
-        <p className="pie-ajustes">Hecha con ganas, gratis y sin publicidad.</p>
+        <p className="pie-ajustes" onClick={() => setToques((t) => t + 1)}>Hecha con ganas, gratis y sin publicidad.</p>
+        {toques >= 3 && <Diagnostico />}
       </div>
     );
   }
@@ -210,8 +214,14 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
         </label>
         {WORKER_URL && <img className="vista-previa" src={urlWallpaper(prefs)} alt="Vista previa del wallpaper de hoy" />}
         <button className="boton secundario" onClick={() => void copiar("link", urlWallpaper(prefs))}><IconCopy size={18} stroke={1.8} /> {copiado === "link" ? "Copiado" : "Copiar mi link"}</button>
-        <a className="boton" href={ATAJO_URL || undefined} target="_blank" rel="noreferrer"><IconBolt size={18} stroke={1.8} /> Instalar atajo</a>
-        <GuiaAtajo />
+        {ATAJO_URL ? (
+          <>
+            <a className="boton" href={ATAJO_URL} target="_blank" rel="noreferrer"><IconBolt size={18} stroke={1.8} /> Instalar atajo</a>
+            <GuiaAtajo />
+          </>
+        ) : (
+          <GuiaCrearAtajo />
+        )}
         <p className="aviso">Si cambiás tus temas o el estilo, volvé a copiar el link y pegalo en el atajo.</p>
       </section>
       ) : (

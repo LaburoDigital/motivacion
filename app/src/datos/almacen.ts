@@ -8,6 +8,8 @@ export interface Preferencias {
   fondo: "auto" | PackId;
   letra: string;
   icono: string;
+  /** Ya vio la bienvenida de la primera vez. */
+  bienvenida: boolean;
   soloFondosFavoritos: boolean;
   fondosFavoritos: string[];
   zonaHoraria: string;
@@ -49,6 +51,7 @@ const prefsDefault = (): Preferencias => ({
   fondo: "auto",
   letra: "playfair",
   icono: "llama",
+  bienvenida: false,
   soloFondosFavoritos: false,
   fondosFavoritos: [],
   zonaHoraria: Intl.DateTimeFormat().resolvedOptions().timeZone,
@@ -65,7 +68,9 @@ export const almacen = {
   guardarEstado: (e: EstadoFeed) => set("estado", e),
   leerPrefs: async () => {
     const { estiloVisual: _viejo, ...guardadas } = await leer<Partial<Preferencias> & { estiloVisual?: string }>("prefs", () => ({}));
-    return { ...prefsDefault(), ...guardadas };
+    // Quien ya usaba la app antes de que existiera la bienvenida no la ve.
+    const yaUsaba = Object.keys(guardadas).length > 0 && guardadas.bienvenida === undefined;
+    return { ...prefsDefault(), ...guardadas, ...(yaUsaba ? { bienvenida: true } : {}) };
   },
   guardarPrefs: (p: Preferencias) => set("prefs", p),
   leerRemotas: () => leer<Remotas>("remotas", () => ({ version: "", frases: [] })),

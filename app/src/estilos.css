@@ -30,7 +30,7 @@ h1 { font-family: "Fraunces", Georgia, serif; font-weight: 500; font-size: 32px;
 h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 12px; display: flex; align-items: center; gap: 8px; }
 
 /* La app ocupa toda la pantalla del iPhone, debajo de la barra de estado y del indicador de inicio. */
-.app { position: fixed; top: 0; left: 0; right: 0; height: var(--alto-app, 100dvh); overflow: hidden; }
+.app { position: fixed; inset: 0; overflow: hidden; }
 .contenido { position: absolute; inset: 0; overflow: hidden; }
 .pantalla { height: 100%; overflow-y: auto; overflow-x: hidden; padding: calc(env(safe-area-inset-top) + 20px) 18px calc(var(--nav-espacio) + 16px); }
 .cargando, .vacio { color: var(--tenue); text-align: center; padding: 56px 24px; line-height: 1.5; }
@@ -286,3 +286,27 @@ h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.0
 .celebracion-frase p { margin: 0; font-family: "Playfair Display", Georgia, serif; font-size: 20px; line-height: 1.35; }
 .celebracion-frase footer { margin-top: 8px; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--tenue); }
 .celebracion .boton { width: min(100%, 320px); }
+
+/* Bienvenida */
+.bienvenida {
+  position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; background: var(--fondo);
+  padding: calc(env(safe-area-inset-top) + 12px) 20px calc(env(safe-area-inset-bottom) + 20px); animation: fundido 260ms;
+}
+.bienvenida-arriba { display: grid; grid-template-columns: 54px 1fr 54px; align-items: center; min-height: 54px; }
+.puntos { display: flex; justify-content: center; gap: 8px; }
+.puntos span { width: 8px; height: 8px; border-radius: 999px; background: var(--superficie-2); transition: width 260ms var(--suave), background 200ms; }
+.puntos span.activo { width: 26px; background: var(--acento); }
+.bienvenida-paso { flex: 1; overflow-y: auto; padding-top: 18px; animation: subir 300ms var(--suave); }
+.bienvenida-paso h1 { font-size: 34px; margin-bottom: 8px; }
+.bienvenida-paso > .aviso { margin-bottom: 22px; }
+.bienvenida-centro { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.bienvenida-campana {
+  width: 120px; height: 120px; border-radius: 50%; display: grid; place-items: center; color: var(--acento); margin-bottom: 18px;
+  background: radial-gradient(circle, rgba(233, 180, 92, 0.18), transparent 70%); box-shadow: inset 0 0 0 1px rgba(233, 180, 92, 0.25);
+}
+.aviso-destacado { margin-top: 16px; color: var(--texto); background: var(--superficie); padding: 14px; border-radius: 16px; text-align: left; }
+.grilla-packs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.grilla-packs .pack { flex: none; width: auto; height: 150px; }
+.bienvenida-abajo { display: grid; gap: 10px; padding-top: 14px; }
+
+.diagnostico { margin: 14px 0 0; padding: 14px; border-radius: 14px; background: var(--superficie); color: var(--texto); font-size: 13px; line-height: 1.5; white-space: pre-wrap; user-select: text; -webkit-user-select: text; }
