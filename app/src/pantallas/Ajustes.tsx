@@ -285,7 +285,7 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
             {ATAJO_URL ? (
               <>
                 <a className="boton" href={ATAJO_URL} target="_blank" rel="noreferrer"><IconBolt size={18} stroke={1.8} /> Instalar atajo</a>
-                <p className="aviso">Tocá <b>Agregar atajo</b> y pegá tu link cuando te lo pida.</p>
+                <p className="aviso">Tocá <b>Agregar atajo</b>. Después abrilo en Atajos, tocá el <b>Texto</b> de arriba y reemplazá el link por el tuyo (el que copiaste en el paso 1). Tocá <b>▶︎</b> para probarlo.</p>
               </>
             ) : (
               <>
