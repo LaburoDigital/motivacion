@@ -75,3 +75,15 @@ test("'Mala traducción' solo aparece en frases de ZenQuotes", () => {
   fireEvent.click(screen.getByText(/Mala traducción/));
   expect(api.marcarMala).toHaveBeenCalledWith("z-1");
 });
+
+test("con rachas activas muestra el contador y al tocarlo abre las rachas", () => {
+  const onAbrirRachas = vi.fn();
+  render(<Inicio api={apiFalsa()} racha={{ dias: 12 }} onAbrirRachas={onAbrirRachas} />);
+  fireEvent.click(screen.getByRole("button", { name: "Tu racha: 12 días" }));
+  expect(onAbrirRachas).toHaveBeenCalled();
+});
+
+test("sin rachas no muestra el contador", () => {
+  render(<Inicio api={apiFalsa()} />);
+  expect(screen.queryByRole("button", { name: /Tu racha/ })).toBeNull();
+});

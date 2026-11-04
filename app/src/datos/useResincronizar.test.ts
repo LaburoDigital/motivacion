@@ -31,3 +31,13 @@ test("con notificaciones apagadas no reenvía nada", () => {
   rerender({ p: prefs({ temas: ["calma"], notificaciones: apagadas }) });
   expect(activarNotificaciones).not.toHaveBeenCalled();
 });
+
+test("si cambia la racha con notificaciones activas, manda solo números al Worker", () => {
+  const rachaGym = { id: "a", nombre: "Sin pajas", tipo: "dejar" as const, inicio: "2026-11-01", marcas: [], record: 0, hitosVistos: [] };
+  const base = { activas: true, hora: "21:00", hoy: "2026-11-03", lista: [rachaGym] };
+  const { rerender } = renderHook(({ r }) => useResincronizarNotificaciones(prefs({ temas: ["gym"] }), r), { initialProps: { r: null as typeof base | null } });
+  rerender({ r: base });
+  const cfg = (activarNotificaciones as unknown as { mock: { calls: [Record<string, unknown>][] } }).mock.calls[0][0];
+  expect(cfg.racha).toEqual({ hora: "21:00", dias: 2, fecha: "2026-11-03", crece: true });
+  expect(JSON.stringify(cfg)).not.toContain("pajas");
+});

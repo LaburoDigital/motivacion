@@ -1,11 +1,22 @@
-import { IconApps, IconBell, IconBolt, IconCopy, IconLock } from "@tabler/icons-react";
+import { IconBolt, IconChevronLeft, IconCopy, IconExternalLink } from "@tabler/icons-react";
 import { useState } from "react";
 import { ATAJO_URL, WORKER_URL } from "../config";
+import {
+  DibujoBloqueo, DibujoFondos, DibujoIcono, DibujoNotificaciones, DibujoRachas, DibujoTemas,
+} from "../componentes/Dibujos";
 import { GuiaAtajo } from "../componentes/GuiaAtajo";
+import { Pestanas } from "../componentes/Pestanas";
 import type { Preferencias, PrefsNotificaciones } from "../datos/almacen";
 import { activarNotificaciones, desactivarNotificaciones, type ResultadoActivar } from "../datos/notificaciones";
 import type { FrasesApi } from "../datos/useFrases";
+import { avisoDeRacha } from "../datos/useResincronizar";
+import type { RachasApi } from "../rachas/useRachas";
 import { ICONOS_APP, aplicarIcono, urlIcono } from "../visual/iconos";
+import { scriptWidget } from "../visual/widget";
+
+type Vista = "notificaciones" | "rachas" | "bloqueo" | "icono";
+
+const SCRIPTABLE_URL = "https://apps.apple.com/app/scriptable/id1405459188";
 
 const MENSAJES: Record<Exclude<ResultadoActivar, "ok">, string> = {
   "sin-soporte": "Instalá la app en tu pantalla de inicio para recibir notificaciones (iOS 16.4 o más).",
@@ -39,9 +50,18 @@ export function urlWallpaper(prefs: Preferencias): string {
   return `${WORKER_URL}/wallpaper?${q}`;
 }
 
-export function Ajustes({ api }: { api: FrasesApi }) {
+interface Props {
+  api: FrasesApi;
+  rachas?: RachasApi;
+  onAbrirRachas?: () => void;
+  onIrATemas?: () => void;
+}
+
+export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
+  const [vista, setVista] = useState<Vista | null>(null);
   const [aviso, setAviso] = useState<string | null>(null);
-  const [copiado, setCopiado] = useState(false);
+  const [copiado, setCopiado] = useState<string | null>(null);
+  const [modoBloqueo, setModoBloqueo] = useState<"Fondo de pantalla" | "Widget de texto">("Fondo de pantalla");
   const prefs = api.prefs;
   if (!prefs) return null;
   const n = prefs.notificaciones;
@@ -52,7 +72,7 @@ export function Ajustes({ api }: { api: FrasesApi }) {
     api.setPrefs({ notificaciones: nuevo });
     // Si ya estaban activas, reenviamos la config al Worker con los horarios nuevos.
     if (nuevo.activas && "activas" in cambio === false && nuevo.desde < nuevo.hasta) {
-      await activarNotificaciones({ ...nuevo, temas: prefs.temas, zona: prefs.zonaHoraria });
+      await activarNotificaciones({ ...nuevo, temas: prefs.temas, zona: prefs.zonaHoraria, racha: avisoDeRacha(rachas ?? null) });
     }
   };
 
@@ -65,23 +85,56 @@ export function Ajustes({ api }: { api: FrasesApi }) {
     }
     const r = await activarNotificaciones({
       cantidad: n.cantidad, cadaHoras: n.cadaHoras, desde: n.desde, hasta: n.hasta, temas: prefs.temas, zona: prefs.zonaHoraria,
+      racha: avisoDeRacha(rachas ?? null),
     });
     if (r === "ok") api.setPrefs({ notificaciones: { ...n, activas: true } });
     else setAviso(MENSAJES[r]);
   };
 
-  const copiar = async () => {
-    await navigator.clipboard.writeText(urlWallpaper(prefs));
-    setCopiado(true);
-    setTimeout(() => setCopiado(false), 2000);
+  const copiar = async (que: string, texto: string) => {
+    await navigator.clipboard.writeText(texto);
+    setCopiado(que);
+    setTimeout(() => setCopiado(null), 2000);
+  };
+
+  if (!vista) {
+    const tarjetas: { id: string; titulo: string; dibujo: JSX.Element; accion: () => void; ancha?: boolean }[] = [
+      { id: "temas", titulo: "Temas que seguís", dibujo: <DibujoTemas />, accion: () => onIrATemas?.() },
+      { id: "fondos", titulo: "Fondos y letra", dibujo: <DibujoFondos />, accion: () => onIrATemas?.() },
+      { id: "notificaciones", titulo: "Notificaciones", dibujo: <DibujoNotificaciones />, accion: () => setVista("notificaciones") },
+      ...(rachas ? [{ id: "rachas", titulo: "Rachas", dibujo: <DibujoRachas />, accion: () => setVista("rachas") }] : []),
+      { id: "bloqueo", titulo: "Pantalla bloqueada", dibujo: <DibujoBloqueo />, accion: () => setVista("bloqueo") },
+      { id: "icono", titulo: "Ícono de la app", dibujo: <DibujoIcono />, accion: () => setVista("icono") },
+    ];
+    return (
+      <div className="pantalla">
+        <h1>Ajustes</h1>
+        <div className="grilla-ajustes">
+          {tarjetas.map((t) => (
+            <button key={t.id} className="tarjeta-ajuste" aria-label={t.titulo} onClick={t.accion}>
+              <span className="tarjeta-dibujo">{t.dibujo}</span>
+              <span className="tarjeta-titulo">{t.titulo}</span>
+            </button>
+          ))}
+        </div>
+        <p className="pie-ajustes">Hecha con ganas, gratis y sin publicidad.</p>
+      </div>
+    );
+  }
+
+  const titulos: Record<Vista, string> = {
+    notificaciones: "Notificaciones", rachas: "Rachas", bloqueo: "Pantalla bloqueada", icono: "Ícono de la app",
   };
 
   return (
     <div className="pantalla">
-      <h1>Ajustes</h1>
+      <div className="cabeza-sub">
+        <button className="accion" aria-label="Volver" onClick={() => setVista(null)}><IconChevronLeft size={22} stroke={1.8} /></button>
+        <h1>{titulos[vista]}</h1>
+      </div>
 
+      {vista === "notificaciones" && (
       <section className="seccion">
-        <h2><IconBell size={20} stroke={1.7} /> Notificaciones</h2>
         <label className="fila">
           Recibir notificaciones
           <input
@@ -115,9 +168,37 @@ export function Ajustes({ api }: { api: FrasesApi }) {
         {aviso && <p className="aviso">{aviso}</p>}
         {horarioValido && <p className="aviso">{cuantasPorDia(n)} notificaciones por día. La primera es siempre tu frase del día.</p>}
       </section>
+      )}
 
+      {vista === "rachas" && rachas && (
+        <section className="seccion">
+          <label className="fila">
+            Activar rachas
+            <input type="checkbox" checked={rachas.activas} onChange={(e) => rachas.setActivas(e.target.checked)} />
+          </label>
+          {rachas.activas && (
+            <label className="fila">
+              Hora del aviso de racha
+              <input type="time" step={900} value={rachas.hora} onChange={(e) => rachas.setHora(e.target.value)} />
+            </label>
+          )}
+          <button className="boton secundario" onClick={onAbrirRachas}>
+            Ver mis rachas{rachas.lista.length ? ` (${rachas.lista.length})` : ""}
+          </button>
+          <p className="aviso">
+            {n.activas
+              ? "Todos los días a esa hora te llega un aviso para que no cortes tu racha. Nunca dice el nombre."
+              : "Activá las notificaciones para recibir el aviso diario de tu racha."}
+          </p>
+        </section>
+      )}
+
+      {vista === "bloqueo" && (
+      <>
+      <Pestanas opciones={["Fondo de pantalla", "Widget de texto"] as const} actual={modoBloqueo} onCambiar={setModoBloqueo} />
+      {modoBloqueo === "Fondo de pantalla" ? (
       <section className="seccion">
-        <h2><IconLock size={20} stroke={1.7} /> Pantalla bloqueada</h2>
+        <p className="aviso">Todas las mañanas tu fondo de pantalla bloqueada cambia a la frase del día, grande y con foto.</p>
         <label className="fila">
           Estilo
           <select
@@ -128,13 +209,33 @@ export function Ajustes({ api }: { api: FrasesApi }) {
           </select>
         </label>
         {WORKER_URL && <img className="vista-previa" src={urlWallpaper(prefs)} alt="Vista previa del wallpaper de hoy" />}
-        <button className="boton secundario" onClick={() => void copiar()}><IconCopy size={18} stroke={1.8} /> {copiado ? "Copiado" : "Copiar mi link"}</button>
+        <button className="boton secundario" onClick={() => void copiar("link", urlWallpaper(prefs))}><IconCopy size={18} stroke={1.8} /> {copiado === "link" ? "Copiado" : "Copiar mi link"}</button>
         <a className="boton" href={ATAJO_URL || undefined} target="_blank" rel="noreferrer"><IconBolt size={18} stroke={1.8} /> Instalar atajo</a>
         <GuiaAtajo />
         <p className="aviso">Si cambiás tus temas o el estilo, volvé a copiar el link y pegalo en el atajo.</p>
       </section>
+      ) : (
       <section className="seccion">
-        <h2><IconApps size={20} stroke={1.7} /> Ícono de la app</h2>
+        <p className="aviso">Tu fondo queda igual: la frase del día aparece en texto en un widget debajo del reloj. En el widget chico entran unas 3 líneas, así que las frases largas se cortan.</p>
+        <ol className="guia">
+          <li>Bajá la app gratis <strong>Scriptable</strong>.</li>
+          <li>Tocá <strong>Copiar código del widget</strong>.</li>
+          <li>En Scriptable tocá <strong>+</strong>, pegá el código y ponele de nombre <strong>Frase del día</strong>.</li>
+          <li>Mantené apretada la pantalla bloqueada → <strong>Personalizar</strong> → tocá la zona de widgets → <strong>Scriptable</strong>.</li>
+          <li>Tocá el widget, elegí el script <strong>Frase del día</strong> y listo.</li>
+        </ol>
+        <a className="boton secundario" href={SCRIPTABLE_URL} target="_blank" rel="noreferrer"><IconExternalLink size={18} stroke={1.8} /> Bajar Scriptable</a>
+        <button className="boton" onClick={() => void copiar("widget", scriptWidget(prefs, WORKER_URL))}>
+          <IconCopy size={18} stroke={1.8} /> {copiado === "widget" ? "Copiado" : "Copiar código del widget"}
+        </button>
+        <p className="aviso">También funciona como widget en la pantalla de inicio, con fondo oscuro y la frase completa.</p>
+      </section>
+      )}
+      </>
+      )}
+
+      {vista === "icono" && (
+      <section className="seccion">
         <div className="iconos-app">
           {ICONOS_APP.map((i) => (
             <button
@@ -151,6 +252,7 @@ export function Ajustes({ api }: { api: FrasesApi }) {
         </div>
         <p className="aviso">Para ver el ícono nuevo, borrá la app de la pantalla de inicio y volvé a agregarla desde Safari. Tus frases y favoritos no se pierden.</p>
       </section>
+      )}
     </div>
   );
 }

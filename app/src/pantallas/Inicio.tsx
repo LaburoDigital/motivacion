@@ -1,3 +1,4 @@
+import { IconFlame } from "@tabler/icons-react";
 import { useCallback, useEffect, useState } from "react";
 import type { Frase } from "shared";
 import { compartirFrase } from "../compartir/imagenFrase";
@@ -11,11 +12,14 @@ import { letraPorId } from "../visual/letras";
 interface Props {
   api: FrasesApi;
   fraseInicial?: string | null;
+  /** La racha más larga, si las rachas están prendidas. */
+  racha?: { dias: number } | null;
+  onAbrirRachas?: () => void;
 }
 
 const LOTE = 10;
 
-export function Inicio({ api, fraseInicial }: Props) {
+export function Inicio({ api, fraseInicial, racha, onAbrirRachas }: Props) {
   const { cargado, fraseDelDia, todas, siguientes, prefs, estado } = api;
   const [feed, setFeed] = useState<Frase[]>([]);
   const [cambios, setCambios] = useState<Record<string, number>>({});
@@ -43,6 +47,11 @@ export function Inicio({ api, fraseInicial }: Props) {
 
   return (
     <div className="feed">
+      {racha && (
+        <button className="chip-racha" aria-label={`Tu racha: ${racha.dias} ${racha.dias === 1 ? "día" : "días"}`} onClick={onAbrirRachas}>
+          <IconFlame size={18} stroke={1.8} /> {racha.dias}
+        </button>
+      )}
       {feed.map((frase, i) => (
         <TarjetaFrase
           key={frase.id}

@@ -2,12 +2,17 @@ import { useEffect, useState } from "react";
 import { BarraNav, type Seccion } from "./componentes/BarraNav";
 import { CartelInstalar } from "./componentes/CartelInstalar";
 import { VistaPrevia } from "./componentes/VistaPrevia";
+import { Celebracion } from "./rachas/Celebracion";
+import { PanelRachas } from "./rachas/PanelRachas";
+import { diasRacha, hitoNuevo } from "./rachas/logica";
+import { useRachas } from "./rachas/useRachas";
 import { useFrases } from "./datos/useFrases";
 import { useResincronizarNotificaciones } from "./datos/useResincronizar";
 import { Ajustes } from "./pantallas/Ajustes";
 import { Favoritos } from "./pantallas/Favoritos";
 import { Inicio } from "./pantallas/Inicio";
 import { Temas } from "./pantallas/Temas";
+import { fraseDelDia } from "shared";
 import { fondoPara } from "./visual/fondos";
 import { aplicarIcono } from "./visual/iconos";
 import { letraPorId } from "./visual/letras";
@@ -26,7 +31,14 @@ export default function App() {
     history.replaceState(null, "", location.pathname);
   };
 
-  useResincronizarNotificaciones(api.prefs);
+  const rachas = useRachas(api.prefs?.zonaHoraria ?? Intl.DateTimeFormat().resolvedOptions().timeZone);
+  const [verRachas, setVerRachas] = useState(false);
+  const mayor = rachas.activas && rachas.lista.length ? Math.max(...rachas.lista.map((r) => diasRacha(r, rachas.hoy))) : null;
+  const festejo = rachas.activas
+    ? rachas.lista.map((r) => ({ r, hito: hitoNuevo(r, rachas.hoy) })).find((x) => x.hito !== null)
+    : undefined;
+
+  useResincronizarNotificaciones(api.prefs, rachas.activas ? rachas : null);
   const icono = api.prefs?.icono;
   useEffect(() => {
     if (icono) aplicarIcono(icono);
@@ -35,13 +47,24 @@ export default function App() {
   return (
     <div className="app">
       <main className="contenido">
-        {seccion === "inicio" && <Inicio api={api} fraseInicial={fraseInicial} />}
+        {seccion === "inicio" && (
+          <Inicio api={api} fraseInicial={fraseInicial} racha={mayor === null ? null : { dias: mayor }} onAbrirRachas={() => setVerRachas(true)} />
+        )}
         {seccion === "temas" && <Temas api={api} />}
         {seccion === "favoritos" && <Favoritos api={api} />}
-        {seccion === "ajustes" && <Ajustes api={api} />}
+        {seccion === "ajustes" && <Ajustes api={api} rachas={rachas} onAbrirRachas={() => setVerRachas(true)} onIrATemas={() => setSeccion("temas")} />}
       </main>
       {previa && api.cargado && api.prefs && (
         <VistaPrevia frase={previa} estilo={{ foto: fondoPara(previa, api.prefs), letra: letraPorId(api.prefs.letra) }} onCerrar={cerrarPrevia} />
+      )}
+      {verRachas && <PanelRachas rachas={rachas} onCerrar={() => setVerRachas(false)} />}
+      {festejo && festejo.hito !== null && api.cargado && (
+        <Celebracion
+          nombre={festejo.r.nombre}
+          hito={festejo.hito}
+          frase={fraseDelDia(api.todas, `${rachas.hoy}|${festejo.r.id}`, ["superacion", "disciplina"])}
+          onSeguir={() => rachas.festejar(festejo.r.id, festejo.hito!)}
+        />
       )}
       <CartelInstalar />
       <BarraNav actual={seccion} onCambiar={setSeccion} />

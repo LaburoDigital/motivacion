@@ -1,5 +1,6 @@
 import { get, set } from "idb-keyval";
 import type { CategoriaId, EstadoFeed, Frase, PackId } from "shared";
+import type { Racha } from "../rachas/logica";
 
 export interface Preferencias {
   temas: CategoriaId[];
@@ -26,6 +27,13 @@ export interface PrefsNotificaciones {
 export interface Remotas {
   version: string;
   frases: Frase[];
+}
+
+export interface ConfigRachas {
+  activas: boolean;
+  /** Hora del aviso diario ("HH:MM"). */
+  hora: string;
+  lista: Racha[];
 }
 
 export interface FraseDelDiaGuardada {
@@ -64,4 +72,6 @@ export const almacen = {
   guardarRemotas: (r: Remotas) => set("remotas", r),
   leerFraseDelDia: () => leer<FraseDelDiaGuardada | null>("fraseDelDia", () => null),
   guardarFraseDelDia: (v: FraseDelDiaGuardada) => set("fraseDelDia", v),
+  leerRachas: () => leer<ConfigRachas>("rachas", () => ({ activas: false, hora: "21:00", lista: [] })),
+  guardarRachas: (c: ConfigRachas) => set("rachas", c),
 };

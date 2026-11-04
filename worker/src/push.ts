@@ -13,9 +13,26 @@ export interface Suscripcion {
   zona: string;
   /** Si está, una notificación cada N horas (1 a 6) en vez de `cantidad` por día. */
   cadaHoras?: number;
+  /** Aviso diario de racha: solo números, nunca el nombre. */
+  racha?: AvisoRacha;
   /** "<fecha>|<índice>" de la última notificación mandada, para no repetirla. */
   enviado?: string;
 }
+
+export interface AvisoRacha {
+  hora: string;
+  dias: number;
+  /** Fecha en que se calcularon los días. */
+  fecha: string;
+  /** Si los días siguen sumando solos (racha de "dejar algo"). */
+  crece: boolean;
+}
+
+/** Índice reservado para el aviso de racha (los de frases van de 0 en adelante). */
+export const INDICE_RACHA = 99;
+
+const FECHA = /^\d{4}-\d{2}-\d{2}$/;
+const diasEntre = (desde: string, hasta: string) => Math.round((Date.parse(hasta) - Date.parse(desde)) / 86_400_000);
 
 export const claveSuscripcion = (endpoint: string) => `sub:${fnv1a(endpoint).toString(16)}`;
 
@@ -27,6 +44,7 @@ interface EntradaIndice {
   hasta: string;
   zona: string;
   cadaHoras?: number;
+  rachaHora?: string;
 }
 
 async function leerIndice(env: Env): Promise<EntradaIndice[]> {
@@ -40,6 +58,7 @@ export async function guardarSuscripcion(env: Env, sub: Suscripcion): Promise<vo
   await env.KV.put(clave, JSON.stringify(previa?.enviado ? { ...sub, enviado: previa.enviado } : sub));
   const entrada: EntradaIndice = { clave, cantidad: sub.cantidad, desde: sub.desde, hasta: sub.hasta, zona: sub.zona };
   if (sub.cadaHoras) entrada.cadaHoras = sub.cadaHoras;
+  if (sub.racha) entrada.rachaHora = sub.racha.hora;
   const indice = (await leerIndice(env)).filter((e) => e.clave !== clave);
   await env.KV.put("subs", JSON.stringify([...indice, entrada]));
 }
@@ -61,8 +80,13 @@ export function validarSuscripcion(cuerpo: unknown): Suscripcion | null {
   if (aMinutos(c!.desde!) >= aMinutos(c!.hasta!)) return null;
   const cadaHoras = c!.cadaHoras;
   if (cadaHoras !== undefined && cadaHoras !== null && (!Number.isInteger(cadaHoras) || cadaHoras < 1 || cadaHoras > 6)) return null;
+  const r = c!.racha;
+  if (r !== undefined && r !== null) {
+    if (!HORA.test(r.hora ?? "") || !Number.isInteger(r.dias) || r.dias < 0 || !FECHA.test(r.fecha ?? "") || typeof r.crece !== "boolean") return null;
+  }
   return {
     ...(cadaHoras ? { cadaHoras } : {}),
+    ...(r ? { racha: { hora: r.hora, dias: r.dias, fecha: r.fecha, crece: r.crece } } : {}),
     subscription: { endpoint: s.endpoint, expirationTime: s.expirationTime ?? null, keys: { p256dh: s.keys.p256dh, auth: s.keys.auth } },
     cantidad: c!.cantidad!,
     desde: c!.desde!,
@@ -80,6 +104,17 @@ export interface MensajePush {
 
 /** La primera del día es la Clave del día; las demás, una buena o clave de sus temas. */
 export async function mensajePara(env: Env, sub: Suscripcion, indice: number, ahora: Date): Promise<MensajePush> {
+  if (indice === INDICE_RACHA && sub.racha) {
+    const r = sub.racha;
+    const dias = r.dias + (r.crece ? Math.max(0, diasEntre(r.fecha, fechaLocal(ahora, sub.zona))) : 0);
+    const pool = (await destacadasServidor(env)).filter((f) => f.categoria === "superacion" || f.categoria === "disciplina");
+    const frase = pool[Math.floor(Math.random() * pool.length)];
+    return {
+      titulo: `🔥 ${dias} ${dias === 1 ? "día" : "días"} de racha`,
+      cuerpo: `No la cortes hoy. ${frase.texto}`,
+      fraseId: frase.id,
+    };
+  }
   let frase = indice === 0 ? await fraseDelDiaPara(env, sub.temas, sub.zona, ahora) : null;
   if (!frase) {
     const buenas = await destacadasServidor(env);
@@ -99,10 +134,12 @@ export async function mensajePara(env: Env, sub: Suscripcion, indice: number, ah
 export async function enviarNotificaciones(env: Env, ahora = new Date()): Promise<void> {
   const grupos = new Map<number, { entrada: EntradaIndice; indice: number; transcurridos: number }[]>();
   for (const entrada of await leerIndice(env)) {
-    const horarios = horariosDelDia(entrada.cantidad, entrada.desde, entrada.hasta, entrada.cadaHoras);
-    const indice = tocaAhora(horarios, ahora, entrada.zona);
-    if (indice === null) continue;
-    const transcurridos = minutosDesde(horarios[indice], ahora, entrada.zona);
+    const turnos = horariosDelDia(entrada.cantidad, entrada.desde, entrada.hasta, entrada.cadaHoras).map((h, i) => ({ h, i }));
+    if (entrada.rachaHora) turnos.push({ h: entrada.rachaHora, i: INDICE_RACHA });
+    const posicion = tocaAhora(turnos.map((t) => t.h), ahora, entrada.zona);
+    if (posicion === null) continue;
+    const indice = turnos[posicion].i;
+    const transcurridos = minutosDesde(turnos[posicion].h, ahora, entrada.zona);
     const inicio = Math.floor(ahora.getTime() / 60000) - transcurridos;
     grupos.set(inicio, [...(grupos.get(inicio) ?? []), { entrada, indice, transcurridos }]);
   }

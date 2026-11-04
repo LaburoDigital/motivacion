@@ -8,6 +8,8 @@ export interface ConfigNotificaciones {
   hasta: string;
   temas: CategoriaId[];
   zona: string;
+  /** Aviso diario de racha: solo hora y números. */
+  racha?: { hora: string; dias: number; fecha: string; crece: boolean } | null;
 }
 
 export type ResultadoActivar = "ok" | "sin-soporte" | "denegado" | "error";

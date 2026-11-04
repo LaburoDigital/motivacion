@@ -225,3 +225,43 @@ describe("cada N horas", () => {
     expect(enviar).toHaveBeenCalledTimes(1);
   });
 });
+
+describe("aviso de racha", () => {
+  const racha = { hora: "21:00", dias: 12, fecha: "2026-11-01", crece: true };
+
+  test("acepta la racha y guarda la hora en el índice", async () => {
+    const e = env();
+    expect((await post(e, config({ racha }))).status).toBe(201);
+    const [entrada] = (await e.KV.get("subs", "json")) as { rachaHora?: string }[];
+    expect(entrada.rachaHora).toBe("21:00");
+  });
+
+  test("rechaza una racha mal formada", async () => {
+    expect((await post(env(), config({ racha: { ...racha, hora: "25:00" } }))).status).toBe(400);
+    expect((await post(env(), config({ racha: { ...racha, dias: -1 } }))).status).toBe(400);
+  });
+
+  test("a la hora del aviso manda la racha con los días al día de hoy", async () => {
+    const enviados: unknown[] = [];
+    vi.stubGlobal("fetch", vi.fn(async (_u: string, init: RequestInit) => { enviados.push(init); return new Response(null, { status: 201 }); }));
+    const e = env();
+    await post(e, config({ racha, desde: "08:00", hasta: "20:00" }));
+    await enviarNotificaciones(e, new Date("2026-11-04T00:00:00Z")); // 21:00 del 3/11 en Argentina
+    expect(enviados).toHaveLength(1);
+  });
+
+  test("el mensaje de racha suma los días que pasaron y no lleva nombre", async () => {
+    const { mensajePara } = await import("../src/push");
+    const sub = { ...config({ racha }), racha } as never;
+    const m = await mensajePara(envFalso(), sub, 99, new Date("2026-11-04T00:00:00Z"));
+    expect(m.titulo).toContain("14 días");
+    expect(m.cuerpo.length).toBeGreaterThan(10);
+  });
+
+  test("una racha que no crece sola mantiene los días", async () => {
+    const { mensajePara } = await import("../src/push");
+    const quieta = { ...racha, crece: false };
+    const m = await mensajePara(envFalso(), { ...config({ racha: quieta }), racha: quieta } as never, 99, new Date("2026-11-04T00:00:00Z"));
+    expect(m.titulo).toContain("12 días");
+  });
+});
