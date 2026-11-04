@@ -32,3 +32,10 @@ test("la foto del wallpaper es la misma que la app elige en Automático", async 
   expect(PACKS_POR_CATEGORIA.gym).toContain(foto.pack);
   expect(FOTOS).toContainEqual(foto);
 });
+
+test("los directorios de wallpapers incluyen uno por grupo de fotos", async () => {
+  const { directoriosWallpaper } = await import("../render/wallpaper");
+  const dirs = directoriosWallpaper().map((d) => d.dir);
+  expect(dirs).toEqual(expect.arrayContaining(["negro", "degradado", "foto", "foto-ciudad", "foto-gym", "foto-estrellas"]));
+  expect(dirs).toHaveLength(3 + 9);
+});

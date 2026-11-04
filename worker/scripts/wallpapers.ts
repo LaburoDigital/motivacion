@@ -3,8 +3,7 @@
 // LIMITE=5 genera solo las primeras 5 frases (para probar).
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import type { Frase } from "shared";
-import { clavesParaRenderizar, generarWallpaper } from "../render/wallpaper";
-import { ESTILOS_WALLPAPER } from "../src/wallpaper";
+import { clavesParaRenderizar, directoriosWallpaper, generarWallpaper } from "../render/wallpaper";
 
 const raiz = new URL("../../", import.meta.url);
 const curadas = JSON.parse(readFileSync(new URL("curadas/frases.json", raiz), "utf8")) as Frase[];
@@ -12,15 +11,16 @@ const limite = Number(process.env.LIMITE) || Infinity;
 const frases = clavesParaRenderizar(curadas).slice(0, limite);
 
 let hechas = 0;
-for (const estilo of ESTILOS_WALLPAPER) {
-  const dir = new URL(`app/dist/wallpapers/${estilo}/`, raiz);
+const carpetas = directoriosWallpaper();
+for (const { dir: nombre, estilo, modo } of carpetas) {
+  const dir = new URL(`app/dist/wallpapers/${nombre}/`, raiz);
   mkdirSync(dir, { recursive: true });
   for (const frase of frases) {
     const archivo = new URL(`${frase.id}.jpg`, dir);
     if (existsSync(archivo) && !process.env.FORZAR) continue;
-    writeFileSync(archivo, await generarWallpaper(frase, estilo));
+    writeFileSync(archivo, await generarWallpaper(frase, estilo, 1179, 2556, undefined, modo));
     hechas++;
   }
-  console.log(`${estilo}: listo`);
+  console.log(`${nombre}: listo`);
 }
-console.log(`${hechas} wallpapers generados (${frases.length} frases × ${ESTILOS_WALLPAPER.length} estilos)`);
+console.log(`${hechas} wallpapers generados (${frases.length} frases × ${carpetas.length} carpetas)`);

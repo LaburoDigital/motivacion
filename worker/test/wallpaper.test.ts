@@ -45,3 +45,20 @@ test("una curada con imagen generada se usa", async () => {
   const res = await pedir(`temas=gym&zona=${ZONA}&estilo=negro`, { curadas });
   expect(res.headers.get("location")).toMatch(/\/wallpapers\/negro\/c-\d{4}\.jpg$/);
 });
+
+test("estilo foto con un grupo elegido lleva a las imágenes de ese grupo", async () => {
+  const res = await pedir(`temas=gym&zona=${ZONA}&estilo=foto&fondo=ciudad`);
+  expect(res.headers.get("location")).toMatch(/\/wallpapers\/foto-ciudad\/b-\d{4}\.jpg$/);
+});
+
+test("estilo foto en Automático o con un grupo inválido usa la foto según el tema", async () => {
+  for (const fondo of ["auto", "cualquiera", ""]) {
+    const res = await pedir(`temas=gym&zona=${ZONA}&estilo=foto&fondo=${fondo}`);
+    expect(res.headers.get("location")).toMatch(/\/wallpapers\/foto\/b-\d{4}\.jpg$/);
+  }
+});
+
+test("los estilos sin foto ignoran el grupo", async () => {
+  const res = await pedir(`zona=${ZONA}&estilo=negro&fondo=ciudad`);
+  expect(res.headers.get("location")).toMatch(/\/wallpapers\/negro\//);
+});

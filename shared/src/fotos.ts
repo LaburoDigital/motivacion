@@ -1,4 +1,5 @@
 // Fotos de Unsplash (licencia libre: uso gratis, sin atribución obligatoria), elegidas a mano.
+import { fnv1a } from "./hash";
 import type { CategoriaId } from "./tipos";
 
 export type PackId = "ciudad" | "gym" | "boxeo" | "lluvia" | "ruta" | "montana" | "estrellas" | "neon" | "correr";
@@ -115,3 +116,14 @@ export const PACKS_POR_CATEGORIA: Record<CategoriaId, PackId[]> = {
 
 export const urlFotoUnsplash = (id: string, w: number, h: number) =>
   `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&crop=entropy&fm=jpg&q=75`;
+
+/**
+ * La foto de una frase: fija para cada frase, según "auto" (por su tema) o un grupo elegido.
+ * La usan la app y los wallpapers, así la pantalla bloqueada muestra la misma foto que el feed.
+ */
+export function fotoDeFrase(frase: { id: string; categoria: CategoriaId }, modo: "auto" | PackId, desplazamiento = 0): Foto {
+  const packs = modo === "auto" ? PACKS_POR_CATEGORIA[frase.categoria] : [modo];
+  const pool = FOTOS.filter((f) => packs.includes(f.pack));
+  const lista = pool.length ? pool : FOTOS;
+  return lista[(fnv1a(frase.id) + desplazamiento) % lista.length];
+}

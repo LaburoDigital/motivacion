@@ -4,16 +4,30 @@ import { createRequire } from "node:module";
 import { Resvg, initWasm } from "@resvg/resvg-wasm";
 import jpeg from "jpeg-js";
 import satori from "satori";
-import { FOTOS, FRASES_BASE, PACKS_POR_CATEGORIA, fnv1a, urlFotoUnsplash, type Foto, type Frase } from "shared";
+import { FRASES_BASE, PACKS, fotoDeFrase, urlFotoUnsplash, type Foto, type Frase, type PackId } from "shared";
 import type { EstiloWallpaper } from "../src/wallpaper";
 import { FUENTE_BASE64 } from "./fuente";
 import { calcularLayout } from "./layoutWallpaper";
 
 /** La misma foto que la app elige en "Automático" para esa frase. */
-export function fotoParaWallpaper(frase: Frase): Foto {
-  const packs = PACKS_POR_CATEGORIA[frase.categoria];
-  const pool = FOTOS.filter((f) => packs.includes(f.pack));
-  return pool[fnv1a(frase.id) % pool.length];
+export function fotoParaWallpaper(frase: Frase, modo: "auto" | PackId = "auto"): Foto {
+  return fotoDeFrase(frase, modo);
+}
+
+export interface DirectorioWallpaper {
+  dir: string;
+  estilo: EstiloWallpaper;
+  modo: "auto" | PackId;
+}
+
+/** Negro, degradado, foto en Automático y una carpeta de foto por cada grupo. */
+export function directoriosWallpaper(): DirectorioWallpaper[] {
+  return [
+    { dir: "negro", estilo: "negro", modo: "auto" },
+    { dir: "degradado", estilo: "degradado", modo: "auto" },
+    { dir: "foto", estilo: "foto", modo: "auto" },
+    ...PACKS.map((p) => ({ dir: `foto-${p.id}`, estilo: "foto" as const, modo: p.id })),
+  ];
 }
 
 const require = createRequire(import.meta.url);
@@ -36,16 +50,16 @@ const el = (type: string, style: Record<string, unknown>, children?: unknown) =>
 
 /** JPG con la frase legible debajo del reloj (el tercio de arriba queda libre). */
 export async function generarWallpaper(
-  frase: Frase, estilo: EstiloWallpaper, w = 1179, h = 2556, foto: BajarFoto = bajarFoto,
+  frase: Frase, estilo: EstiloWallpaper, w = 1179, h = 2556, foto: BajarFoto = bajarFoto, modo: "auto" | PackId = "auto",
 ): Promise<Uint8Array> {
   const { top, fontSize, maxWidth } = calcularLayout(frase.texto, w, h, !!frase.autor);
-  const imagen = estilo === "foto" ? await foto(`${urlFotoUnsplash(fotoParaWallpaper(frase).id, w, h)}&blur=25`) : null;
+  const imagen = estilo === "foto" ? await foto(`${urlFotoUnsplash(fotoParaWallpaper(frase, modo).id, w, h)}&blur=12`) : null;
   const fondo = estilo === "degradado" ? "linear-gradient(160deg, #0f0c29, #302b63 55%, #0b0b0f)" : "#000000";
 
   const capas: unknown[] = [];
   if (imagen) {
     capas.push({ type: "img", props: { src: imagen, width: w, height: h, style: { position: "absolute", top: 0, left: 0 } } });
-    capas.push(el("div", { position: "absolute", top: 0, left: 0, width: w, height: h, backgroundColor: "rgba(0,0,0,0.5)" }));
+    capas.push(el("div", { position: "absolute", top: 0, left: 0, width: w, height: h, backgroundColor: "rgba(0,0,0,0.45)" }));
   }
   capas.push(
     el(

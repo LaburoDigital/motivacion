@@ -60,3 +60,10 @@ describe("letras", () => {
     expect(letraPorId("no-existe")).toBe(LETRAS[0]);
   });
 });
+
+test("la app elige la misma foto que el fondo de pantalla bloqueada", async () => {
+  const { fotoDeFrase } = await import("shared");
+  const f = frase("b-0077", "disciplina");
+  expect(fondoPara(f, prefs())).toEqual(fotoDeFrase(f, "auto"));
+  expect(fondoPara(f, prefs({ fondo: "ciudad" }))).toEqual(fotoDeFrase(f, "ciudad"));
+});

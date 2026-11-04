@@ -1,4 +1,4 @@
-import { FOTOS, PACKS_POR_CATEGORIA, fnv1a, urlFotoUnsplash, type Foto, type Frase, type PackId } from "shared";
+import { FOTOS, PACKS_POR_CATEGORIA, fnv1a, fotoDeFrase, urlFotoUnsplash, type Foto, type Frase, type PackId } from "shared";
 import type { Preferencias } from "../datos/almacen";
 
 export type ModoFondo = "auto" | PackId;
@@ -20,6 +20,9 @@ export function poolDe(frase: Frase, prefs: Preferencias): Foto[] {
 
 /** La foto de una frase: fija para cada frase; `desplazamiento` pasa a la siguiente del mismo grupo. */
 export function fondoPara(frase: Frase, prefs: Preferencias, desplazamiento = 0): Foto {
+  if (!prefs.soloFondosFavoritos || !prefs.fondosFavoritos.some((id) => FOTOS.some((f) => f.id === id))) {
+    return fotoDeFrase(frase, prefs.fondo, desplazamiento);
+  }
   const pool = poolDe(frase, prefs);
   return pool[(fnv1a(frase.id) + desplazamiento) % pool.length];
 }

@@ -29,7 +29,7 @@ const MENSAJES: Record<Exclude<ResultadoActivar, "ok">, string> = {
 const ESTILOS_WP: { id: Preferencias["estiloWallpaper"]; nombre: string }[] = [
   { id: "negro", nombre: "Negro puro" },
   { id: "degradado", nombre: "Degradado oscuro" },
-  { id: "foto", nombre: "Foto oscurecida" },
+  { id: "foto", nombre: "Foto como en la app" },
 ];
 
 const FRECUENCIAS: { valor: string; nombre: string }[] = [
@@ -49,6 +49,7 @@ function cuantasPorDia(n: PrefsNotificaciones): number {
 
 export function urlWallpaper(prefs: Preferencias): string {
   const q = new URLSearchParams({ temas: prefs.temas.join(","), zona: prefs.zonaHoraria, estilo: prefs.estiloWallpaper });
+  if (prefs.estiloWallpaper === "foto") q.set("fondo", prefs.fondo);
   return `${WORKER_URL}/wallpaper?${q}`;
 }
 
@@ -222,7 +223,7 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
         ) : (
           <GuiaCrearAtajo />
         )}
-        <p className="aviso">Si cambiás tus temas o el estilo, volvé a copiar el link y pegalo en el atajo.</p>
+        <p className="aviso">Si cambiás tus temas, el estilo o tus fondos, volvé a copiar el link y pegalo en el atajo.</p>
       </section>
       ) : (
       <section className="seccion">

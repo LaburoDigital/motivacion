@@ -56,7 +56,7 @@ const prefsDefault = (): Preferencias => ({
   fondosFavoritos: [],
   zonaHoraria: Intl.DateTimeFormat().resolvedOptions().timeZone,
   notificaciones: { activas: false, cantidad: 3, cadaHoras: 2, desde: "08:00", hasta: "22:00" },
-  estiloWallpaper: "negro",
+  estiloWallpaper: "foto",
 });
 
 async function leer<T>(clave: string, porDefecto: () => T): Promise<T> {

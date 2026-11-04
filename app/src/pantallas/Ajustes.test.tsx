@@ -160,3 +160,15 @@ test("tocar tres veces el pie muestra las medidas de la pantalla", () => {
   expect(d).toContain("screen");
   expect(d).toContain("safe-bottom");
 });
+
+test("con el estilo foto, el link lleva tu grupo de fotos", async () => {
+  const writeText = vi.fn(async (_texto: string) => undefined);
+  Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText } });
+  const api = apiFalsa({ prefs: prefsCon({ estiloWallpaper: "foto", fondo: "ciudad" }) });
+  render(<Ajustes api={api} />);
+  abrir("Pantalla bloqueada");
+  expect(screen.getByRole("option", { name: "Foto como en la app" })).toBeTruthy();
+  fireEvent.click(screen.getByRole("button", { name: /Copiar mi link/ }));
+  await waitFor(() => expect(writeText).toHaveBeenCalled());
+  expect(new URL(writeText.mock.calls[0][0]).searchParams.get("fondo")).toBe("ciudad");
+});
