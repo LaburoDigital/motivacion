@@ -250,7 +250,8 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
             </button>
           ))}
         </div>
-        <p className="aviso">Para ver el ícono nuevo, borrá la app de la pantalla de inicio y volvé a agregarla desde Safari. Tus frases y favoritos no se pierden.</p>
+        <p className="aviso">Para ver el ícono nuevo hay que borrar la app de la pantalla de inicio y volver a agregarla desde Safari.</p>
+        <p className="error">Ojo: al borrar la app se borran tus likes, favoritos y rachas.</p>
       </section>
       )}
     </div>
