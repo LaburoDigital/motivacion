@@ -42,20 +42,30 @@ test("Temas que seguís lleva a la pestaña Temas", () => {
   expect(onIrATemas).toHaveBeenCalled();
 });
 
-test("con hasta antes que desde, el interruptor se deshabilita y muestra el error", () => {
-  const api = apiFalsa({ prefs: prefsCon({ notificaciones: { activas: false, cantidad: 3, cadaHoras: null, desde: "22:00", hasta: "08:00" } }) });
+test("con desde igual a hasta, el interruptor se deshabilita y muestra el error", () => {
+  const api = apiFalsa({ prefs: prefsCon({ notificaciones: { activas: false, cantidad: 3, cadaHoras: null, desde: "10:00", hasta: "10:00", dias: [0, 1, 2, 3, 4, 5, 6] } }) });
   render(<Ajustes api={api} />);
   abrir("Notificaciones");
   expect((screen.getByLabelText(/Recibir notificaciones/) as HTMLInputElement).disabled).toBe(true);
-  expect(screen.getByText(/tiene que ser antes/)).toBeTruthy();
+  expect(screen.getByText(/no pueden ser iguales/)).toBeTruthy();
 });
 
-test("cambiar la hora guarda la preferencia", () => {
+test("los botones de hora mueven media hora", () => {
   const api = apiFalsa();
   render(<Ajustes api={api} />);
   abrir("Notificaciones");
-  fireEvent.change(screen.getByLabelText("Desde"), { target: { value: "09:00" } });
-  expect(api.setPrefs).toHaveBeenCalledWith({ notificaciones: expect.objectContaining({ desde: "09:00" }) });
+  fireEvent.click(screen.getByRole("button", { name: "Desde: más tarde" }));
+  expect(api.setPrefs).toHaveBeenCalledWith({ notificaciones: expect.objectContaining({ desde: "08:30" }) });
+  fireEvent.click(screen.getByRole("button", { name: "Hasta: más temprano" }));
+  expect(api.setPrefs).toHaveBeenCalledWith({ notificaciones: expect.objectContaining({ hasta: "21:30" }) });
+});
+
+test("la hora da la vuelta por la medianoche", () => {
+  const api = apiFalsa({ prefs: prefsCon({ notificaciones: { activas: false, cantidad: 3, cadaHoras: null, desde: "08:00", hasta: "23:30", dias: [0, 1, 2, 3, 4, 5, 6] } }) });
+  render(<Ajustes api={api} />);
+  abrir("Notificaciones");
+  fireEvent.click(screen.getByRole("button", { name: "Hasta: más tarde" }));
+  expect(api.setPrefs).toHaveBeenCalledWith({ notificaciones: expect.objectContaining({ hasta: "00:00" }) });
 });
 
 test("sin soporte muestra cómo instalar la app", async () => {
@@ -63,24 +73,42 @@ test("sin soporte muestra cómo instalar la app", async () => {
   abrir("Notificaciones");
   fireEvent.click(screen.getByLabelText(/Recibir notificaciones/));
   await waitFor(() => expect(screen.getByText(/Instalá la app en tu pantalla de inicio/)).toBeTruthy());
-  expect(activarNotificaciones).toHaveBeenCalledWith(expect.objectContaining({ cantidad: 3, desde: "08:00", hasta: "22:00" }));
+  expect(activarNotificaciones).toHaveBeenCalledWith(expect.objectContaining({ cantidad: 8, desde: "08:00", hasta: "22:00" }));
 });
 
-test("por defecto la frecuencia es cada 2 horas y se manda al activar", async () => {
+test("cada 2 horas de 8 a 22 se muestra como 8 por día y se manda así al activar", async () => {
   render(<Ajustes api={apiFalsa()} />);
   abrir("Notificaciones");
-  expect((screen.getByLabelText("Frecuencia") as HTMLSelectElement).value).toBe("h2");
-  expect(screen.getByText(/8 notificaciones por día/)).toBeTruthy();
+  expect(screen.getByTestId("cantidad").textContent).toBe("8x");
   fireEvent.click(screen.getByLabelText(/Recibir notificaciones/));
-  await waitFor(() => expect(activarNotificaciones).toHaveBeenCalledWith(expect.objectContaining({ cadaHoras: 2 })));
+  await waitFor(() => expect(activarNotificaciones).toHaveBeenCalledWith(expect.objectContaining({ cantidad: 8, cadaHoras: null })));
 });
 
-test("elegir '3 por día' saca el cada N horas", () => {
+test("menos y más cambian la cantidad, entre 1 y 24", () => {
   const api = apiFalsa();
   render(<Ajustes api={api} />);
   abrir("Notificaciones");
-  fireEvent.change(screen.getByLabelText("Frecuencia"), { target: { value: "d3" } });
-  expect(api.setPrefs).toHaveBeenCalledWith({ notificaciones: expect.objectContaining({ cantidad: 3, cadaHoras: null }) });
+  fireEvent.click(screen.getByRole("button", { name: "Menos notificaciones" }));
+  expect(api.setPrefs).toHaveBeenCalledWith({ notificaciones: expect.objectContaining({ cantidad: 7, cadaHoras: null }) });
+});
+
+test("se eligen los días de la semana y no se pueden sacar todos", () => {
+  const api = apiFalsa({ prefs: prefsCon({ notificaciones: { activas: false, cantidad: 3, cadaHoras: null, desde: "08:00", hasta: "22:00", dias: [6] } }) });
+  render(<Ajustes api={api} />);
+  abrir("Notificaciones");
+  fireEvent.click(screen.getByRole("button", { name: "Domingo" }));
+  expect(api.setPrefs).toHaveBeenCalledWith({ notificaciones: expect.objectContaining({ dias: [0, 6] }) });
+  vi.mocked(api.setPrefs).mockClear();
+  fireEvent.click(screen.getByRole("button", { name: "Sábado" }));
+  expect(api.setPrefs).not.toHaveBeenCalled();
+});
+
+test("'Frases sobre' lleva a elegir los temas", () => {
+  const onIrATemas = vi.fn();
+  render(<Ajustes api={apiFalsa()} onIrATemas={onIrATemas} />);
+  abrir("Notificaciones");
+  fireEvent.click(screen.getByRole("button", { name: /Frases sobre/ }));
+  expect(onIrATemas).toHaveBeenCalled();
 });
 
 test("'Copiar mi link' copia la URL del wallpaper con temas, zona y estilo", async () => {

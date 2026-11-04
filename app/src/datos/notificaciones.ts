@@ -4,6 +4,7 @@ import { WORKER_URL } from "../config";
 export interface ConfigNotificaciones {
   cantidad: number;
   cadaHoras?: number | null;
+  dias?: number[];
   desde: string;
   hasta: string;
   temas: CategoriaId[];

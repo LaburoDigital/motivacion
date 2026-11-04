@@ -1,4 +1,5 @@
-import { IconBolt, IconChevronLeft, IconCopy, IconExternalLink } from "@tabler/icons-react";
+import { IconBolt, IconChevronLeft, IconChevronRight, IconCopy, IconExternalLink, IconMinus, IconPlus } from "@tabler/icons-react";
+import { CATEGORIAS } from "shared";
 import { useState } from "react";
 import { ATAJO_URL, WORKER_URL } from "../config";
 import {
@@ -32,19 +33,43 @@ const ESTILOS_WP: { id: Preferencias["estiloWallpaper"]; nombre: string }[] = [
   { id: "foto", nombre: "Foto como en la app" },
 ];
 
-const FRECUENCIAS: { valor: string; nombre: string }[] = [
-  { valor: "h1", nombre: "Cada 1 hora" },
-  { valor: "h2", nombre: "Cada 2 horas" },
-  { valor: "h3", nombre: "Cada 3 horas" },
-  { valor: "h4", nombre: "Cada 4 horas" },
-  ...[1, 2, 3, 4, 5].map((c) => ({ valor: `d${c}`, nombre: `${c} por día` })),
+const DIAS = [
+  { n: 0, corto: "D", nombre: "Domingo" },
+  { n: 1, corto: "L", nombre: "Lunes" },
+  { n: 2, corto: "M", nombre: "Martes" },
+  { n: 3, corto: "M", nombre: "Miércoles" },
+  { n: 4, corto: "J", nombre: "Jueves" },
+  { n: 5, corto: "V", nombre: "Viernes" },
+  { n: 6, corto: "S", nombre: "Sábado" },
 ];
 
 const aMin = (hhmm: string) => Number(hhmm.slice(0, 2)) * 60 + Number(hhmm.slice(3, 5));
+const deMin = (m: number) => {
+  const x = ((m % 1440) + 1440) % 1440;
+  return `${String(Math.floor(x / 60)).padStart(2, "0")}:${String(x % 60).padStart(2, "0")}`;
+};
 
+/** Cuántas por día: con "cada N horas" (versiones viejas) se calcula sobre el horario, que puede cruzar la medianoche. */
 function cuantasPorDia(n: PrefsNotificaciones): number {
   if (!n.cadaHoras) return n.cantidad;
-  return Math.max(0, Math.floor((aMin(n.hasta) - aMin(n.desde)) / (n.cadaHoras * 60)) + 1);
+  let rango = aMin(n.hasta) - aMin(n.desde);
+  if (rango <= 0) rango += 1440;
+  return Math.min(24, Math.max(1, Math.floor(rango / (n.cadaHoras * 60)) + 1));
+}
+
+function Paso({ titulo, valor, onMenos, onMas, etiquetaMenos, etiquetaMas, testId }: {
+  titulo: string; valor: string; onMenos: () => void; onMas: () => void; etiquetaMenos: string; etiquetaMas: string; testId?: string;
+}) {
+  return (
+    <div className="fila paso">
+      <span>{titulo}</span>
+      <div className="paso-controles">
+        <button className="paso-boton" aria-label={etiquetaMenos} onClick={onMenos}><IconMinus size={18} stroke={2.2} /></button>
+        <span className="paso-valor" data-testid={testId} key={valor}>{valor}</span>
+        <button className="paso-boton" aria-label={etiquetaMas} onClick={onMas}><IconPlus size={18} stroke={2.2} /></button>
+      </div>
+    </div>
+  );
 }
 
 export function urlWallpaper(prefs: Preferencias): string {
@@ -69,16 +94,25 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
   const prefs = api.prefs;
   if (!prefs) return null;
   const n = prefs.notificaciones;
-  const horarioValido = n.desde < n.hasta;
+  const cantidad = cuantasPorDia(n);
+  const dias = n.dias ?? [0, 1, 2, 3, 4, 5, 6];
+  const horarioValido = n.desde !== n.hasta;
 
   const cambiarNotif = async (cambio: Partial<PrefsNotificaciones>) => {
-    const nuevo = { ...n, ...cambio };
+    const nuevo = { ...n, cantidad, cadaHoras: null, dias, ...cambio };
     api.setPrefs({ notificaciones: nuevo });
     // Si ya estaban activas, reenviamos la config al Worker con los horarios nuevos.
-    if (nuevo.activas && "activas" in cambio === false && nuevo.desde < nuevo.hasta) {
+    if (nuevo.activas && "activas" in cambio === false && nuevo.desde !== nuevo.hasta) {
       await activarNotificaciones({ ...nuevo, temas: prefs.temas, zona: prefs.zonaHoraria, racha: avisoDeRacha(rachas ?? null) });
     }
   };
+  const alternarDia = (d: number) => {
+    if (dias.includes(d) && dias.length === 1) return;
+    void cambiarNotif({ dias: dias.includes(d) ? dias.filter((x) => x !== d) : [...dias, d].sort() });
+  };
+  const temasTexto = prefs.temas.length
+    ? prefs.temas.length === 1 ? CATEGORIAS.find((c) => c.id === prefs.temas[0])?.etiqueta : `${prefs.temas.length} temas`
+    : "Mezcla general";
 
   const alternar = async (activar: boolean) => {
     setAviso(null);
@@ -88,10 +122,10 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
       return;
     }
     const r = await activarNotificaciones({
-      cantidad: n.cantidad, cadaHoras: n.cadaHoras, desde: n.desde, hasta: n.hasta, temas: prefs.temas, zona: prefs.zonaHoraria,
+      cantidad, cadaHoras: null, desde: n.desde, hasta: n.hasta, dias, temas: prefs.temas, zona: prefs.zonaHoraria,
       racha: avisoDeRacha(rachas ?? null),
     });
-    if (r === "ok") api.setPrefs({ notificaciones: { ...n, activas: true } });
+    if (r === "ok") api.setPrefs({ notificaciones: { ...n, cantidad, cadaHoras: null, dias, activas: true } });
     else setAviso(MENSAJES[r]);
   };
 
@@ -149,29 +183,46 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
             onChange={(e) => void alternar(e.target.checked)}
           />
         </label>
-        <label className="fila">
-          Frecuencia
-          <select
-            value={n.cadaHoras ? `h${n.cadaHoras}` : `d${n.cantidad}`}
-            onChange={(e) => {
-              const v = e.target.value;
-              void cambiarNotif(v.startsWith("h") ? { cadaHoras: Number(v.slice(1)) } : { cantidad: Number(v.slice(1)), cadaHoras: null });
-            }}
-          >
-            {FRECUENCIAS.map((f) => <option key={f.valor} value={f.valor}>{f.nombre}</option>)}
-          </select>
-        </label>
-        <label className="fila">
-          Desde
-          <input type="time" step={900} value={n.desde} onChange={(e) => void cambiarNotif({ desde: e.target.value })} />
-        </label>
-        <label className="fila">
-          Hasta
-          <input type="time" step={900} value={n.hasta} onChange={(e) => void cambiarNotif({ hasta: e.target.value })} />
-        </label>
-        {!horarioValido && <p className="error">La hora de inicio tiene que ser antes que la de fin.</p>}
+        <button className="fila fila-boton" onClick={() => onIrATemas?.()}>
+          <span>Frases sobre</span>
+          <span className="fila-valor">{temasTexto} <IconChevronRight size={18} stroke={1.8} /></span>
+        </button>
+        <Paso
+          titulo="Cantidad" valor={`${cantidad}x`} testId="cantidad"
+          etiquetaMenos="Menos notificaciones" etiquetaMas="Más notificaciones"
+          onMenos={() => void cambiarNotif({ cantidad: Math.max(1, cantidad - 1) })}
+          onMas={() => void cambiarNotif({ cantidad: Math.min(24, cantidad + 1) })}
+        />
+        <Paso
+          titulo="Desde las" valor={n.desde}
+          etiquetaMenos="Desde: más temprano" etiquetaMas="Desde: más tarde"
+          onMenos={() => void cambiarNotif({ desde: deMin(aMin(n.desde) - 30) })}
+          onMas={() => void cambiarNotif({ desde: deMin(aMin(n.desde) + 30) })}
+        />
+        <Paso
+          titulo="Hasta las" valor={n.hasta}
+          etiquetaMenos="Hasta: más temprano" etiquetaMas="Hasta: más tarde"
+          onMenos={() => void cambiarNotif({ hasta: deMin(aMin(n.hasta) - 30) })}
+          onMas={() => void cambiarNotif({ hasta: deMin(aMin(n.hasta) + 30) })}
+        />
+        <div className="repetir">
+          <span>Repetir</span>
+          <div className="dias">
+            {DIAS.map((d) => (
+              <button key={d.n} className={`dia ${dias.includes(d.n) ? "activo" : ""}`} aria-label={d.nombre} aria-pressed={dias.includes(d.n)} onClick={() => alternarDia(d.n)}>
+                {d.corto}
+              </button>
+            ))}
+          </div>
+        </div>
+        {!horarioValido && <p className="error">"Desde" y "hasta" no pueden ser iguales.</p>}
         {aviso && <p className="aviso">{aviso}</p>}
-        {horarioValido && <p className="aviso">{cuantasPorDia(n)} notificaciones por día. La primera es siempre tu frase del día.</p>}
+        {horarioValido && (
+          <p className="aviso">
+            {cantidad} {cantidad === 1 ? "notificación" : "notificaciones"} por día, de {n.desde} a {n.hasta}
+            {aMin(n.hasta) < aMin(n.desde) ? " (del día siguiente)" : ""}. La primera es tu frase del día. El sonido es el de iOS.
+          </p>
+        )}
       </section>
       )}
 

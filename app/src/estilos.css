@@ -314,3 +314,64 @@ h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.0
 .bienvenida-abajo { display: grid; gap: 10px; padding-top: 14px; }
 
 .diagnostico { margin: 14px 0 0; padding: 14px; border-radius: 14px; background: var(--superficie); color: var(--texto); font-size: 13px; line-height: 1.5; white-space: pre-wrap; user-select: text; -webkit-user-select: text; }
+
+/* Editor de notificaciones */
+.fila-boton { width: 100%; text-align: left; color: var(--texto); }
+.fila-valor { display: flex; align-items: center; gap: 4px; color: var(--tenue); }
+.paso-controles { display: flex; align-items: center; gap: 10px; }
+.paso-boton {
+  width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--texto); color: var(--fondo); transition: transform 140ms var(--suave);
+}
+.paso-boton:active { transform: scale(0.88); }
+.paso-valor { min-width: 58px; text-align: center; font-variant-numeric: tabular-nums; font-size: 17px; animation: valor 260ms var(--suave); }
+@keyframes valor { from { transform: translateY(6px); opacity: 0; } }
+.repetir { display: grid; gap: 12px; font-size: 15px; }
+.dias { display: flex; justify-content: space-between; gap: 6px; }
+.dia {
+  flex: 1; aspect-ratio: 1; max-width: 44px; border-radius: 50%; font-weight: 600; font-size: 14px;
+  background: var(--superficie-2); color: var(--tenue); transition: background 200ms, color 200ms, transform 140ms var(--suave);
+}
+.dia.activo { background: var(--texto); color: var(--fondo); }
+.dia:active { transform: scale(0.9); }
+
+/* Movimiento: dibujos vivos, tarjetas que entran de a una, secciones que se deslizan */
+.tarjeta-dibujo svg * { transform-box: fill-box; transform-origin: center; }
+.anim-tiembla { animation: tiembla 3.2s ease-in-out infinite; }
+@keyframes tiembla {
+  0%, 70%, 100% { transform: rotate(0); }
+  74% { transform: rotate(-3deg); } 78% { transform: rotate(3deg); } 82% { transform: rotate(-2deg); } 86% { transform: rotate(2deg); } 90% { transform: rotate(0); }
+}
+.anim-llama { animation: llama 1.6s ease-in-out infinite; transform-origin: 50% 100% !important; }
+@keyframes llama { 0%, 100% { transform: scale(1, 1); } 30% { transform: scale(0.96, 1.07); } 60% { transform: scale(1.03, 0.97); } }
+.anim-punto { animation: punto 2.4s ease-in-out infinite; }
+@keyframes punto { 0%, 60%, 100% { transform: scale(1); opacity: 1; } 30% { transform: scale(1.35); opacity: 0.75; } }
+.anim-brilla { animation: brilla 2.6s ease-in-out infinite; }
+@keyframes brilla { 0%, 100% { opacity: 1; filter: drop-shadow(0 0 0 rgba(233, 180, 92, 0)); } 50% { opacity: 0.85; filter: drop-shadow(0 0 6px rgba(233, 180, 92, 0.7)); } }
+.anim-flota { animation: flota 3s ease-in-out infinite; }
+.anim-flota-lento { animation: flota 4.2s ease-in-out infinite; }
+@keyframes flota { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.anim-destello { animation: destello 2.2s ease-in-out infinite; }
+@keyframes destello { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.8; } }
+.anim-chip { animation: chip 3s ease-in-out infinite; }
+@keyframes chip { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+.anim-sol { animation: sol 3.4s ease-in-out infinite; }
+@keyframes sol { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px) scale(1.12); } }
+
+.tarjeta-ajuste { animation: entrar 520ms var(--suave) both; }
+.tarjeta-ajuste:nth-child(2) { animation-delay: 60ms; }
+.tarjeta-ajuste:nth-child(3) { animation-delay: 120ms; }
+.tarjeta-ajuste:nth-child(4) { animation-delay: 180ms; }
+.tarjeta-ajuste:nth-child(5) { animation-delay: 240ms; }
+.tarjeta-ajuste:nth-child(6) { animation-delay: 300ms; }
+@keyframes entrar { from { opacity: 0; transform: translateY(18px) scale(0.97); } }
+.cabeza-sub, .cabeza-sub ~ .seccion, .cabeza-sub ~ .pestanas { animation: deslizar 380ms var(--suave) both; }
+.cabeza-sub ~ .seccion { animation-delay: 60ms; }
+@keyframes deslizar { from { opacity: 0; transform: translateX(28px); } }
+.chip-racha svg { animation: llama 1.6s ease-in-out infinite; transform-origin: 50% 100%; }
+.chip { transition: background 220ms, color 220ms, transform 160ms var(--suave); }
+.chip.activo { animation: elegido 320ms var(--suave); }
+@keyframes elegido { 40% { transform: scale(1.08); } }
+.racha-numero span { animation: valor 400ms var(--suave); }
+.frase p { animation: aparecer-texto 700ms var(--suave) both; }
+@keyframes aparecer-texto { from { opacity: 0; transform: translateY(10px); } }

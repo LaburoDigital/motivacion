@@ -2,7 +2,7 @@ import { buildPushPayload, type PushSubscription } from "@block65/webcrypto-web-
 import { fechaLocal, fnv1a, type CategoriaId } from "shared";
 import type { Env } from "./env";
 import { destacadasServidor, fraseDelDiaPara, parsearTemas, zonaValida } from "./frases";
-import { aMinutos, horariosDelDia, minutosDesde, tocaAhora } from "./horarios";
+import { aMinutos, diaSemana, horariosDelDia, minutosDesde, tocaAhora } from "./horarios";
 
 export interface Suscripcion {
   subscription: PushSubscription;
@@ -13,6 +13,8 @@ export interface Suscripcion {
   zona: string;
   /** Si está, una notificación cada N horas (1 a 6) en vez de `cantidad` por día. */
   cadaHoras?: number;
+  /** Días en que llegan las frases (0 = domingo … 6 = sábado). Sin esto, todos. */
+  dias?: number[];
   /** Aviso diario de racha: solo números, nunca el nombre. */
   racha?: AvisoRacha;
   /** "<fecha>|<índice>" de la última notificación mandada, para no repetirla. */
@@ -45,6 +47,7 @@ interface EntradaIndice {
   zona: string;
   cadaHoras?: number;
   rachaHora?: string;
+  dias?: number[];
 }
 
 async function leerIndice(env: Env): Promise<EntradaIndice[]> {
@@ -59,6 +62,7 @@ export async function guardarSuscripcion(env: Env, sub: Suscripcion): Promise<vo
   const entrada: EntradaIndice = { clave, cantidad: sub.cantidad, desde: sub.desde, hasta: sub.hasta, zona: sub.zona };
   if (sub.cadaHoras) entrada.cadaHoras = sub.cadaHoras;
   if (sub.racha) entrada.rachaHora = sub.racha.hora;
+  if (sub.dias) entrada.dias = sub.dias;
   const indice = (await leerIndice(env)).filter((e) => e.clave !== clave);
   await env.KV.put("subs", JSON.stringify([...indice, entrada]));
 }
@@ -75,9 +79,13 @@ export function validarSuscripcion(cuerpo: unknown): Suscripcion | null {
   const c = cuerpo as Partial<Suscripcion> | null;
   const s = c?.subscription;
   if (!s?.endpoint?.startsWith("https://") || !s.keys?.p256dh || !s.keys?.auth) return null;
-  if (!Number.isInteger(c!.cantidad) || c!.cantidad! < 1 || c!.cantidad! > 5) return null;
+  if (!Number.isInteger(c!.cantidad) || c!.cantidad! < 1 || c!.cantidad! > 24) return null;
   if (!HORA.test(c!.desde ?? "") || !HORA.test(c!.hasta ?? "")) return null;
-  if (aMinutos(c!.desde!) >= aMinutos(c!.hasta!)) return null;
+  if (aMinutos(c!.desde!) === aMinutos(c!.hasta!)) return null;
+  const dias = c!.dias;
+  if (dias !== undefined && dias !== null) {
+    if (!Array.isArray(dias) || !dias.length || dias.some((d) => !Number.isInteger(d) || d < 0 || d > 6)) return null;
+  }
   const cadaHoras = c!.cadaHoras;
   if (cadaHoras !== undefined && cadaHoras !== null && (!Number.isInteger(cadaHoras) || cadaHoras < 1 || cadaHoras > 6)) return null;
   const r = c!.racha;
@@ -86,6 +94,7 @@ export function validarSuscripcion(cuerpo: unknown): Suscripcion | null {
   }
   return {
     ...(cadaHoras ? { cadaHoras } : {}),
+    ...(dias ? { dias: [...new Set(dias)].sort() } : {}),
     ...(r ? { racha: { hora: r.hora, dias: r.dias, fecha: r.fecha, crece: r.crece } } : {}),
     subscription: { endpoint: s.endpoint, expirationTime: s.expirationTime ?? null, keys: { p256dh: s.keys.p256dh, auth: s.keys.auth } },
     cantidad: c!.cantidad!,
@@ -134,7 +143,8 @@ export async function mensajePara(env: Env, sub: Suscripcion, indice: number, ah
 export async function enviarNotificaciones(env: Env, ahora = new Date()): Promise<void> {
   const grupos = new Map<number, { entrada: EntradaIndice; indice: number; transcurridos: number }[]>();
   for (const entrada of await leerIndice(env)) {
-    const turnos = horariosDelDia(entrada.cantidad, entrada.desde, entrada.hasta, entrada.cadaHoras).map((h, i) => ({ h, i }));
+    const hoyToca = !entrada.dias || entrada.dias.includes(diaSemana(ahora, entrada.zona));
+    const turnos = hoyToca ? horariosDelDia(entrada.cantidad, entrada.desde, entrada.hasta, entrada.cadaHoras).map((h, i) => ({ h, i })) : [];
     if (entrada.rachaHora) turnos.push({ h: entrada.rachaHora, i: INDICE_RACHA });
     const posicion = tocaAhora(turnos.map((t) => t.h), ahora, entrada.zona);
     if (posicion === null) continue;

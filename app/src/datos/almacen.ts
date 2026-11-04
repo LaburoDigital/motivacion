@@ -20,8 +20,10 @@ export interface Preferencias {
 export interface PrefsNotificaciones {
   activas: boolean;
   cantidad: number;
-  /** Si está, una cada N horas en vez de `cantidad` por día. */
+  /** Si está, una cada N horas en vez de `cantidad` por día (versiones viejas). */
   cadaHoras: number | null;
+  /** Días en que llegan (0 = domingo … 6 = sábado). */
+  dias?: number[];
   desde: string;
   hasta: string;
 }
@@ -55,7 +57,7 @@ const prefsDefault = (): Preferencias => ({
   soloFondosFavoritos: false,
   fondosFavoritos: [],
   zonaHoraria: Intl.DateTimeFormat().resolvedOptions().timeZone,
-  notificaciones: { activas: false, cantidad: 3, cadaHoras: 2, desde: "08:00", hasta: "22:00" },
+  notificaciones: { activas: false, cantidad: 8, cadaHoras: null, desde: "08:00", hasta: "22:00", dias: [0, 1, 2, 3, 4, 5, 6] },
   estiloWallpaper: "foto",
 });
 

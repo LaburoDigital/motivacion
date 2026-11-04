@@ -50,14 +50,21 @@ describe("/suscripcion", () => {
     expect(await e.KV.get("subs", "json")).toEqual([{ clave: k, cantidad: 2, desde: "08:00", hasta: "22:00", zona: AR }]);
   });
 
-  test("rechaza desde >= hasta", async () => {
-    expect((await post(env(), config({ desde: "22:00", hasta: "08:00" }))).status).toBe(400);
+  test("acepta horarios que cruzan la medianoche y rechaza desde igual a hasta", async () => {
+    expect((await post(env(), config({ desde: "22:00", hasta: "02:00" }))).status).toBe(201);
     expect((await post(env(), config({ desde: "10:00", hasta: "10:00" }))).status).toBe(400);
   });
 
-  test("rechaza cantidad fuera de 1 a 5", async () => {
+  test("acepta de 1 a 24 por día", async () => {
+    expect((await post(env(), config({ cantidad: 24 }))).status).toBe(201);
     expect((await post(env(), config({ cantidad: 0 }))).status).toBe(400);
-    expect((await post(env(), config({ cantidad: 6 }))).status).toBe(400);
+    expect((await post(env(), config({ cantidad: 25 }))).status).toBe(400);
+  });
+
+  test("valida los días de la semana", async () => {
+    expect((await post(env(), config({ dias: [1, 2, 3] }))).status).toBe(201);
+    expect((await post(env(), config({ dias: [7] }))).status).toBe(400);
+    expect((await post(env(), config({ dias: [] }))).status).toBe(400);
   });
 
   test("rechaza una suscripción sin claves", async () => {
@@ -263,5 +270,25 @@ describe("aviso de racha", () => {
     const quieta = { ...racha, crece: false };
     const m = await mensajePara(envFalso(), { ...config({ racha: quieta }), racha: quieta } as never, 99, new Date("2026-11-04T00:00:00Z"));
     expect(m.titulo).toContain("12 días");
+  });
+});
+
+describe("días de la semana", () => {
+  test("un día que no está en la lista no manda nada", async () => {
+    const enviar = vi.fn(async () => new Response(null, { status: 201 }));
+    vi.stubGlobal("fetch", enviar);
+    const e = env();
+    await post(e, config({ dias: [0, 6] })); // solo fines de semana; el 3/11/2026 es martes
+    await enviarNotificaciones(e, new Date("2026-11-03T11:00:00Z"));
+    expect(enviar).not.toHaveBeenCalled();
+  });
+
+  test("un día que está en la lista manda", async () => {
+    const enviar = vi.fn(async () => new Response(null, { status: 201 }));
+    vi.stubGlobal("fetch", enviar);
+    const e = env();
+    await post(e, config({ dias: [2] }));
+    await enviarNotificaciones(e, new Date("2026-11-03T11:00:00Z"));
+    expect(enviar).toHaveBeenCalledTimes(1);
   });
 });
