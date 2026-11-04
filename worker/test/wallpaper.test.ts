@@ -1,5 +1,5 @@
 import { FRASES_BASE, fechaLocal, fraseDelDia, type Frase } from "shared";
-import { afterEach, expect, test, vi } from "vitest";
+import { afterEach, describe, expect, test, vi } from "vitest";
 import worker from "../src/index";
 import { envFalso } from "./kvFalso";
 
@@ -61,4 +61,31 @@ test("estilo foto en Automático o con un grupo inválido usa la foto según el 
 test("los estilos sin foto ignoran el grupo", async () => {
   const res = await pedir(`zona=${ZONA}&estilo=negro&fondo=ciudad`);
   expect(res.headers.get("location")).toMatch(/\/wallpapers\/negro\//);
+});
+
+describe("cambiar durante el día", () => {
+  afterEach(() => vi.useRealTimers());
+  const idDe = (loc: string | null) => loc!.match(/(b-\d{4})\.jpg$/)![1];
+
+  test("a la mañana es la frase del día", async () => {
+    vi.useFakeTimers({ now: new Date("2026-11-03T10:30:00Z"), toFake: ["Date"] }); // 07:30 en Argentina
+    const delDia = idDe((await pedir(`temas=gym&zona=${ZONA}&estilo=negro`)).headers.get("location"));
+    const rota = idDe((await pedir(`temas=gym&zona=${ZONA}&estilo=negro&cambio=hora`)).headers.get("location"));
+    expect(rota).toBe(delDia);
+  });
+
+  test("más tarde es otra frase Clave del mismo tema", async () => {
+    vi.useFakeTimers({ now: new Date("2026-11-03T16:30:00Z"), toFake: ["Date"] }); // 13:30 en Argentina
+    const delDia = idDe((await pedir(`temas=gym&zona=${ZONA}&estilo=negro`)).headers.get("location"));
+    const rota = idDe((await pedir(`temas=gym&zona=${ZONA}&estilo=negro&cambio=hora`)).headers.get("location"));
+    expect(rota).not.toBe(delDia);
+    const f = FRASES_BASE.find((x) => x.id === rota)!;
+    expect(f.nivel).toBe("clave");
+    expect(f.categoria).toBe("gym");
+  });
+
+  test("la redirección se guarda poco tiempo en caché", async () => {
+    const res = await pedir(`temas=gym&zona=${ZONA}&estilo=negro&cambio=hora`);
+    expect(res.headers.get("cache-control")).toBe("max-age=300");
+  });
 });

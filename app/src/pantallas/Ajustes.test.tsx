@@ -200,3 +200,22 @@ test("con el estilo foto, el link lleva tu grupo de fotos", async () => {
   await waitFor(() => expect(writeText).toHaveBeenCalled());
   expect(new URL(writeText.mock.calls[0][0]).searchParams.get("fondo")).toBe("ciudad");
 });
+
+test("'Cambiar durante el día' agrega la opción al link", async () => {
+  const writeText = vi.fn(async (_texto: string) => undefined);
+  Object.defineProperty(navigator, "clipboard", { configurable: true, value: { writeText } });
+  const api = apiFalsa({ prefs: prefsCon({ fondoCambia: true }) });
+  render(<Ajustes api={api} />);
+  abrir("Pantalla bloqueada");
+  fireEvent.click(screen.getByRole("button", { name: /Copiar mi link/ }));
+  await waitFor(() => expect(writeText).toHaveBeenCalled());
+  expect(new URL(writeText.mock.calls[0][0]).searchParams.get("cambio")).toBe("hora");
+});
+
+test("el interruptor 'Cambiar durante el día' guarda la preferencia", () => {
+  const api = apiFalsa();
+  render(<Ajustes api={api} />);
+  abrir("Pantalla bloqueada");
+  fireEvent.click(screen.getByLabelText(/Cambiar durante el día/));
+  expect(api.setPrefs).toHaveBeenCalledWith({ fondoCambia: true });
+});

@@ -124,3 +124,20 @@ export async function actualizarDiario(env: Env): Promise<void> {
 
   await recalcularRemotas(env);
 }
+
+/**
+ * Para el fondo que cambia durante el día: antes de las 10 es la frase del día;
+ * después, otra Clave de los mismos temas que cambia con cada hora.
+ */
+export async function fraseSegunHora(env: Env, temas: CategoriaId[], zona: string, ahora = new Date()): Promise<Frase | null> {
+  const delDia = await fraseDelDiaPara(env, temas, zona, ahora);
+  const hora = Number(new Intl.DateTimeFormat("en-GB", { timeZone: zona, hour: "2-digit", hourCycle: "h23" }).format(ahora));
+  if (hora < 10 || !delDia) return delDia;
+  const claves = await clavesServidor(env);
+  const fecha = fechaLocal(ahora, zona);
+  for (const extra of ["", "|b", "|c"]) {
+    const f = fraseDelDia(claves, `${fecha}|${hora}${extra}`, temas);
+    if (f && f.id !== delDia.id) return f;
+  }
+  return delDia;
+}

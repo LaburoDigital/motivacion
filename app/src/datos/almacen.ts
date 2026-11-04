@@ -15,6 +15,8 @@ export interface Preferencias {
   zonaHoraria: string;
   notificaciones: PrefsNotificaciones;
   estiloWallpaper: "negro" | "degradado" | "foto";
+  /** El fondo de pantalla bloqueada cambia de frase durante el día (con varias automatizaciones). */
+  fondoCambia?: boolean;
 }
 
 export interface PrefsNotificaciones {

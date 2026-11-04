@@ -75,6 +75,7 @@ function Paso({ titulo, valor, onMenos, onMas, etiquetaMenos, etiquetaMas, testI
 export function urlWallpaper(prefs: Preferencias): string {
   const q = new URLSearchParams({ temas: prefs.temas.join(","), zona: prefs.zonaHoraria, estilo: prefs.estiloWallpaper });
   if (prefs.estiloWallpaper === "foto") q.set("fondo", prefs.fondo);
+  if (prefs.fondoCambia) q.set("cambio", "hora");
   return `${WORKER_URL}/wallpaper?${q}`;
 }
 
@@ -264,6 +265,16 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
             {ESTILOS_WP.map((e) => <option key={e.id} value={e.id}>{e.nombre}</option>)}
           </select>
         </label>
+        <label className="fila">
+          Cambiar durante el día
+          <input type="checkbox" checked={!!prefs.fondoCambia} onChange={(e) => api.setPrefs({ fondoCambia: e.target.checked })} />
+        </label>
+        {prefs.fondoCambia && (
+          <p className="aviso">
+            Antes de las 10 es la frase del día; después, otra frase cada vez que corre el atajo. Armá una automatización por cada hora
+            en que quieras que cambie (por ejemplo 07:00, 13:00 y 19:00), todas con el mismo atajo.
+          </p>
+        )}
         {WORKER_URL && <img className="vista-previa" src={urlWallpaper(prefs)} alt="Vista previa del wallpaper de hoy" />}
         <button className="boton secundario" onClick={() => void copiar("link", urlWallpaper(prefs))}><IconCopy size={18} stroke={1.8} /> {copiado === "link" ? "Copiado" : "Copiar mi link"}</button>
         {ATAJO_URL ? (

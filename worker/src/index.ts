@@ -30,9 +30,12 @@ async function rutear(req: Request, env: Env): Promise<Response> {
   if (req.method === "GET" && url.pathname === "/wallpaper") {
     const pedido = url.searchParams.get("estilo") as EstiloWallpaper;
     const estilo = ESTILOS_WALLPAPER.includes(pedido) ? pedido : "negro";
-    const destino = await urlWallpaper(env, parsearTemas(url.searchParams.get("temas")), zonaValida(url.searchParams.get("zona")), estilo, url.searchParams.get("fondo"));
+    const rotar = url.searchParams.get("cambio") === "hora";
+    const destino = await urlWallpaper(
+      env, parsearTemas(url.searchParams.get("temas")), zonaValida(url.searchParams.get("zona")), estilo, url.searchParams.get("fondo"), rotar,
+    );
     if (!destino) return json({ error: "sin frases clave" }, 404);
-    return new Response(null, { status: 302, headers: { ...CORS, location: destino, "cache-control": "max-age=1800" } });
+    return new Response(null, { status: 302, headers: { ...CORS, location: destino, "cache-control": rotar ? "max-age=300" : "max-age=1800" } });
   }
 
   if (url.pathname === "/suscripcion" && req.method === "POST") {
