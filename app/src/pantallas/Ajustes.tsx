@@ -6,8 +6,6 @@ import {
   DibujoBloqueo, DibujoFondos, DibujoIcono, DibujoNotificaciones, DibujoRachas, DibujoTemas,
 } from "../componentes/Dibujos";
 import { Diagnostico } from "../componentes/Diagnostico";
-import { GuiaAtajo } from "../componentes/GuiaAtajo";
-import { GuiaCrearAtajo } from "../componentes/GuiaCrearAtajo";
 import { Pestanas } from "../componentes/Pestanas";
 import type { Preferencias, PrefsNotificaciones } from "../datos/almacen";
 import { activarNotificaciones, desactivarNotificaciones, type ResultadoActivar } from "../datos/notificaciones";
@@ -254,8 +252,10 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
       <>
       <Pestanas opciones={["Fondo de pantalla", "Widget de texto"] as const} actual={modoBloqueo} onCambiar={setModoBloqueo} />
       {modoBloqueo === "Fondo de pantalla" ? (
+      <>
       <section className="seccion">
-        <p className="aviso">Todas las mañanas tu fondo de pantalla bloqueada cambia a la frase del día, grande y con foto.</p>
+        <p className="lema">Todas las mañanas tu pantalla bloqueada cambia sola a la frase del día, con foto.</p>
+        {WORKER_URL && <img className="vista-previa" src={urlWallpaper(prefs)} alt="Vista previa del fondo de hoy" />}
         <label className="fila">
           Estilo
           <select
@@ -265,28 +265,62 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
             {ESTILOS_WP.map((e) => <option key={e.id} value={e.id}>{e.nombre}</option>)}
           </select>
         </label>
+      </section>
+
+      <p className="aviso">Se arma una sola vez, en 3 pasos:</p>
+      <ol className="pasos">
+        <li className="paso-tarjeta">
+          <span className="paso-numero">1</span>
+          <div>
+            <strong>Copiá tu link</strong>
+            <button className="boton" onClick={() => void copiar("link", urlWallpaper(prefs))}>
+              <IconCopy size={18} stroke={1.8} /> {copiado === "link" ? "Copiado" : "Copiar mi link"}
+            </button>
+          </div>
+        </li>
+        <li className="paso-tarjeta">
+          <span className="paso-numero">2</span>
+          <div>
+            <strong>Armá el atajo</strong>
+            {ATAJO_URL ? (
+              <>
+                <a className="boton" href={ATAJO_URL} target="_blank" rel="noreferrer"><IconBolt size={18} stroke={1.8} /> Instalar atajo</a>
+                <p className="aviso">Tocá <b>Agregar atajo</b> y pegá tu link cuando te lo pida.</p>
+              </>
+            ) : (
+              <>
+                <p className="aviso">En la app <b>Atajos</b> tocá <b>+</b> y agregá estas 3 acciones, en orden:</p>
+                <ul className="acciones-atajo">
+                  <li><b>Texto</b> → pegá tu link</li>
+                  <li><b>Obtener contenido de URL</b></li>
+                  <li><b>Establecer foto de fondo de pantalla</b> → Pantalla bloqueada, y apagá los dos interruptores</li>
+                </ul>
+                <p className="aviso">Tocá <b>▶︎</b> para probarlo.</p>
+              </>
+            )}
+          </div>
+        </li>
+        <li className="paso-tarjeta">
+          <span className="paso-numero">3</span>
+          <div>
+            <strong>Que se haga solo</strong>
+            <p className="aviso">Atajos → <b>Automatización</b> → <b>+</b> → <b>Hora del día</b> → <b>07:00</b> → <b>Ejecutar inmediatamente</b> → elegí tu atajo.</p>
+          </div>
+        </li>
+      </ol>
+
+      <section className="seccion">
+        <h2>Extra</h2>
         <label className="fila">
           Cambiar durante el día
           <input type="checkbox" checked={!!prefs.fondoCambia} onChange={(e) => api.setPrefs({ fondoCambia: e.target.checked })} />
         </label>
         {prefs.fondoCambia && (
-          <p className="aviso">
-            Antes de las 10 es la frase del día; después, otra frase cada vez que corre el atajo. Armá una automatización por cada hora
-            en que quieras que cambie (por ejemplo 07:00, 13:00 y 19:00), todas con el mismo atajo.
-          </p>
+          <p className="aviso">Copiá el link de nuevo y sumá más horas en el paso 3 (por ejemplo 13:00 y 19:00). Cada vez trae otra frase.</p>
         )}
-        {WORKER_URL && <img className="vista-previa" src={urlWallpaper(prefs)} alt="Vista previa del wallpaper de hoy" />}
-        <button className="boton secundario" onClick={() => void copiar("link", urlWallpaper(prefs))}><IconCopy size={18} stroke={1.8} /> {copiado === "link" ? "Copiado" : "Copiar mi link"}</button>
-        {ATAJO_URL ? (
-          <>
-            <a className="boton" href={ATAJO_URL} target="_blank" rel="noreferrer"><IconBolt size={18} stroke={1.8} /> Instalar atajo</a>
-            <GuiaAtajo />
-          </>
-        ) : (
-          <GuiaCrearAtajo />
-        )}
-        <p className="aviso">Si cambiás tus temas, el estilo o tus fondos, volvé a copiar el link y pegalo en el atajo.</p>
+        <p className="aviso">Si cambiás temas, estilo o fondos, copiá el link de nuevo y pegalo en el <b>Texto</b> del atajo.</p>
       </section>
+      </>
       ) : (
       <section className="seccion">
         <p className="aviso">Tu fondo queda igual: la frase del día aparece en texto en un widget debajo del reloj. En el widget chico entran unas 3 líneas, así que las frases largas se cortan.</p>
