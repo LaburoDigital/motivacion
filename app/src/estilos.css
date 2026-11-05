@@ -396,3 +396,17 @@ h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.0
 
 .paso-valor { position: relative; }
 .paso-hora { position: absolute; inset: -8px; width: calc(100% + 16px); opacity: 0; font-size: 16px; }
+
+/* Opciones de racha */
+.opciones-racha { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.opcion-racha {
+  display: grid; justify-items: center; gap: 6px; padding: 12px 4px; border-radius: 16px; font-size: 12px; color: var(--tenue);
+  background: var(--superficie-2); transition: background 200ms, color 200ms, transform 140ms var(--suave);
+}
+.opcion-racha:active { transform: scale(0.94); }
+.opcion-racha.activa { background: var(--acento); color: var(--acento-texto); animation: elegido 320ms var(--suave); }
+.racha-nombre { display: flex; align-items: center; gap: 8px; }
+.racha-mensaje { margin: 0; color: var(--texto); font-family: "Fraunces", Georgia, serif; font-size: 16px; line-height: 1.4; }
+.campo-corto { width: 90px; text-align: center; padding: 10px; }
+
+.celebracion-festejo { margin: 0; color: var(--tenue); font-size: 16px; max-width: 30ch; line-height: 1.4; }

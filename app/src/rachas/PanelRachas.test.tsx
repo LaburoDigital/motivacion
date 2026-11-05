@@ -16,7 +16,7 @@ test("crear una racha de hacer algo y marcar que cumplí hoy", async () => {
   render(<Montaje />);
   fireEvent.change(await screen.findByLabelText("Nombre de la racha"), { target: { value: "Gym" } });
   fireEvent.click(screen.getByRole("button", { name: "Crear racha" }));
-  await screen.findByText("Gym");
+  await waitFor(() => expect(screen.getByTestId("nombre-racha").textContent).toBe("Gym"));
   expect(screen.getByTestId("dias-racha").textContent).toBe("0");
   fireEvent.click(screen.getByRole("button", { name: "Cumplí hoy" }));
   await waitFor(() => expect(screen.getByTestId("dias-racha").textContent).toBe("1"));
@@ -28,7 +28,7 @@ test("una racha de dejar algo pide confirmar la recaída", async () => {
   fireEvent.change(await screen.findByLabelText("Nombre de la racha"), { target: { value: "Sin fumar" } });
   fireEvent.click(screen.getByRole("radio", { name: /Dejar algo/ }));
   fireEvent.click(screen.getByRole("button", { name: "Crear racha" }));
-  await screen.findByText("Sin fumar");
+  await waitFor(() => expect(screen.getByTestId("nombre-racha").textContent).toBe("Sin fumar"));
   fireEvent.click(screen.getByRole("button", { name: "Recaí" }));
   expect(screen.getByRole("button", { name: "Sí, empezar de nuevo" })).toBeTruthy();
   fireEvent.click(screen.getByRole("button", { name: "Sí, empezar de nuevo" }));
@@ -38,7 +38,7 @@ test("una racha de dejar algo pide confirmar la recaída", async () => {
 test("no crea rachas con nombre vacío", async () => {
   render(<Montaje />);
   fireEvent.click(await screen.findByRole("button", { name: "Crear racha" }));
-  expect(screen.getByText("Poné un nombre para tu racha.")).toBeTruthy();
+  expect(screen.getByText(/poné un nombre para tu racha/)).toBeTruthy();
 });
 
 test("las rachas quedan guardadas en el celular", async () => {
@@ -46,4 +46,23 @@ test("las rachas quedan guardadas en el celular", async () => {
   await waitFor(() => expect(result.current.cargado).toBe(true));
   act(() => result.current.crear("Comer sano", "hacer"));
   await waitFor(async () => expect((await almacen.leerRachas()).lista.map((r) => r.nombre)).toEqual(["Comer sano"]));
+});
+
+test("elegir una opción armada crea la racha con su nombre y los días que llevás", async () => {
+  render(<Montaje />);
+  fireEvent.click(await screen.findByRole("radio", { name: /Dejar algo/ }));
+  fireEvent.click(screen.getByRole("button", { name: "Fumar" }));
+  fireEvent.change(screen.getByLabelText("Días que ya llevás"), { target: { value: "12" } });
+  fireEvent.click(screen.getByRole("button", { name: "Crear racha" }));
+  await waitFor(() => expect(screen.getByTestId("nombre-racha").textContent).toBe("Sin fumar"));
+  expect(screen.getByTestId("dias-racha").textContent).toBe("12");
+  expect(screen.getByTestId("mensaje-racha").textContent!.length).toBeGreaterThan(10);
+});
+
+test("'Otra' deja escribir el nombre", async () => {
+  render(<Montaje />);
+  fireEvent.click(await screen.findByRole("button", { name: "Otra" }));
+  fireEvent.change(screen.getByLabelText("Nombre de la racha"), { target: { value: "Tomar agua" } });
+  fireEvent.click(screen.getByRole("button", { name: "Crear racha" }));
+  await waitFor(() => expect(screen.getByTestId("nombre-racha").textContent).toBe("Tomar agua"));
 });

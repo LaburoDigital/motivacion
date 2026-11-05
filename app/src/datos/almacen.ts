@@ -40,6 +40,8 @@ export interface ConfigRachas {
   /** Hora del aviso diario ("HH:MM"). */
   hora: string;
   lista: Racha[];
+  /** Si el aviso de la noche puede decir el nombre de la racha (se ve con el celular bloqueado). */
+  mostrarNombre?: boolean;
 }
 
 export interface FraseDelDiaGuardada {

@@ -13,3 +13,8 @@ test("festeja el hito con el nombre de la racha y una frase Clave", () => {
   fireEvent.click(screen.getByRole("button", { name: "Seguir así" }));
   expect(onSeguir).toHaveBeenCalled();
 });
+
+test("muestra el festejo propio de la racha", () => {
+  render(<Celebracion nombre="Sin fumar" hito={7} frase={null} festejo="Tu cuerpo ya lo nota." onSeguir={vi.fn()} />);
+  expect(screen.getByText("Tu cuerpo ya lo nota.")).toBeTruthy();
+});

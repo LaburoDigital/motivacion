@@ -35,7 +35,9 @@ export function useRachas(zona: string) {
     hoy,
     setActivas: (activas: boolean) => cambiar((c) => ({ ...c, activas })),
     setHora: (hora: string) => cambiar((c) => ({ ...c, hora })),
-    crear: (nombre: string, tipo: TipoRacha) => cambiar((c) => ({ ...c, activas: true, lista: [...c.lista, crearRacha(nombre, tipo, hoy)] })),
+    crear: (nombre: string, tipo: TipoRacha, opciones: { diasPrevios?: number; clase?: string | null } = {}) =>
+      cambiar((c) => ({ ...c, activas: true, lista: [...c.lista, crearRacha(nombre, tipo, hoy, undefined, opciones)] })),
+    setMostrarNombre: (mostrarNombre: boolean) => cambiar((c) => ({ ...c, mostrarNombre })),
     borrar: (id: string) => cambiar((c) => ({ ...c, lista: c.lista.filter((r) => r.id !== id) })),
     cumplir: (id: string) => cambiarRacha(id, (r) => marcarHoy(r, hoy)),
     recaer: (id: string) => cambiarRacha(id, (r) => recaer(r, hoy)),

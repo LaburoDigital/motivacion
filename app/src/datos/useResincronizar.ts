@@ -9,11 +9,12 @@ export interface RachasParaAviso {
   hora: string;
   hoy: string;
   lista: Racha[];
+  mostrarNombre?: boolean;
 }
 
 export function avisoDeRacha(rachas: RachasParaAviso | null): ConfigNotificaciones["racha"] {
   if (!rachas?.activas) return null;
-  const resumen = resumenParaAviso(rachas.lista, rachas.hoy);
+  const resumen = resumenParaAviso(rachas.lista, rachas.hoy, !!rachas.mostrarNombre);
   return resumen ? { hora: rachas.hora, ...resumen } : null;
 }
 

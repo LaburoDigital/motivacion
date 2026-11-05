@@ -10,7 +10,7 @@ export interface ConfigNotificaciones {
   temas: CategoriaId[];
   zona: string;
   /** Aviso diario de racha: solo hora y números. */
-  racha?: { hora: string; dias: number; fecha: string; crece: boolean } | null;
+  racha?: { hora: string; dias: number; fecha: string; crece: boolean; clase: string | null; nombre?: string } | null;
 }
 
 export type ResultadoActivar = "ok" | "sin-soporte" | "denegado" | "error";

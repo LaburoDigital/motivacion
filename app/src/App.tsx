@@ -13,7 +13,7 @@ import { Bienvenida } from "./pantallas/Bienvenida";
 import { Favoritos } from "./pantallas/Favoritos";
 import { Inicio } from "./pantallas/Inicio";
 import { Temas } from "./pantallas/Temas";
-import { fraseDelDia } from "shared";
+import { fraseDelDia, opcionRacha } from "shared";
 import { fondoPara } from "./visual/fondos";
 import { aplicarIcono } from "./visual/iconos";
 import { letraPorId } from "./visual/letras";
@@ -63,6 +63,7 @@ export default function App() {
         <Celebracion
           nombre={festejo.r.nombre}
           hito={festejo.hito}
+          festejo={opcionRacha(festejo.r.clase)?.festejo}
           frase={fraseDelDia(api.todas, `${rachas.hoy}|${festejo.r.id}`, ["superacion", "disciplina"])}
           onSeguir={() => rachas.festejar(festejo.r.id, festejo.hito!)}
         />

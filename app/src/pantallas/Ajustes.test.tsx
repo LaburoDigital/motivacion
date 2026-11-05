@@ -19,7 +19,7 @@ const abrir = (nombre: string) => fireEvent.click(screen.getByRole("button", { n
 function rachasFalsas(cambios = {}) {
   return {
     activas: false, hora: "21:00", lista: [], cargado: true, hoy: "2026-11-03",
-    setActivas: vi.fn(), setHora: vi.fn(), crear: vi.fn(), borrar: vi.fn(), cumplir: vi.fn(), recaer: vi.fn(), festejar: vi.fn(),
+    setActivas: vi.fn(), setHora: vi.fn(), setMostrarNombre: vi.fn(), crear: vi.fn(), borrar: vi.fn(), cumplir: vi.fn(), recaer: vi.fn(), festejar: vi.fn(),
     ...cambios,
   };
 }
@@ -226,4 +226,12 @@ test("tocar la hora permite elegirla con la ruedita", () => {
   abrir("Notificaciones");
   fireEvent.change(screen.getByLabelText("Elegir hora: Desde las"), { target: { value: "06:15" } });
   expect(api.setPrefs).toHaveBeenCalledWith({ notificaciones: expect.objectContaining({ desde: "06:15" }) });
+});
+
+test("se puede elegir que el aviso diga el nombre de la racha", () => {
+  const rachas = rachasFalsas({ activas: true });
+  render(<Ajustes api={apiFalsa()} rachas={rachas} onAbrirRachas={vi.fn()} />);
+  abrir("Rachas");
+  fireEvent.click(screen.getByLabelText(/Mostrar el nombre en el aviso/));
+  expect(rachas.setMostrarNombre).toHaveBeenCalledWith(true);
 });

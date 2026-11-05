@@ -11,6 +11,8 @@ export interface Racha {
   marcas: string[];
   record: number;
   hitosVistos: number[];
+  /** Opción armada (ej. "fumar"); null si la escribió el usuario. */
+  clase?: string | null;
 }
 
 export const HITOS = [7, 30, 90, 180, 365];
@@ -21,8 +23,15 @@ const deDia = (n: number) => new Date(n * 86_400_000).toISOString().slice(0, 10)
 /** Días calendario de `desde` a `hasta` (fechas "YYYY-MM-DD"). */
 export const diasEntre = (desde: string, hasta: string) => aDia(hasta) - aDia(desde);
 
-export function crearRacha(nombre: string, tipo: TipoRacha, hoy: string, id: string = crypto.randomUUID()): Racha {
-  return { id, nombre: nombre.trim(), tipo, inicio: hoy, marcas: [], record: 0, hitosVistos: [] };
+export function crearRacha(
+  nombre: string, tipo: TipoRacha, hoy: string, id: string = crypto.randomUUID(),
+  { diasPrevios = 0, clase = null }: { diasPrevios?: number; clase?: string | null } = {},
+): Racha {
+  const n = Math.max(0, Math.floor(diasPrevios));
+  // "Dejar": empezó hace n días. "Hacer": n días cumplidos hasta ayer; hoy queda por marcar.
+  const inicio = tipo === "dejar" ? deDia(aDia(hoy) - n) : hoy;
+  const marcas = tipo === "hacer" ? Array.from({ length: n }, (_, i) => deDia(aDia(hoy) - n + i)) : [];
+  return { id, nombre: nombre.trim(), tipo, inicio, marcas, record: n, hitosVistos: HITOS.filter((h) => h <= n), clase };
 }
 
 export const cumplioHoy = (r: Racha, hoy: string) => r.marcas.includes(hoy);
@@ -67,8 +76,11 @@ export const festejarHasta = (r: Racha, hito: number): Racha => ({
  * Lo que se le manda al Worker para la notificación de la noche: solo números, nunca el nombre.
  * `crece`: si los días siguen sumando solos (racha de "dejar").
  */
-export function resumenParaAviso(rachas: Racha[], hoy: string): { dias: number; fecha: string; crece: boolean } | null {
+export function resumenParaAviso(
+  rachas: Racha[], hoy: string, mostrarNombre = false,
+): { dias: number; fecha: string; crece: boolean; clase: string | null; nombre?: string } | null {
   if (!rachas.length) return null;
   const mayor = rachas.reduce((a, b) => (diasRacha(b, hoy) > diasRacha(a, hoy) ? b : a));
-  return { dias: diasRacha(mayor, hoy), fecha: hoy, crece: mayor.tipo === "dejar" };
+  const resumen = { dias: diasRacha(mayor, hoy), fecha: hoy, crece: mayor.tipo === "dejar", clase: mayor.clase ?? null };
+  return mostrarNombre ? { ...resumen, nombre: mayor.nombre } : resumen;
 }

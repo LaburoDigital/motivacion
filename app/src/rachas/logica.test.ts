@@ -75,10 +75,36 @@ describe("resumenParaAviso", () => {
     const a = crearRacha("Gym", "hacer", "2026-11-01", "a");
     const b = crearRacha("Sin pajas", "dejar", "2026-10-20", "b");
     const r = resumenParaAviso([a, b], "2026-11-03");
-    expect(r).toEqual({ dias: 14, fecha: "2026-11-03", crece: true });
+    expect(r).toEqual({ dias: 14, fecha: "2026-11-03", crece: true, clase: null });
     expect(JSON.stringify(r)).not.toContain("pajas");
   });
   test("sin rachas devuelve null", () => {
     expect(resumenParaAviso([], "2026-11-03")).toBeNull();
   });
+});
+
+describe("días que ya llevabas", () => {
+  test("dejar algo: arranca con los días que llevás", () => {
+    const r = crearRacha("Sin fumar", "dejar", "2026-11-05", "x", { diasPrevios: 20, clase: "fumar" });
+    expect(diasRacha(r, "2026-11-05")).toBe(20);
+    expect(diasRacha(r, "2026-11-06")).toBe(21);
+    expect(r.record).toBe(20);
+    expect(r.clase).toBe("fumar");
+  });
+  test("hacer algo: cuenta los días previos hasta ayer y hoy queda por marcar", () => {
+    const r = crearRacha("Gym", "hacer", "2026-11-05", "x", { diasPrevios: 5 });
+    expect(diasRacha(r, "2026-11-05")).toBe(5);
+    expect(cumplioHoy(r, "2026-11-05")).toBe(false);
+    expect(diasRacha(marcarHoy(r, "2026-11-05"), "2026-11-05")).toBe(6);
+  });
+  test("los hitos ya pasados no se festejan de nuevo", () => {
+    const r = crearRacha("Sin pajas", "dejar", "2026-11-05", "x", { diasPrevios: 40 });
+    expect(hitoNuevo(r, "2026-11-05")).toBeNull();
+  });
+});
+
+test("el resumen para el aviso lleva la clase y, solo si se pidió, el nombre", () => {
+  const r = crearRacha("Sin fumar", "dejar", "2026-11-01", "x", { clase: "fumar" });
+  expect(resumenParaAviso([r], "2026-11-03")).toEqual({ dias: 2, fecha: "2026-11-03", crece: true, clase: "fumar" });
+  expect(resumenParaAviso([r], "2026-11-03", true)).toEqual({ dias: 2, fecha: "2026-11-03", crece: true, clase: "fumar", nombre: "Sin fumar" });
 });

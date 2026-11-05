@@ -249,12 +249,20 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
               <input type="time" step={900} value={rachas.hora} onChange={(e) => rachas.setHora(e.target.value)} />
             </label>
           )}
+          {rachas.activas && (
+            <label className="fila">
+              Mostrar el nombre en el aviso
+              <input type="checkbox" checked={!!rachas.mostrarNombre} onChange={(e) => rachas.setMostrarNombre(e.target.checked)} />
+            </label>
+          )}
           <button className="boton secundario" onClick={onAbrirRachas}>
             Ver mis rachas{rachas.lista.length ? ` (${rachas.lista.length})` : ""}
           </button>
           <p className="aviso">
             {n.activas
-              ? "Todos los días a esa hora te llega un aviso para que no cortes tu racha. Nunca dice el nombre."
+              ? rachas.mostrarNombre
+                ? "Todos los días a esa hora te llega un aviso con el nombre de tu racha. Se ve con el celular bloqueado."
+                : "Todos los días a esa hora te llega un aviso para que no cortes tu racha, sin decir de qué es."
               : "Activá las notificaciones para recibir el aviso diario de tu racha."}
           </p>
         </section>

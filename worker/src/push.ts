@@ -1,5 +1,5 @@
 import { buildPushPayload, type PushSubscription } from "@block65/webcrypto-web-push";
-import { fechaLocal, fnv1a, type CategoriaId } from "shared";
+import { fechaLocal, fnv1a, opcionRacha, type CategoriaId } from "shared";
 import type { Env } from "./env";
 import { destacadasServidor, fraseDelDiaPara, parsearTemas, zonaValida } from "./frases";
 import { aMinutos, diaSemana, horariosDelDia, minutosDesde, tocaAhora } from "./horarios";
@@ -28,6 +28,10 @@ export interface AvisoRacha {
   fecha: string;
   /** Si los días siguen sumando solos (racha de "dejar algo"). */
   crece: boolean;
+  /** Opción armada (ej. "fumar") para elegir un mensaje propio, que igual no la nombra. */
+  clase?: string | null;
+  /** Solo si el usuario eligió que el aviso diga el nombre. */
+  nombre?: string;
 }
 
 /** Índice reservado para el aviso de racha (los de frases van de 0 en adelante). */
@@ -91,11 +95,13 @@ export function validarSuscripcion(cuerpo: unknown): Suscripcion | null {
   const r = c!.racha;
   if (r !== undefined && r !== null) {
     if (!HORA.test(r.hora ?? "") || !Number.isInteger(r.dias) || r.dias < 0 || !FECHA.test(r.fecha ?? "") || typeof r.crece !== "boolean") return null;
+    if (r.clase != null && !opcionRacha(r.clase)) return null;
+    if (r.nombre != null && (typeof r.nombre !== "string" || r.nombre.length > 40)) return null;
   }
   return {
     ...(cadaHoras ? { cadaHoras } : {}),
     ...(dias ? { dias: [...new Set(dias)].sort() } : {}),
-    ...(r ? { racha: { hora: r.hora, dias: r.dias, fecha: r.fecha, crece: r.crece } } : {}),
+    ...(r ? { racha: { hora: r.hora, dias: r.dias, fecha: r.fecha, crece: r.crece, clase: r.clase ?? null, ...(r.nombre ? { nombre: r.nombre } : {}) } } : {}),
     subscription: { endpoint: s.endpoint, expirationTime: s.expirationTime ?? null, keys: { p256dh: s.keys.p256dh, auth: s.keys.auth } },
     cantidad: c!.cantidad!,
     desde: c!.desde!,
@@ -118,9 +124,11 @@ export async function mensajePara(env: Env, sub: Suscripcion, indice: number, ah
     const dias = r.dias + (r.crece ? Math.max(0, diasEntre(r.fecha, fechaLocal(ahora, sub.zona))) : 0);
     const pool = (await destacadasServidor(env)).filter((f) => f.categoria === "superacion" || f.categoria === "disciplina");
     const frase = pool[Math.floor(Math.random() * pool.length)];
+    const avisos = opcionRacha(r.clase)?.avisos;
+    const diasTexto = `${dias} ${dias === 1 ? "día" : "días"}`;
     return {
-      titulo: `🔥 ${dias} ${dias === 1 ? "día" : "días"} de racha`,
-      cuerpo: `No la cortes hoy. ${frase.texto}`,
+      titulo: r.nombre ? `🔥 ${diasTexto} · ${r.nombre}` : `🔥 ${diasTexto} de racha`,
+      cuerpo: avisos ? avisos[dias % avisos.length] : `No la cortes hoy. ${frase.texto}`,
       fraseId: frase.id,
     };
   }

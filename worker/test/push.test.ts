@@ -294,3 +294,26 @@ describe("días de la semana", () => {
     expect(enviar).toHaveBeenCalledTimes(1);
   });
 });
+
+describe("aviso de racha con clase", () => {
+  const ahora = new Date("2026-11-04T00:00:00Z");
+  test("con clase usa un mensaje propio, sin decir de qué es", async () => {
+    const { mensajePara } = await import("../src/push");
+    const { opcionRacha } = await import("shared");
+    const racha = { hora: "21:00", dias: 5, fecha: "2026-11-03", crece: true, clase: "fumar" };
+    const m = await mensajePara(envFalso(), { ...config({ racha }), racha } as never, 99, ahora);
+    expect(opcionRacha("fumar")!.avisos).toContain(m.cuerpo);
+    expect(m.titulo).not.toMatch(/fumar/i);
+  });
+  test("con nombre, el título lo dice", async () => {
+    const { mensajePara } = await import("../src/push");
+    const racha = { hora: "21:00", dias: 5, fecha: "2026-11-03", crece: true, clase: "gym", nombre: "Gym" };
+    const m = await mensajePara(envFalso(), { ...config({ racha }), racha } as never, 99, ahora);
+    expect(m.titulo).toContain("Gym");
+  });
+  test("acepta clase y nombre válidos", async () => {
+    const r = { hora: "21:00", dias: 5, fecha: "2026-11-03", crece: true, clase: "gym", nombre: "Gym" };
+    expect((await post(env(), config({ racha: r }))).status).toBe(201);
+    expect((await post(env(), config({ racha: { ...r, nombre: "x".repeat(60) } }))).status).toBe(400);
+  });
+});
