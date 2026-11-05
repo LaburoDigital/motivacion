@@ -219,3 +219,11 @@ test("el interruptor 'Cambiar durante el día' guarda la preferencia", () => {
   fireEvent.click(screen.getByLabelText(/Cambiar durante el día/));
   expect(api.setPrefs).toHaveBeenCalledWith({ fondoCambia: true });
 });
+
+test("tocar la hora permite elegirla con la ruedita", () => {
+  const api = apiFalsa();
+  render(<Ajustes api={api} />);
+  abrir("Notificaciones");
+  fireEvent.change(screen.getByLabelText("Elegir hora: Desde las"), { target: { value: "06:15" } });
+  expect(api.setPrefs).toHaveBeenCalledWith({ notificaciones: expect.objectContaining({ desde: "06:15" }) });
+});

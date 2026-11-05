@@ -55,15 +55,25 @@ function cuantasPorDia(n: PrefsNotificaciones): number {
   return Math.min(24, Math.max(1, Math.floor(rango / (n.cadaHoras * 60)) + 1));
 }
 
-function Paso({ titulo, valor, onMenos, onMas, etiquetaMenos, etiquetaMas, testId }: {
+function Paso({ titulo, valor, onMenos, onMas, etiquetaMenos, etiquetaMas, testId, onElegirHora }: {
   titulo: string; valor: string; onMenos: () => void; onMas: () => void; etiquetaMenos: string; etiquetaMas: string; testId?: string;
+  /** Si está, tocar el valor abre la ruedita de hora del iPhone. */
+  onElegirHora?: (hhmm: string) => void;
 }) {
   return (
     <div className="fila paso">
       <span>{titulo}</span>
       <div className="paso-controles">
         <button className="paso-boton" aria-label={etiquetaMenos} onClick={onMenos}><IconMinus size={18} stroke={2.2} /></button>
-        <span className="paso-valor" data-testid={testId} key={valor}>{valor}</span>
+        <span className="paso-valor" data-testid={testId} key={valor}>
+          {valor}
+          {onElegirHora && (
+            <input
+              type="time" className="paso-hora" aria-label={`Elegir hora: ${titulo}`} value={valor}
+              onChange={(e) => e.target.value && onElegirHora(e.target.value)}
+            />
+          )}
+        </span>
         <button className="paso-boton" aria-label={etiquetaMas} onClick={onMas}><IconPlus size={18} stroke={2.2} /></button>
       </div>
     </div>
@@ -197,12 +207,14 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
           etiquetaMenos="Desde: más temprano" etiquetaMas="Desde: más tarde"
           onMenos={() => void cambiarNotif({ desde: deMin(aMin(n.desde) - 30) })}
           onMas={() => void cambiarNotif({ desde: deMin(aMin(n.desde) + 30) })}
+          onElegirHora={(h) => void cambiarNotif({ desde: h })}
         />
         <Paso
           titulo="Hasta las" valor={n.hasta}
           etiquetaMenos="Hasta: más temprano" etiquetaMas="Hasta: más tarde"
           onMenos={() => void cambiarNotif({ hasta: deMin(aMin(n.hasta) - 30) })}
           onMas={() => void cambiarNotif({ hasta: deMin(aMin(n.hasta) + 30) })}
+          onElegirHora={(h) => void cambiarNotif({ hasta: h })}
         />
         <div className="repetir">
           <span>Repetir</span>

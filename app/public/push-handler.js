@@ -12,6 +12,9 @@ self.addEventListener("push", (evento) => {
       icon: "/icono-192.png",
       badge: "/icono-192.png",
       data: { fraseId: datos.fraseId },
+      // La nueva reemplaza a la anterior: no se acumulan en el centro de notificaciones.
+      tag: "motivacion",
+      renotify: true,
     }),
   );
 });

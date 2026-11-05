@@ -159,7 +159,9 @@ test("el mensaje de la mañana es la Clave del día y las demás son buena o cla
     expect(["buena", "clave"]).toContain(f.nivel);
     expect(f.categoria).toBe("gym");
   }
-  expect(primera.titulo).toBe("Motivación");
+  expect(primera.titulo).toBe("🔥 Frase del día");
+  const otra = await mensajePara(envFalso(), config() as never, 1, ahora);
+  expect(otra.titulo).not.toContain("Motivación");
   expect(primera.cuerpo).toContain("—");
 });
 

@@ -131,7 +131,11 @@ export async function mensajePara(env: Env, sub: Suscripcion, indice: number, ah
     const pool = deTemas.length ? deTemas : buenas;
     frase = pool[Math.floor(Math.random() * pool.length)];
   }
-  return { titulo: "Motivación", cuerpo: frase.autor ? `${frase.texto} — ${frase.autor}` : frase.texto, fraseId: frase.id };
+  // iOS ya muestra "Motivación" arriba: el título es otra cosa para no repetirlo.
+  if (indice === 0) {
+    return { titulo: "🔥 Frase del día", cuerpo: frase.autor ? `${frase.texto} — ${frase.autor}` : frase.texto, fraseId: frase.id };
+  }
+  return { titulo: frase.autor ? `✨ ${frase.autor}` : "✨ Para hoy", cuerpo: frase.texto, fraseId: frase.id };
 }
 
 /**

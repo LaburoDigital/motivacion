@@ -34,3 +34,16 @@ test("sin ventanas abiertas, abre la app en la frase", async () => {
   await tocar(oyentes);
   expect(openWindow).toHaveBeenCalledWith("/?frase=b-0001");
 });
+
+test("las notificaciones se reemplazan en vez de acumularse", async () => {
+  const oyentes: Record<string, (e: unknown) => void> = {};
+  const showNotification = vi.fn(async () => undefined);
+  const self = { addEventListener: (t: string, f: (e: unknown) => void) => { oyentes[t] = f; }, registration: { showNotification }, clients: {} };
+  new Function("self", readFileSync("public/push-handler.js", "utf8"))(self);
+  let espera: Promise<unknown> = Promise.resolve();
+  oyentes.push({ data: { json: () => ({ titulo: "🔥 Frase del día", cuerpo: "x", fraseId: "b-1" }) }, waitUntil: (p: Promise<unknown>) => { espera = p; } });
+  await espera;
+  const opciones = (showNotification.mock.calls[0] as unknown[])[1] as { tag?: string; renotify?: boolean };
+  expect(opciones.tag).toBe("motivacion");
+  expect(opciones.renotify).toBe(true);
+});
