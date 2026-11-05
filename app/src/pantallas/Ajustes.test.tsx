@@ -8,6 +8,7 @@ vi.mock("../datos/notificaciones", () => ({
   desactivarNotificaciones: vi.fn(async () => undefined),
 }));
 vi.mock("../config", () => ({ WORKER_URL: "https://w.test", ATAJO_URL: "https://www.icloud.com/shortcuts/abc" }));
+vi.mock("../datos/respaldo", () => ({ obtenerCodigo: vi.fn(async () => "llama-norte-rio-pan-sol-mar"), recuperarRespaldo: vi.fn(async () => "ok") }));
 
 const { activarNotificaciones } = await import("../datos/notificaciones");
 
@@ -234,4 +235,16 @@ test("se puede elegir que el aviso diga el nombre de la racha", () => {
   abrir("Rachas");
   fireEvent.click(screen.getByLabelText(/Mostrar el nombre en el aviso/));
   expect(rachas.setMostrarNombre).toHaveBeenCalledWith(true);
+});
+
+test("'Tus datos' muestra el código y permite recuperar", async () => {
+  const { obtenerCodigo, recuperarRespaldo } = await import("../datos/respaldo");
+  vi.mocked(obtenerCodigo).mockResolvedValue("llama-norte-rio-pan-sol-mar");
+  vi.mocked(recuperarRespaldo).mockResolvedValue("no-existe");
+  render(<Ajustes api={apiFalsa()} />);
+  abrir("Tus datos");
+  await screen.findByText("llama-norte-rio-pan-sol-mar");
+  fireEvent.change(screen.getByLabelText("Código para recuperar"), { target: { value: "aaa-bbb-ccc-ddd-eee-fff" } });
+  fireEvent.click(screen.getByRole("button", { name: "Recuperar" }));
+  await screen.findByText(/No encontramos/);
 });

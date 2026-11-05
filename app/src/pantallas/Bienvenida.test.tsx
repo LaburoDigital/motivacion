@@ -4,6 +4,7 @@ import { apiFalsa } from "../test/apiFalsa";
 import { Bienvenida } from "./Bienvenida";
 
 vi.mock("../datos/notificaciones", () => ({ activarNotificaciones: vi.fn(async () => "ok") }));
+vi.mock("../datos/respaldo", () => ({ recuperarRespaldo: vi.fn(async () => "ok") }));
 const { activarNotificaciones } = await import("../datos/notificaciones");
 afterEach(() => vi.clearAllMocks());
 
@@ -52,4 +53,14 @@ test("si la app no está instalada, explica cómo instalarla", async () => {
   fireEvent.click(boton("Siguiente"));
   fireEvent.click(boton("Activar notificaciones"));
   await screen.findByText(/Agregar a inicio/);
+});
+
+test("quien ya tenía la app puede recuperar sus datos con el código", async () => {
+  const { recuperarRespaldo } = await import("../datos/respaldo");
+  vi.mocked(recuperarRespaldo).mockResolvedValue("invalido");
+  render(<Bienvenida api={apiFalsa()} />);
+  fireEvent.click(boton(/Ya tenía la app/));
+  fireEvent.change(screen.getByLabelText("Código para recuperar"), { target: { value: "hola" } });
+  fireEvent.click(boton("Recuperar"));
+  await screen.findByText(/6 palabras/);
 });

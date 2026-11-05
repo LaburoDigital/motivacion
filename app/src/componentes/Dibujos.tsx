@@ -94,3 +94,17 @@ export function DibujoFondos() {
     </svg>
   );
 }
+
+export function DibujoDatos() {
+  return (
+    <svg viewBox="0 0 160 110" aria-hidden>
+      <path className="anim-flota-lento" d="M48 70a18 18 0 0 1 2-36 26 26 0 0 1 50-6 20 20 0 0 1 12 38z" {...base} />
+      <g className="anim-flota">
+        <rect x="64" y="52" width="32" height="26" rx="6" {...acento} />
+        <path d="M70 52v-8a10 10 0 0 1 20 0v8" {...acento} />
+        <circle cx="80" cy="65" r="3" {...acento} />
+      </g>
+      <path className="anim-destello" d="M40 92h20M70 96h20M100 92h20" {...base} opacity="0.5" />
+    </svg>
+  );
+}

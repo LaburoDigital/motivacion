@@ -1,6 +1,9 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import { marcarRecorteAhora } from "./visual/recorte";
+import { pedirPersistencia } from "./datos/respaldo";
+
+void pedirPersistencia();
 
 marcarRecorteAhora();
 window.addEventListener("resize", marcarRecorteAhora);

@@ -1,11 +1,13 @@
 import { IconBolt, IconChevronLeft, IconChevronRight, IconCopy, IconExternalLink, IconMinus, IconPlus } from "@tabler/icons-react";
 import { CATEGORIAS } from "shared";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ATAJO_URL, WORKER_URL } from "../config";
 import {
-  DibujoBloqueo, DibujoFondos, DibujoIcono, DibujoNotificaciones, DibujoRachas, DibujoTemas,
+  DibujoBloqueo, DibujoDatos, DibujoFondos, DibujoIcono, DibujoNotificaciones, DibujoRachas, DibujoTemas,
 } from "../componentes/Dibujos";
 import { Diagnostico } from "../componentes/Diagnostico";
+import { Recuperar } from "../componentes/Recuperar";
+import { obtenerCodigo } from "../datos/respaldo";
 import { Pestanas } from "../componentes/Pestanas";
 import type { Preferencias, PrefsNotificaciones } from "../datos/almacen";
 import { activarNotificaciones, desactivarNotificaciones, type ResultadoActivar } from "../datos/notificaciones";
@@ -15,7 +17,7 @@ import type { RachasApi } from "../rachas/useRachas";
 import { ICONOS_APP, aplicarIcono, urlIcono } from "../visual/iconos";
 import { scriptWidget } from "../visual/widget";
 
-type Vista = "notificaciones" | "rachas" | "bloqueo" | "icono";
+type Vista = "notificaciones" | "rachas" | "bloqueo" | "icono" | "datos";
 
 const SCRIPTABLE_URL = "https://apps.apple.com/app/scriptable/id1405459188";
 
@@ -97,6 +99,10 @@ interface Props {
 export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
   const [vista, setVista] = useState<Vista | null>(null);
   const [toques, setToques] = useState(0);
+  const [codigo, setCodigo] = useState<string | null>(null);
+  useEffect(() => {
+    if (vista === "datos") void obtenerCodigo().then(setCodigo);
+  }, [vista]);
   const [aviso, setAviso] = useState<string | null>(null);
   const [copiado, setCopiado] = useState<string | null>(null);
   const [modoBloqueo, setModoBloqueo] = useState<"Fondo de pantalla" | "Widget de texto">("Fondo de pantalla");
@@ -152,6 +158,7 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
       ...(rachas ? [{ id: "rachas", titulo: "Rachas", dibujo: <DibujoRachas />, accion: () => setVista("rachas") }] : []),
       { id: "bloqueo", titulo: "Pantalla bloqueada", dibujo: <DibujoBloqueo />, accion: () => setVista("bloqueo") },
       { id: "icono", titulo: "Ícono de la app", dibujo: <DibujoIcono />, accion: () => setVista("icono") },
+      { id: "datos", titulo: "Tus datos", dibujo: <DibujoDatos />, accion: () => setVista("datos") },
     ];
     return (
       <div className="pantalla">
@@ -171,7 +178,7 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
   }
 
   const titulos: Record<Vista, string> = {
-    notificaciones: "Notificaciones", rachas: "Rachas", bloqueo: "Pantalla bloqueada", icono: "Ícono de la app",
+    notificaciones: "Notificaciones", rachas: "Rachas", bloqueo: "Pantalla bloqueada", icono: "Ícono de la app", datos: "Tus datos",
   };
 
   return (
@@ -378,8 +385,27 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
           ))}
         </div>
         <p className="aviso">Para ver el ícono nuevo hay que borrar la app de la pantalla de inicio y volver a agregarla desde Safari.</p>
-        <p className="error">Ojo: al borrar la app se borran tus likes, favoritos y rachas.</p>
+        <p className="aviso">Antes de borrarla copiá tu código en <b>Ajustes → Tus datos</b>. Al volver a agregarla, la bienvenida te deja pegarlo y recuperás todo.</p>
       </section>
+      )}
+      {vista === "datos" && (
+        <>
+          <section className="seccion">
+            <p className="lema">Tus likes, rachas y ajustes se guardan solos en este celular y en la nube.</p>
+            <p className="aviso">Si borrás la app o cambiás de celular, con este código recuperás todo:</p>
+            <div className="codigo">{codigo ?? "…"}</div>
+            {codigo && (
+              <button className="boton secundario" onClick={() => void copiar("codigo", codigo)}>
+                <IconCopy size={18} stroke={1.8} /> {copiado === "codigo" ? "Copiado" : "Copiar código"}
+              </button>
+            )}
+            <p className="aviso">Guardalo en Notas o mandátelo por WhatsApp. Cualquiera con el código puede ver tus datos, así que no lo compartas.</p>
+          </section>
+          <section className="seccion">
+            <h2>Recuperar de otro celular</h2>
+            <Recuperar />
+          </section>
+        </>
       )}
     </div>
   );

@@ -8,6 +8,7 @@ import { diasRacha, hitoNuevo } from "./rachas/logica";
 import { useRachas } from "./rachas/useRachas";
 import { useFrases } from "./datos/useFrases";
 import { useResincronizarNotificaciones } from "./datos/useResincronizar";
+import { useRespaldoAuto } from "./datos/useRespaldoAuto";
 import { Ajustes } from "./pantallas/Ajustes";
 import { Bienvenida } from "./pantallas/Bienvenida";
 import { Favoritos } from "./pantallas/Favoritos";
@@ -40,6 +41,10 @@ export default function App() {
     : undefined;
 
   useResincronizarNotificaciones(api.prefs, rachas.activas ? rachas : null);
+  useRespaldoAuto(
+    api.cargado && rachas.cargado,
+    JSON.stringify([api.estado.likes, api.estado.clavesPropias, api.estado.malas, api.prefs, rachas.activas, rachas.hora, rachas.lista]),
+  );
   const icono = api.prefs?.icono;
   useEffect(() => {
     if (icono) aplicarIcono(icono);

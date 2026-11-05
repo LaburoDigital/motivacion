@@ -410,3 +410,12 @@ h2 { font-size: 13px; font-weight: 500; color: var(--tenue); letter-spacing: 0.0
 .campo-corto { width: 90px; text-align: center; padding: 10px; }
 
 .celebracion-festejo { margin: 0; color: var(--tenue); font-size: 16px; max-width: 30ch; line-height: 1.4; }
+
+/* Tus datos */
+.codigo {
+  padding: 16px; border-radius: 16px; background: var(--superficie-2); text-align: center; font-family: "Space Grotesk", monospace;
+  font-size: 18px; letter-spacing: 0.02em; color: var(--acento); user-select: all; -webkit-user-select: all; word-break: break-word;
+}
+.recuperar { display: grid; gap: 10px; }
+.link-recuperar { color: var(--acento); font-size: 14px; font-weight: 500; padding: 8px 0 14px; text-align: left; }
+.bienvenida-recuperar { display: grid; gap: 12px; margin-bottom: 26px; }

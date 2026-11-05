@@ -1,5 +1,6 @@
 import type { Env } from "./env";
 import { actualizarDiario, cuerpoFrases, fraseDelDiaPara, parsearTemas, zonaValida } from "./frases";
+import { guardarRespaldo, leerRespaldo } from "./respaldo";
 import { borrarSuscripcion, claveSuscripcion, enviarNotificaciones, guardarSuscripcion, validarSuscripcion } from "./push";
 import { ESTILOS_WALLPAPER, urlWallpaper, type EstiloWallpaper } from "./wallpaper";
 
@@ -7,7 +8,7 @@ export type { Env };
 
 const CORS = {
   "access-control-allow-origin": "*",
-  "access-control-allow-methods": "GET, POST, DELETE, OPTIONS",
+  "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
   "access-control-allow-headers": "content-type",
 };
 
@@ -53,6 +54,19 @@ async function rutear(req: Request, env: Env): Promise<Response> {
   }
 
   if (req.method === "GET" && url.pathname === "/vapid") return json({ publicKey: env.VAPID_PUBLIC });
+
+  const respaldo = url.pathname.match(/^\/respaldo\/([^/]+)$/);
+  if (respaldo) {
+    const codigo = decodeURIComponent(respaldo[1]);
+    if (req.method === "PUT") {
+      const status = await guardarRespaldo(env, codigo, await req.text());
+      return status === 204 ? new Response(null, { status, headers: CORS }) : json({ error: "respaldo inválido" }, status);
+    }
+    if (req.method === "GET") {
+      const datos = await leerRespaldo(env, codigo);
+      return datos ? new Response(datos, { headers: { ...CORS, "content-type": "application/json" } }) : json({ error: "no encontrado" }, 404);
+    }
+  }
 
   return json({ error: "no encontrado" }, 404);
 }

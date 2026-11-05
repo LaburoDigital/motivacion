@@ -1,6 +1,7 @@
 import { IconBell, IconChevronLeft, IconSparkles } from "@tabler/icons-react";
 import { useState } from "react";
 import { CATEGORIAS, FOTOS, PACKS, type CategoriaId } from "shared";
+import { Recuperar } from "../componentes/Recuperar";
 import { activarNotificaciones } from "../datos/notificaciones";
 import type { FrasesApi } from "../datos/useFrases";
 import { urlFoto } from "../visual/fondos";
@@ -12,6 +13,7 @@ export function Bienvenida({ api }: { api: FrasesApi }) {
   const [paso, setPaso] = useState(0);
   const [aviso, setAviso] = useState<string | null>(null);
   const [activadas, setActivadas] = useState(false);
+  const [recuperando, setRecuperando] = useState(false);
   const prefs = api.prefs;
   if (!prefs) return null;
 
@@ -49,6 +51,16 @@ export function Bienvenida({ api }: { api: FrasesApi }) {
 
       {paso === 0 && (
         <section className="bienvenida-paso">
+          {recuperando ? (
+            <div className="bienvenida-recuperar">
+              <h1>Recuperá tus datos</h1>
+              <p className="aviso">Pegá el código de 6 palabras que está en Ajustes → Tus datos de tu otra app.</p>
+              <Recuperar />
+              <button className="boton secundario" onClick={() => setRecuperando(false)}>Empezar de cero</button>
+            </div>
+          ) : (
+            <button className="link-recuperar" onClick={() => setRecuperando(true)}>¿Ya tenía la app? Recuperá tus datos</button>
+          )}
           <h1>¿Qué te mueve?</h1>
           <p className="aviso">Elegí de qué querés frases. Podés cambiarlo cuando quieras.</p>
           <div className="chips">
