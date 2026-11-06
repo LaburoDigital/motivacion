@@ -59,7 +59,7 @@ export async function generarWallpaper(
   const capas: unknown[] = [];
   if (imagen) {
     capas.push({ type: "img", props: { src: imagen, width: w, height: h, style: { position: "absolute", top: 0, left: 0 } } });
-    capas.push(el("div", { position: "absolute", top: 0, left: 0, width: w, height: h, backgroundColor: "rgba(0,0,0,0.45)" }));
+    capas.push(el("div", { position: "absolute", top: 0, left: 0, width: w, height: h, backgroundColor: "rgba(0,0,0,0.35)" }));
   }
   capas.push(
     el(

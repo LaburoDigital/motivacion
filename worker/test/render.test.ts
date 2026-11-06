@@ -37,5 +37,6 @@ test("los directorios de wallpapers incluyen uno por grupo de fotos", async () =
   const { directoriosWallpaper } = await import("../render/wallpaper");
   const dirs = directoriosWallpaper().map((d) => d.dir);
   expect(dirs).toEqual(expect.arrayContaining(["negro", "degradado", "foto", "foto-ciudad", "foto-gym", "foto-estrellas"]));
-  expect(dirs).toHaveLength(3 + 9);
+  const { PACKS } = await import("shared");
+  expect(dirs).toHaveLength(3 + PACKS.length);
 });
