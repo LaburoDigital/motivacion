@@ -9,3 +9,8 @@ test("el script del widget pide la frase del día con los temas y la zona del us
   expect(s).toContain("Script.setWidget");
   expect(s).toContain("accessoryRectangular");
 });
+
+test("al tocar el widget se abre Motivación en esa frase", () => {
+  const s = scriptWidget(apiFalsa().prefs!, "https://w.test", "https://app.test");
+  expect(s).toContain('w.url = "https://app.test/?frase=" + frase.id;');
+});

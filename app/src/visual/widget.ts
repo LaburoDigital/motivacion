@@ -4,7 +4,7 @@ import type { Preferencias } from "../datos/almacen";
  * Código para la app gratis Scriptable: un widget de pantalla bloqueada (o de inicio)
  * que muestra la frase del día en texto, para quien no quiere cambiar su fondo.
  */
-export function scriptWidget(prefs: Preferencias, workerUrl: string): string {
+export function scriptWidget(prefs: Preferencias, workerUrl: string, appUrl = location.origin): string {
   const q = new URLSearchParams({ temas: prefs.temas.join(","), zona: prefs.zonaHoraria });
   return `// Motivación: frase del día
 const URL_FRASE = "${workerUrl}/frase-del-dia?${q}";
@@ -28,6 +28,8 @@ if (!chico) {
     autor.textColor = new Color("#e9b45c");
   }
 }
+// Al tocarlo abre Motivación en Safari, en esta frase (iOS no deja abrir la app instalada).
+w.url = "${appUrl}/?frase=" + frase.id;
 w.refreshAfterDate = new Date(Date.now() + 3 * 60 * 60 * 1000);
 Script.setWidget(w);
 Script.complete();

@@ -362,7 +362,7 @@ export function Ajustes({ api, rachas, onAbrirRachas, onIrATemas }: Props) {
         <button className="boton" onClick={() => void copiar("widget", scriptWidget(prefs, WORKER_URL))}>
           <IconCopy size={18} stroke={1.8} /> {copiado === "widget" ? "Copiado" : "Copiar código del widget"}
         </button>
-        <p className="aviso">También funciona como widget en la pantalla de inicio, con fondo oscuro y la frase completa.</p>
+        <p className="aviso">Al tocar el widget se abre Motivación en Safari, en esa frase. También funciona en la pantalla de inicio, con fondo oscuro y la frase completa.</p>
       </section>
       )}
       </>
