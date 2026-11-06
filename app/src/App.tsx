@@ -53,12 +53,14 @@ export default function App() {
   return (
     <div className="app">
       <main className="contenido">
+        <div className="vista" key={seccion}>
         {seccion === "inicio" && (
           <Inicio api={api} fraseInicial={fraseInicial} racha={mayor === null ? null : { dias: mayor }} onAbrirRachas={() => setVerRachas(true)} />
         )}
         {seccion === "temas" && <Temas api={api} />}
         {seccion === "favoritos" && <Favoritos api={api} />}
         {seccion === "ajustes" && <Ajustes api={api} rachas={rachas} onAbrirRachas={() => setVerRachas(true)} onIrATemas={() => setSeccion("temas")} />}
+        </div>
       </main>
       {previa && api.cargado && api.prefs && (
         <VistaPrevia frase={previa} estilo={{ foto: fondoPara(previa, api.prefs), letra: letraPorId(api.prefs.letra) }} onCerrar={cerrarPrevia} />

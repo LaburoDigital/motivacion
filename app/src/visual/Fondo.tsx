@@ -13,6 +13,7 @@ export function Fondo({ foto, children }: { foto: Foto; children: ReactNode }) {
   const [fallo, setFallo] = useState(false);
   return (
     <div className="fondo">
+      {!fallo && <img className="fondo-previa" src={urlFoto(foto, 24, 42)} alt="" aria-hidden />}
       {!fallo && (
         <img
           className="fondo-foto"

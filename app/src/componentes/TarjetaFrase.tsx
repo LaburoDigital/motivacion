@@ -70,7 +70,10 @@ export function TarjetaFrase({ frase, apariencia, liked, delDia, onLike, onDoble
           onContextMenu={(e) => e.preventDefault()}
         />
         {corazones.map((id) => (
-          <IconHeartFilled key={id} className="corazon-animado" data-testid="corazon-animado" size={110} aria-hidden />
+          <span key={id} className="corazon-grupo" aria-hidden>
+            <span className="corazon-onda" />
+            <IconHeartFilled className="corazon-animado" data-testid="corazon-animado" size={110} />
+          </span>
         ))}
         <div className="tarjeta-arriba">
           {delDia ? <span className="etiqueta etiqueta-dia">Frase del día</span> : <span className="etiqueta">{tema}</span>}
